@@ -16,8 +16,7 @@ class StoreUserRequest extends FormRequest
     {
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'unique:users,phone', 'regex:/^2189\d{8}$/'],
-            'type' => ['required', Rule::in(['admin', 'user', 'owner'])],
+            'phone_number' => ['required', 'string', 'unique:users,phone_number', 'regex:/^2189\d{8}$/'],
             'password' => ['required', 'string', 'min:8'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
@@ -39,7 +38,7 @@ class StoreUserRequest extends FormRequest
                 'example' => 'John Doe',
                 'type' => 'string',
             ],
-            'phone' => [
+            'phone_number' => [
                 'description' => 'The user\'s phone number. Must start with 2189 and be exactly 12 digits.',
                 'example' => '218912345678',
                 'type' => 'string',

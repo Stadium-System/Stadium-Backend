@@ -32,10 +32,11 @@ class AuthController extends Controller
 
         // Create user
         $user = User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
+            'name' => $data['name'],
             'phone_number' => $data['phone_number'],
             'password' => bcrypt($data['password']),
+            'avatar' => $data['avatar'] ?? null,
+            'cover' => $data['cover'] ?? null,
             'type' => 'user',
         ]);
 
@@ -79,7 +80,7 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        if ($user->role == 'admin' ) {
+        if ($user->role == 'admin') {
             Auth::logout();
             throw ValidationException::withMessages([
                 'message' => ['Unauthorized access for this user type.'],
