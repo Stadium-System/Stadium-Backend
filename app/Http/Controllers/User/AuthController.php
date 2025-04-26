@@ -10,6 +10,7 @@ use App\Http\Requests\User\Auth\LoginUserRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\User\Auth\StoreUserRequest;
 use App\Models\User;
+use App\Models\Otp;
 class AuthController extends Controller
 {
 
@@ -21,23 +22,45 @@ class AuthController extends Controller
      * Completes the registration for a new user with the provided details,
      * assigns the default 'user' role, and returns an access token.
      *
-     * @bodyParam first_name string required The first name of the user. Example: John
-     * @bodyParam last_name string required The last name of the user. Example: Doe
+     * @bodyParam name string required The  name of the user. Example: John Doe
      * @bodyParam phone_number string required The user's phone number. Must start with 2189 and be exactly 12 characters. Example: 218912345678
      * @bodyParam password string required The password for the user. Must be at least 8 characters. Example: securepassword
+     * @bodyParam avatar file The avatar image for the user. Must be a valid image file. Example: avatar.jpg
+     * @bodyParam cover file The cover image for the user. Must be a valid image file. Example: cover.jpg
      */
     public function register(StoreUserRequest $request)
     {
         $data = $request->validated();
 
-        // Create user
-        $user = User::create([
+        // Find the user by phone number
+        $user = User::where('phone_number', $data['phone_number'])->first();
+
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'phone_number' => ['This phone number is not associated with an OTP request.'],
+            ]);
+        }
+
+        // Ensure the phone number has been verified via OTP
+        if (!Otp::where('phone_number', $data['phone_number'])->where('is_verified', true)->exists()) {
+            throw ValidationException::withMessages([
+                'phone_number' => ['Phone number is not verified.'],
+            ]);
+        }
+
+        // Ensure the user is still inactive before updating
+        if ($user->status !== 'inactive') {
+            throw ValidationException::withMessages([
+                'phone_number' => ['This phone number is already registered and active. Please log in.'],
+            ]);
+        }
+
+        $user->update([
             'name' => $data['name'],
-            'phone_number' => $data['phone_number'],
-            'password' => bcrypt($data['password']),
             'avatar' => $data['avatar'] ?? null,
             'cover' => $data['cover'] ?? null,
             'type' => 'user',
+            'status' => 'active'
         ]);
 
         $user->assignRole('user');
@@ -84,6 +107,20 @@ class AuthController extends Controller
             Auth::logout();
             throw ValidationException::withMessages([
                 'message' => ['Unauthorized access for this user type.'],
+            ]);
+        }
+
+        if ($user->status === 'inactive') {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'message' => ['User account is not active.'],
+            ]);
+        }
+
+        if ($user->status === 'banned') {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'message' => ['User account is banned.'],
             ]);
         }
 

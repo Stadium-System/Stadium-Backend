@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'roles' => $this->getRoleNames(), 
             'avatar' => $this->avatar,
             'cover' => $this->cover,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

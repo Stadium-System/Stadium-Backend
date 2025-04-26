@@ -16,8 +16,7 @@ class StoreUserRequest extends FormRequest
     {
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'string', 'unique:users,phone_number', 'regex:/^2189\d{8}$/'],
-            'password' => ['required', 'string', 'min:8'],
+            'phone_number' => ['required', 'string', 'regex:/^2189\d{8}$/'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
@@ -43,22 +42,17 @@ class StoreUserRequest extends FormRequest
                 'example' => '218912345678',
                 'type' => 'string',
             ],
-            'email' => [
-                'description' => 'The user\'s email address.',
-                'example' => 'johndoe@example.com',
-                'type' => 'string',
+            'avatar' => [
+                'description' => 'The user\'s avatar image. Must be a valid image file.',
+                'example' => 'avatar.jpg',
+                'type' => 'file',
             ],
-            'type' => [
-                'description' => 'The user\'s account type.',
-                'example' => 'user',
-                'type' => 'string',
-                'enum' => ['admin', 'user', 'owner'],
+            'cover' => [
+                'description' => 'The user\'s cover image. Must be a valid image file.',
+                'example' => 'cover.jpg',
+                'type' => 'file',
             ],
-            'password' => [
-                'description' => 'The user\'s password. Must be at least 8 characters.',
-                'example' => 'password123',
-                'type' => 'string',
-            ],
+            
         ];
     }
 }

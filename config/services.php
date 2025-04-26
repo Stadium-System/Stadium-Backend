@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'isend_sms' => [
+        'base_url' => env('ISEND_SMS_BASE_URL'),
+        'api_key' => env('ISEND_SMS_API_KEY'),
+    ],
+
 ];

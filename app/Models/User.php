@@ -24,6 +24,7 @@ class User extends Authenticatable
         'phone_number',
         'role',
         'type',
+        'status',
         'email',
         'avatar',
         'cover',
@@ -52,4 +53,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function otps()
+    {
+        return $this->hasMany(Otp::class);
+    }
+
 }
