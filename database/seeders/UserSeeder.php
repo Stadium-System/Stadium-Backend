@@ -12,7 +12,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create an admin user
         User::create([
             'name' => 'Admin User',
             'phone_number' => '218912345678',
@@ -36,5 +35,14 @@ class UserSeeder extends Seeder
             'type' => 'user',
             'status' => 'active',
         ])->assignRole('user');
+        
+        // Create an owner user
+        User::create([
+            'name' => 'Stadium Owner',
+            'phone_number' => '218912345681',
+            'password' => bcrypt('aaaa5555'),
+            'type' => 'owner',
+            'status' => 'active',
+        ])->assignRole('owner');
     }
 }
