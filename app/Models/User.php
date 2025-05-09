@@ -59,4 +59,9 @@ class User extends Authenticatable
         return $this->hasMany(Otp::class);
     }
 
+    public function stadiums()
+    {
+        return $this->hasMany(Stadium::class);
+    }
+
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Auth;
+namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,13 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'phone_number' => ['required', 'string', 'regex:/^2189\d{8}$/'], Rule::unique('users', 'phone_number'),
-            'password' => 'required|string|min:8',
-            'type' => 'required|string|in:admin,user,owner',
+            'name' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|regex:/^2189\d{8}$/|size:12', Rule::unique('users', 'phone_number'),
+            'password' => 'sometimes|nullable|string|min:8',
+            'type' => 'nullable|string|in:admin,user,owner',
+            'status' => 'nullable|string|in:active,inactive,banned',
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'], 
         ];
     }
 }

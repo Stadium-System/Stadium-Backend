@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\StoreUserRequest;
-use App\Http\Requests\Admin\Auth\UpdateUserRequest;
+use App\Http\Requests\Admin\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -79,13 +79,6 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
-        // Prevent non-admins from creating admin users
-        if ($data['type'] === 'admin' && !Auth::user()->hasRole('admin')) {
-            throw ValidationException::withMessages([
-                'type' => ['Only admins can create admin users.'],
-            ]);
-        }
-
         $user = User::create([
             'name' => $data['name'],
             'phone_number' => $data['phone_number'],
@@ -130,6 +123,8 @@ class UserController extends Controller
      * @urlParam id integer required The ID of the user. Example: 1
      * @bodyParam name string required The updated name of the user. Example: Jane Doe
      * @bodyParam password string The updated password for the user. Must be at least 8 characters. Example: newsecurepassword
+     * @bodyParam phone_number string The updated phone number of the user. Must start with 2189 and be exactly 12 characters. Example: 218912345678
+     * @bodyParam status string The updated status of the user. Must be either active, inactive, or banned. Example: active
      * @bodyParam avatar file The avatar image for the user. Must be a valid image file. Example: avatar.jpg
      * @bodyParam cover file The cover image for the user. Must be a valid image file. Example: cover.jpg
      * @bodyParam type string required The updated type of user. Example: user
@@ -143,17 +138,12 @@ class UserController extends Controller
         } else {
             unset($data['password']);
         }
-        // Prevent super admins from being downgraded
-        if ($user->type === 'super_admin' && $request->filled('type') && $request->type !== 'super_admin') {
-            return response()->json(['message' => 'Super admins cannot be downgraded.'], 403);
-        }
         
         $user->update($data);
 
-        // Update role based on 'type'
-        $user->syncRoles($request->type === 'admin' ? 'admin' : 'user');
+        $user->syncRoles($request->type);
 
-        return new UserResource($user->load('addresses'));
+        return new UserResource($user);
     }
 
     /**
@@ -162,7 +152,6 @@ class UserController extends Controller
      * Delete user by ID
      *
      * Deletes a specific user by its ID.
-     * Admins and Super admins cannot delete themselves, and only super admins can delete admins.
      *
      * @authenticated
      *
@@ -171,16 +160,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $authUser = auth()->user();
-
-        // Prevent admins and super admins from deleting themselves
-        if ($authUser->is($user)) {
-            return response()->json(['message' => 'Admins and super admins cannot delete themselves.'], 403);
-        }
-
-        // Only super admins can delete admins
-        if (($user->type === 'admin' || $user->type === 'super_admin') && !$authUser->hasRole('super_admin')) {
-            return response()->json(['message' => 'Only super admins can delete admins.'], 403);
-        }
 
         $user->delete();
 
@@ -192,8 +171,7 @@ class UserController extends Controller
      *
      * Ban User
      *
-     * Bans a user so they cannot log in. Only super admins and admins are allowed to perform this action.
-     * Super admins cannot be banned.
+     * Bans a user so they cannot log in.
      *
      * @authenticated
      *
@@ -205,27 +183,10 @@ class UserController extends Controller
      * @response 403 {
      *   "message": "Unauthorized."
      * }
-     * @response 403 {
-     *   "message": "Super admins cannot be banned."
-     * }
      */
     public function ban(User $user)
     {
         $authUser = auth()->user();
-
-        // Only allow super admins & admins to ban
-        if (!$authUser->hasRole(['super_admin', 'admin'])) {
-            return response()->json(['message' => 'Unauthorized.'], 403);
-        }
-
-        if ($user->hasRole('super_admin')) {
-            return response()->json(['message' => 'Super admins cannot be banned.'], 403);
-        }
-
-        // Only super admins can ban other admins
-        if ($user->type === 'admin' && !$authUser->hasRole('super_admin')) {
-            return response()->json(['message' => 'Only super admins can ban admins.'], 403);
-        }
 
         $user->update([
             'status' => 'banned'
@@ -240,8 +201,7 @@ class UserController extends Controller
      *
      * Unban User
      *
-     * Unbans a user, allowing them to log in. Only super admins and admins are allowed to perform this action.
-     * Super admins cannot be unbanned.
+     * Unbans a user, allowing them to log in.
      *
      * @authenticated
      *
@@ -253,27 +213,10 @@ class UserController extends Controller
      * @response 403 {
      *   "message": "Unauthorized."
      * }
-     * @response 403 {
-     *   "message": "Super admins cannot be unbanned."
-     * }
      */
     public function unban(User $user)
     {
         $authUser = auth()->user();
-
-        // Only allow super admins & admins to unban
-        if (!$authUser->hasRole(['super_admin', 'admin'])) {
-            return response()->json(['message' => 'Unauthorized.'], 403);
-        }
-
-        if ($user->hasRole('super_admin')) {
-            return response()->json(['message' => 'Super admins cannot be unbanned.'], 403);
-        }
-
-        // Only super admins can unban other admins
-        if ($user->type === 'admin' && !$authUser->hasRole('super_admin')) {
-            return response()->json(['message' => 'Only super admins can unban admins.'], 403);
-        }
 
         $user->update([
             'status' => 'active'
