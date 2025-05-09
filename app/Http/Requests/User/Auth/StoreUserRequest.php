@@ -17,6 +17,7 @@ class StoreUserRequest extends FormRequest
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'regex:/^2189\d{8}$/'],
+            'type' => ['required', 'string', Rule::in(['user', 'owner'])],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
