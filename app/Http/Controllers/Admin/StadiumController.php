@@ -54,7 +54,17 @@ class StadiumController extends Controller
      *       "user": {
      *         "id": 1,
      *         "name": "John Doe"
-     *       }
+     *       },
+     *       "images": [
+     *         {
+     *           "id": 1,
+     *           "url": "https://example.com/image1.jpg"
+     *         },
+     *         {
+     *           "id": 2,
+     *           "url": "https://example.com/image2.jpg"
+     *         }
+     *       ]
      *     }
      *   ],
      *   "links": { ... },
@@ -84,7 +94,7 @@ class StadiumController extends Controller
             ])
             ->allowedSorts(['name', 'price_per_hour', 'capacity', 'rating', 'created_at', 'updated_at', 'status'])
             ->defaultSort('id')
-            ->with('user') // Always include user relation
+            ->with(['user', 'images'])
             ->paginate($request->per_page ?? 15)
             ->appends($request->query());
 
@@ -138,8 +148,13 @@ class StadiumController extends Controller
         $validatedData['user_id'] = $validatedData['user_id'] ?? User::first()->id;
 
         $stadium = Stadium::create($validatedData);
+
+         // Handle temp upload IDs if provided
+        if ($request->filled('temp_upload_ids')) {
+            $stadium->imagesFromTempUploads($request->temp_upload_ids, 'stadiums');
+        }
         
-        return new StadiumResource($stadium->load('user'));
+        return new StadiumResource($stadium->load('user', 'images'));
     }
 
     /**
@@ -176,7 +191,7 @@ class StadiumController extends Controller
      */
     public function show(Stadium $stadium)
     {
-        return new StadiumResource($stadium->load('user'));
+        return new StadiumResource($stadium->load('user', 'images'));
     }
 
     /**
@@ -226,7 +241,12 @@ class StadiumController extends Controller
     {
         $stadium->update($request->validated());
 
-        return new StadiumResource($stadium->fresh()->load('user'));
+         // Handle temp upload IDs if provided
+        if ($request->filled('temp_upload_ids')) {
+            $stadium->imagesFromTempUploads($request->temp_upload_ids, 'stadiums');
+        }
+
+        return new StadiumResource($stadium->fresh()->load('user', 'images'));
     }
 
     /**
@@ -248,5 +268,37 @@ class StadiumController extends Controller
         $stadium->delete();
         
         return response()->json(['message' => 'Stadium deleted successfully']);
+    }
+
+    /**
+     * @group Admin/Stadiums
+     *
+     * Remove Stadium Image
+     *
+     * Removes an image from a stadium.
+     *
+     * @authenticated
+     * @urlParam stadium integer required The ID of the stadium. Example: 1
+     * @urlParam image integer required The ID of the image to remove. Example: 2
+     *
+     * @response {
+     *   "message": "Image removed successfully"
+     * }
+     */
+    public function removeImage(Stadium $stadium, $imageId)
+    {
+        $image = $stadium->images()->find($imageId);
+        
+        if (!$image) {
+            return response()->json(['message' => 'Image not found'], 404);
+        }
+        
+        // Delete the image from S3
+        Storage::disk('s3')->delete($image->url);
+        
+        // Delete the image record
+        $image->delete();
+        
+        return response()->json(['message' => 'Image removed successfully']);
     }
 }

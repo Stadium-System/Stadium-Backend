@@ -88,6 +88,7 @@ class StadiumController extends Controller
             ])
             ->allowedSorts(['name', 'price_per_hour', 'capacity', 'rating', 'created_at', 'updated_at'])
             ->defaultSort('id')
+            ->with(['user', 'images'])
             ->paginate($request->per_page ?? 15)
             ->appends($request->query());
 
@@ -111,30 +112,41 @@ class StadiumController extends Controller
      * @bodyParam capacity numeric The capacity of the stadium. Example: 12
      * @bodyParam description string The description of the stadium. Example: Full-size soccer field with floodlights
      * @bodyParam status string The status of the stadium (open or closed). Example: open
-     *
-     * @response {
-     *   "data": {
-     *     "id": 1,
-     *     "name": "ملعب توسي بارك السداسي",
-     *     "location": "ملعب مدرسة شباب الإنتفاضة - مقابل جزيرة الجعب",
-     *     "latitude": 25.276987,
-     *     "longitude": 55.296249,
-     *     "price_per_hour": 150.00,
-     *     "capacity": 12,
-     *     "image": stadium.jpg,
-     *     "description": "Full-size soccer field with floodlights",
-     *     "rating": 0,
-     *     "status": "open",
-     *     "created_at": "2025-05-09T10:00:00.000000Z",
-     *     "updated_at": "2025-05-09T10:00:00.000000Z",
-     *     "user": {
-     *       "id": 1,
-     *       "name": "John Doe"
-     *       "phone_number": "218912345678",
-     *     }
-     *   }
-     * }
-     */
+    * @bodyParam temp_upload_ids array The TempUpload IDs for the stadium images. Example: [1, 2]
+    * @bodyParam temp_upload_ids.* integer The TempUpload ID for each image. Example: 1
+    *
+    * @response {
+    *   "data": {
+    *     "id": 1,
+    *     "name": "ملعب توسي بارك السداسي",
+    *     "location": "ملعب مدرسة شباب الإنتفاضة - مقابل جزيرة الجعب",
+    *     "latitude": 25.276987,
+    *     "longitude": 55.296249,
+    *     "price_per_hour": 150.00,
+    *     "capacity": 12,
+    *     "images": [
+    *       {
+    *         "id": 1,
+    *         "url": "https://your-s3-bucket-url.com/stadiums/1/image1.jpg"
+    *       },
+    *       {
+    *         "id": 2,
+    *         "url": "https://your-s3-bucket-url.com/stadiums/1/image2.jpg"
+    *       }
+    *     ],
+    *     "description": "Full-size soccer field with floodlights",
+    *     "rating": 0,
+    *     "status": "open",
+    *     "created_at": "2025-05-09T10:00:00.000000Z",
+    *     "updated_at": "2025-05-09T10:00:00.000000Z",
+    *     "user": {
+    *       "id": 1,
+    *       "name": "John Doe",
+    *       "phone_number": "218912345678"
+    *     }
+    *   }
+    * }
+    */
     public function store(StoreStadiumRequest $request)
     {
         $validatedData = $request->validated();
@@ -144,8 +156,13 @@ class StadiumController extends Controller
         $validatedData['status'] = $validatedData['status'] ?? 'open';
 
         $stadium = Stadium::create($validatedData);
+
+        // Handle temp upload IDs if provided
+        if ($request->filled('temp_upload_ids')) {
+            $stadium->imagesFromTempUploads($request->temp_upload_ids, 'stadiums');
+        }
         
-        return new StadiumResource($stadium->load('user'));
+        return new StadiumResource($stadium->load('user', 'images'));
     }
 
     /**
@@ -210,8 +227,13 @@ class StadiumController extends Controller
     public function update(UpdateStadiumRequest $request, Stadium $stadium)
     {   
         $stadium->update($request->validated());
+
+        // Handle temp upload IDs if provided
+        if ($request->filled('temp_upload_ids')) {
+            $stadium->imagesFromTempUploads($request->temp_upload_ids, 'stadiums');
+        }
         
-        return new StadiumResource($stadium->fresh()->load('user'));
+        return new StadiumResource($stadium->fresh()->load('user', 'images'));
     }
 
     /**
@@ -238,4 +260,35 @@ class StadiumController extends Controller
         
         return response()->json(['message' => 'Stadium deleted successfully']);
     }
+
+        /**
+         * @group User/Stadiums
+         *
+         * Remove Stadium Image
+         *
+         * Removes an image from a stadium. Only the owner of the stadium can remove images.
+         *
+         * @authenticated
+         * @urlParam stadium integer required The ID of the stadium. Example: 1
+         * @urlParam image integer required The ID of the image to remove. Example: 2
+         *
+         * @response {
+         *   "message": "Image removed successfully"
+         * }
+         */
+        public function removeImage(Stadium $stadium, $imageId)
+        {
+            // Check if user owns the stadium
+            if ($stadium->user_id !== auth()->id()) {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
+            
+            $image = $stadium->images()->findOrFail($imageId);
+            
+            Storage::disk('s3')->delete($image->url);
+            
+            $image->delete();
+            
+            return response()->json(['message' => 'Image removed successfully']);
+        }
 }

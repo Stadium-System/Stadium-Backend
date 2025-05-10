@@ -31,6 +31,8 @@ class StoreStadiumRequest extends FormRequest
             'capacity' => 'required|numeric|min:1',
             'description' => 'nullable|string',
             'status' => 'sometimes|in:open,closed',
+            'temp_upload_ids' => 'nullable|array',
+            'temp_upload_ids.*' => 'integer|exists:temp_uploads,id',
         ];
     }
 }
