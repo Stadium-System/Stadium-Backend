@@ -11,7 +11,8 @@ class StoreStadiumRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // Only allow authenticated admin users to create stadiums.
+        return $this->user() && $this->user()->hasRole('admin');
     }
 
     /**
