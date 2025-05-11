@@ -187,6 +187,10 @@ class UserController extends Controller
     public function ban(User $user)
     {
         $authUser = auth()->user();
+        
+        if ($authUser->id === $user->id) {
+           return response()->json(['message' => 'You cannot ban yourself.'], 403);
+        }
 
         $user->update([
             'status' => 'banned'
