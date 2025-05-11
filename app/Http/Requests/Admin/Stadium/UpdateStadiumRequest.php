@@ -11,7 +11,8 @@ class UpdateStadiumRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // Only allow authenticated admin users to update orders.
+        return $this->user() && $this->user()->hasRole('admin');
     }
 
     /**
