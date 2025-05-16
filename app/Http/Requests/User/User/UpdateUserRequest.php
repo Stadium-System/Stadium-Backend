@@ -23,8 +23,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['nullable', 'string', 'max:255'],
-            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'avatar_media_id' => ['nullable', 'integer', 'exists:media,id'],
+            'cover_media_id' => ['nullable', 'integer', 'exists:media,id'],
         ];
     }
 }

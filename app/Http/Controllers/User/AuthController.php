@@ -11,6 +11,9 @@ use App\Http\Resources\UserResource;
 use App\Http\Requests\User\Auth\StoreUserRequest;
 use App\Models\User;
 use App\Models\Otp;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+
 class AuthController extends Controller
 {
 
@@ -62,6 +65,20 @@ class AuthController extends Controller
             'type' => 'user',
             'status' => 'active'
         ]);
+
+        // Handle avatar upload from temp media
+        if ($request->has('avatar_media_id')) {
+            $mediaId = $request->input('avatar_media_id');
+            $media = Media::findOrFail($mediaId);
+            $media->move($user, 'avatar');
+        }
+        
+        // Handle cover upload from temp media
+        if ($request->has('cover_media_id')) {
+            $mediaId = $request->input('cover_media_id');
+            $media = Media::findOrFail($mediaId);
+            $media->move($user, 'cover');
+        }
 
         $user->assignRole('user');
 

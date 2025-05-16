@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
     })
+    ->withSchedule(function (Illuminate\Console\Scheduling\Schedule $schedule) {
+        $schedule->command('temp-uploads:cleanup')->daily();
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

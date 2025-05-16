@@ -18,7 +18,13 @@ class StadiumResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'images' => $this->whenLoaded('images'),
+            
+            'images' => $this->getMedia('images')->map(function ($media) {
+                return [
+                    'id' => $media->id,
+                    'url' => $media->getFullUrl()
+                ];
+            }),
 
             'location' => $this->location,
             'latitude' => $this->latitude,

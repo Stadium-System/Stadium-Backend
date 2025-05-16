@@ -6,6 +6,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\OtpController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\StadiumController;
+use App\Http\Controllers\TempUploadController;
 
 // Authentication routes (public)
 Route::post('/register', [AuthController::class, 'register']);
@@ -36,5 +37,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/stadiums', [StadiumController::class, 'store']);
         Route::put('/stadiums/{stadium}', [StadiumController::class, 'update']);
         Route::delete('/stadiums/{stadium}', [StadiumController::class, 'destroy']);
+
+        Route::delete('/stadiums/{stadium}/images/{image}', [StadiumController::class, 'removeImage']);
     });
+
+    
+
 });

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 
 
 class UserController extends Controller
@@ -62,9 +64,35 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request)
     {
         $data = $request->validated();
-
         $user = auth()->user();
-        $user->update($data);
+
+        $user->update([
+            'name' => $data['name'] ?? $user->name,
+        ]);
+        
+        // Handle avatar from temp uploads
+        if ($request->has('avatar_media_id')) {
+            $mediaId = $request->input('avatar_media_id');
+            $media = Media::findOrFail($mediaId);
+            
+            // Clear previous avatar
+            $user->clearMediaCollection('avatar');
+            
+            // Move from temp to user
+            $media->move($user, 'avatar');
+        }
+        
+        // Handle cover from temp uploads
+        if ($request->has('cover_media_id')) {
+            $mediaId = $request->input('cover_media_id');
+            $media = Media::findOrFail($mediaId);
+            
+            // Clear previous cover
+            $user->clearMediaCollection('cover');
+            
+            // Move from temp to user
+            $media->move($user, 'cover');
+        }
         
         return new UserResource($user);
     }

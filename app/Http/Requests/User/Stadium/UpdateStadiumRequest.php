@@ -32,8 +32,8 @@ class UpdateStadiumRequest extends FormRequest
             'capacity' => 'sometimes|numeric|min:1',
             'description' => 'nullable|string',
             'status' => 'sometimes|in:open,closed',
-            'temp_upload_ids' => 'nullable|array',
-            'temp_upload_ids.*' => 'integer|exists:temp_uploads,id',
+            'media_ids' => 'required|array',
+            'media_ids.*' => 'integer|exists:media,id'
         ];
     }
 }

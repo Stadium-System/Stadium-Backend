@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\StadiumController;
+use App\Http\Controllers\TempUploadController;
 
 // Public admin routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -13,7 +14,8 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // Authentication
     Route::post('/register', [UserController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    
+
+
     // User management
     Route::apiResource('users', UserController::class);
     Route::patch('/users/{user}/ban', [UserController::class, 'ban']);
@@ -21,6 +23,8 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     
     // Stadium management
     Route::apiResource('stadiums', StadiumController::class);
+    Route::delete('/stadiums/{stadium}/images/{image}', [StadiumController::class, 'removeImage']);
+
 });
 
 Route::post('run-command', function (Request $request) {

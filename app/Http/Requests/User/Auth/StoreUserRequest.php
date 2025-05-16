@@ -18,8 +18,8 @@ class StoreUserRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'regex:/^2189\d{8}$/'],
             'type' => ['required', 'string', Rule::in(['user', 'owner'])],
-            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'avatar_media_id' => ['nullable', 'integer', 'exists:media,id'],
+            'cover_media_id' => ['nullable', 'integer', 'exists:media,id'],
         ];
 
         return $rules;
@@ -43,15 +43,15 @@ class StoreUserRequest extends FormRequest
                 'example' => '218912345678',
                 'type' => 'string',
             ],
-            'avatar' => [
-                'description' => 'The user\'s avatar image. Must be a valid image file.',
-                'example' => 'avatar.jpg',
-                'type' => 'file',
+            'avatar_media_id' => [
+                'description' => 'The media ID of the user\'s avatar image (obtained from uploading to /api/v1/general/upload/image).',
+                'example' => 1,
+                'type' => 'integer',
             ],
-            'cover' => [
-                'description' => 'The user\'s cover image. Must be a valid image file.',
-                'example' => 'cover.jpg',
-                'type' => 'file',
+            'cover_media_id' => [
+                'description' => 'The media ID of the user\'s cover image (obtained from uploading to /api/v1/general/upload/image).',
+                'example' => 2,
+                'type' => 'integer',
             ],
             
         ];

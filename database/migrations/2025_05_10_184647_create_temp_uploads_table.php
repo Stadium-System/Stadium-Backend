@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('temp_uploads', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
             $table->string('type')->default('image');
             $table->timestamps();
         });

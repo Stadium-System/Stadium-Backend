@@ -94,7 +94,7 @@ class StadiumController extends Controller
             ])
             ->allowedSorts(['name', 'price_per_hour', 'capacity', 'rating', 'created_at', 'updated_at', 'status'])
             ->defaultSort('id')
-            ->with(['user', 'images'])
+            ->with(['user'])
             ->paginate($request->per_page ?? 15)
             ->appends($request->query());
 

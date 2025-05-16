@@ -10,6 +10,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Http\Requests\User\Stadium\StoreStadiumRequest;
 use App\Http\Requests\User\Stadium\UpdateStadiumRequest;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 
 class StadiumController extends Controller
 {
@@ -157,12 +159,15 @@ class StadiumController extends Controller
 
         $stadium = Stadium::create($validatedData);
 
-        // Handle temp upload IDs if provided
-        if ($request->filled('temp_upload_ids')) {
-            $stadium->imagesFromTempUploads($request->temp_upload_ids, 'stadiums');
+        // Handle image uploads if media_ids are provided
+        if ($request->has('media_ids') && is_array($request->input('media_ids'))) {
+            foreach ($request->input('media_ids') as $mediaId) {
+                $media = Media::findOrFail($mediaId);
+                $media->move($stadium, 'images');
+            }
         }
         
-        return new StadiumResource($stadium->load('user', 'images'));
+        return new StadiumResource($stadium->load('user'));
     }
 
     /**
@@ -228,9 +233,12 @@ class StadiumController extends Controller
     {   
         $stadium->update($request->validated());
 
-        // Handle temp upload IDs if provided
-        if ($request->filled('temp_upload_ids')) {
-            $stadium->imagesFromTempUploads($request->temp_upload_ids, 'stadiums');
+        // Handle image uploads if media_ids are provided
+        if ($request->has('media_ids')) {
+            foreach ($request->input('media_ids') as $mediaId) {
+                $media = Media::findOrFail($mediaId);
+                $media->move($stadium, 'images');
+            }
         }
         
         return new StadiumResource($stadium->fresh()->load('user', 'images'));
@@ -261,34 +269,34 @@ class StadiumController extends Controller
         return response()->json(['message' => 'Stadium deleted successfully']);
     }
 
-        /**
-         * @group User/Stadiums
-         *
-         * Remove Stadium Image
-         *
-         * Removes an image from a stadium. Only the owner of the stadium can remove images.
-         *
-         * @authenticated
-         * @urlParam stadium integer required The ID of the stadium. Example: 1
-         * @urlParam image integer required The ID of the image to remove. Example: 2
-         *
-         * @response {
-         *   "message": "Image removed successfully"
-         * }
-         */
-        public function removeImage(Stadium $stadium, $imageId)
-        {
-            // Check if user owns the stadium
-            if ($stadium->user_id !== auth()->id()) {
-                return response()->json(['message' => 'Unauthorized'], 403);
-            }
-            
-            $image = $stadium->images()->findOrFail($imageId);
-            
-            Storage::disk('s3')->delete($image->url);
-            
-            $image->delete();
-            
-            return response()->json(['message' => 'Image removed successfully']);
+    /**
+     * @group User/Stadiums
+     *
+     * Remove Stadium Image
+     *
+     * Removes an image from a stadium. Only the owner of the stadium can remove images.
+     *
+     * @authenticated
+     * @urlParam stadium integer required The ID of the stadium. Example: 1
+     * @urlParam image integer required The ID of the image to remove. Example: 2
+     *
+     * @response {
+     *   "message": "Image removed successfully"
+     * }
+     */
+    public function removeImage(Stadium $stadium, $imageId)
+    {
+        // Check if user owns the stadium
+        if ($stadium->user_id !== auth()->id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
         }
+        
+        $image = $stadium->images()->findOrFail($imageId);
+        
+        Storage::disk('s3')->delete($image->url);
+        
+        $image->delete();
+        
+        return response()->json(['message' => 'Image removed successfully']);
+    }
 }

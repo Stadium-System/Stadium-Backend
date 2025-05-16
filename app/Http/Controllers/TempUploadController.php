@@ -33,18 +33,44 @@ class TempUploadController extends Controller
             'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $uploadData = StorageHelper::uploadToS3($request->file('file'), 'temp-uploads/images');
-        $upload = TempUpload::create([
-            'url' => $uploadData['path'],
-            'type' => 'image',
-        ]);
-        
+        $tempModel = TempUpload::create(['type' => 'image']);
+
+        $media = $tempModel->addMediaFromRequest('file')
+            ->usingName('temp_' . time())
+            ->toMediaCollection('temp_images');
+
         return response()->json([
             'message' => 'Uploaded Successfully',
             'data' => [
-                'id' => $upload->id,
-                'url' => Storage::disk('s3')->url($upload->url),
+                'id' => $media->id,
+                'url' => $media->getFullUrl()
             ],
         ], 201);
+    }
+
+    /**
+     * Get all temporary uploads for the authenticated user
+     */
+    public function listTempUploads()
+    {
+        $tempUploads = TempUpload::all();
+        
+        $mediaItems = collect();
+        
+        // Collect all media items from all temp uploads
+        foreach ($tempUploads as $tempUpload) {
+            $mediaItems = $mediaItems->merge($tempUpload->getMedia('temp_images'));
+        }
+        
+        return response()->json([
+            'count' => $mediaItems->count(),
+            'data' => $mediaItems->map(function($media) {
+                return [
+                    'id' => $media->id,
+                    'url' => $media->getFullUrl(),
+                    'created_at' => $media->created_at
+                ];
+            })
+        ]);
     }
 }

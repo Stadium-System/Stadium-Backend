@@ -32,8 +32,8 @@ class StoreStadiumRequest extends FormRequest
             'description' => 'nullable|string',
             'status' => 'sometimes|in:open,closed',
             'user_id' => 'nullable|exists:users,id',
-            'temp_upload_ids' => 'nullable|array',
-            'temp_upload_ids.*' => 'integer|exists:temp_uploads,id',
+            'media_ids' => 'required|array',
+            'media_ids.*' => 'integer|exists:media,id'
         ];
     }
 }
