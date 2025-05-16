@@ -27,8 +27,8 @@ class StoreUserRequest extends FormRequest
             'phone_number' => ['required', 'string', 'regex:/^2189\d{8}$/'], Rule::unique('users', 'phone_number'),
             'password' => 'required|string|min:8',
             'type' => 'required|string|in:admin,user,owner',
-            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'media_ids' => 'required|array',
+            'media_ids.*' => 'integer|exists:media,id'
         ];
     }
 }

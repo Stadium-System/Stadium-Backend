@@ -45,8 +45,8 @@ class UserController extends Controller
      * Updates the currently authenticated user's details.
      *
      * @bodyParam name string optional The name of the user. Example: John Doe
-     * @bodyParam avatar file optional The avatar image for the user. Must be a valid image file. Example: avatar.jpg
-     * @bodyParam cover file optional The cover image for the user. Must be a valid image file. Example: cover.jpg
+     * @bodyParam avatar_media_id integer optional The media ID for the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 3
+     * @bodyParam cover_media_id integer optional The media ID for the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 4
      *
      * @response {
      *  "id": 1,

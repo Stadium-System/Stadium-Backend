@@ -14,16 +14,18 @@ class TempUploadController extends Controller
      *
      * Upload Image
      *
-     * Uploads a temporary image file to S3 and returns a temporary upload ID.    
+     * Uploads a temporary image file to S3 and returns a media ID that can be used in other endpoints.
+     * This endpoint must be called first before creating/updating resources with images. 
+     *  
      * @authenticated
      *
-     * @bodyParam file file required The image file to upload.
+     * @bodyParam file file required The image file to upload. Must be jpeg, png, jpg, or gif and less than 2MB.
      *
      * @response 201 {
      *  "message": "Uploaded Successfully",
      *  "data": {
-     *      "id": 2,
-     *      "url": "https://your-s3-bucket-url.com/temp-uploads/images/unique_image_name.jpg"
+     *      "id": 8,
+     *      "url": "https://stadium-app-bucket-gaafarbbk.s3.us-east-2.amazonaws.com/8/146.jpg"
      *  }
      * }
      */
@@ -49,7 +51,35 @@ class TempUploadController extends Controller
     }
 
     /**
-     * Get all temporary uploads for the authenticated user
+     * @group File Upload
+     *
+     * List Temporary Uploads
+     *
+     * Retrieves all temporary media uploads for the authenticated user.
+     * Use this endpoint to see all previously uploaded temporary files that haven't been attached to models yet.
+     * 
+     * @authenticated
+     *
+     * @response {
+     *  "count": 3,
+     *  "data": [
+     *    {
+     *      "id": 1,
+     *      "url": "https://your-s3-bucket-url.com/temp-uploads/images/first_image.jpg",
+     *      "created_at": "2025-05-09T10:00:00.000000Z"
+     *    },
+     *    {
+     *      "id": 2,
+     *      "url": "https://your-s3-bucket-url.com/temp-uploads/images/second_image.jpg",
+     *      "created_at": "2025-05-09T10:15:00.000000Z"
+     *    },
+     *    {
+     *      "id": 3,
+     *      "url": "https://your-s3-bucket-url.com/temp-uploads/images/third_image.jpg",
+     *      "created_at": "2025-05-09T10:30:00.000000Z"
+     *    }
+     *  ]
+     * }
      */
     public function listTempUploads()
     {

@@ -1,19 +1,19 @@
-name: User/Stadiums
+name: User/Users
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/stadiums
+    uri: api/v1/me
     metadata:
-      groupName: User/Stadiums
+      groupName: User/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Stadium Catalog
+        Get Authenticated User
 
-        Retrieves a paginated list of stadiums with filtering options.
+        Retrieves the currently authenticated user's details.
       description: ''
       authenticated: false
       custom: []
@@ -22,210 +22,6 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
-      'filter[name]':
-        name: 'filter[name]'
-        description: 'Optional stadium name filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[location]':
-        name: 'filter[location]'
-        description: 'Optional stadium location filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[min_price_per_hour]':
-        name: 'filter[min_price_per_hour]'
-        description: 'Optional minimum price per hour filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[max_price_per_hour]':
-        name: 'filter[max_price_per_hour]'
-        description: 'Optional maximum price per hour filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[min_capacity]':
-        name: 'filter[min_capacity]'
-        description: 'Optional minimum capacity filter.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[max_capacity]':
-        name: 'filter[max_capacity]'
-        description: 'Optional maximum capacity filter.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[status]':
-        name: 'filter[status]'
-        description: 'Optional status filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[min_rating]':
-        name: 'filter[min_rating]'
-        description: 'Optional minimum rating filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[max_rating]':
-        name: 'filter[max_rating]'
-        description: 'Optional maximum rating filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[user_id]':
-        name: 'filter[user_id]'
-        description: "Optional owner's user ID filter."
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      sort:
-        name: sort
-        description: 'Optional sort parameter. Prefix with "-" for descending order.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanQueryParameters:
-      'filter[name]': architecto
-      'filter[location]': architecto
-      'filter[min_price_per_hour]': 4326.41688
-      'filter[max_price_per_hour]': 4326.41688
-      'filter[min_capacity]': 16
-      'filter[max_capacity]': 16
-      'filter[status]': architecto
-      'filter[min_rating]': 4326.41688
-      'filter[max_rating]': 4326.41688
-      'filter[user_id]': 16
-      sort: architecto
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "data": [
-              {
-                "id": 1,
-                "name": "City Stadium",
-                "location": "Downtown",
-                "price_per_hour": 100.00,
-                "capacity": 12,
-                "image": "https://example.com/stadium.jpg",
-                "rating": 4.5,
-                "status": "available",
-                "created_at": "2023-01-01T00:00:00.000000Z",
-                "updated_at": "2023-01-01T00:00:00.000000Z",
-                "user": {
-                  "id": 1,
-                  "name": "John Doe"
-                }
-              }
-            ],
-            "links": { ... },
-            "meta": { ... }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/v1/stadiums/{stadium_id}'
-    metadata:
-      groupName: User/Stadiums
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Get Stadium Details
-
-        Retrieves the details of a specific stadium.
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      stadium_id:
-        name: stadium_id
-        description: 'The ID of the stadium.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      id:
-        name: id
-        description: 'The ID of the stadium.'
-        required: true
-        example: '1'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      stadium_id: 1
-      id: '1'
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -233,354 +29,19 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/stadiums
-    metadata:
-      groupName: User/Stadiums
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Create Stadium
-
-        Creates a new stadium with the provided details.
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: multipart/form-data
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the stadium.'
-        required: true
-        example: 'Sunset Soccer Field'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      location:
-        name: location
-        description: 'The location of the stadium.'
-        required: true
-        example: 'Downtown Sports Complex'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      latitude:
-        name: latitude
-        description: 'The latitude coordinates.'
-        required: true
-        example: '25.276987'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      longitude:
-        name: longitude
-        description: 'The longitude coordinates.'
-        required: true
-        example: '55.296249'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      image:
-        name: image
-        description: 'Must be an image. Must not be greater than 2048 kilobytes.'
-        required: false
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      price_per_hour:
-        name: price_per_hour
-        description: 'The hourly rental price.'
-        required: true
-        example: '150.00'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      capacity:
-        name: capacity
-        description: 'The capacity of the stadium.'
-        required: false
-        example: '12'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the stadium.'
-        required: false
-        example: 'Full-size soccer field with floodlights'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      status:
-        name: status
-        description: 'The status of the stadium (open or closed).'
-        required: false
-        example: open
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'Sunset Soccer Field'
-      location: 'Downtown Sports Complex'
-      latitude: '25.276987'
-      longitude: '55.296249'
-      price_per_hour: '150.00'
-      capacity: '12'
-      description: 'Full-size soccer field with floodlights'
-      status: open
-    fileParameters:
-      image: null
-    responses:
-      -
         status: 200
         content: |-
           {
-            "data": {
-              "id": 1,
-              "name": "ملعب توسي بارك السداسي",
-              "location": "ملعب مدرسة شباب الإنتفاضة - مقابل جزيرة الجعب",
-              "latitude": 25.276987,
-              "longitude": 55.296249,
-              "price_per_hour": 150.00,
-              "capacity": 12,
-              "image": stadium.jpg,
-              "description": "Full-size soccer field with floodlights",
-              "rating": 0,
-              "status": "open",
-              "created_at": "2025-05-09T10:00:00.000000Z",
-              "updated_at": "2025-05-09T10:00:00.000000Z",
-              "user": {
-                "id": 1,
-                "name": "John Doe"
-                "phone_number": "218912345678",
-              }
-            }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - PUT
-    uri: 'api/v1/stadiums/{stadium_id}'
-    metadata:
-      groupName: User/Stadiums
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Update Stadium
-
-        Updates an existing stadium with the provided details.
-        Only the owner of the stadium can update it.
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: multipart/form-data
-      Accept: application/json
-    urlParameters:
-      stadium_id:
-        name: stadium_id
-        description: 'The ID of the stadium.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      id:
-        name: id
-        description: 'The ID of the stadium.'
-        required: true
-        example: '1'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      stadium_id: 1
-      id: '1'
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the stadium.'
-        required: false
-        example: 'Sunset Soccer Field Elite'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      location:
-        name: location
-        description: 'The location of the stadium.'
-        required: false
-        example: 'Downtown Sports Center'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      latitude:
-        name: latitude
-        description: 'The latitude coordinates.'
-        required: false
-        example: '25.276990'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      longitude:
-        name: longitude
-        description: 'The longitude coordinates.'
-        required: false
-        example: '55.296260'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      image:
-        name: image
-        description: 'Must be an image. Must not be greater than 2048 kilobytes.'
-        required: false
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      price_per_hour:
-        name: price_per_hour
-        description: 'The hourly rental price.'
-        required: false
-        example: '175.00'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      capacity:
-        name: capacity
-        description: 'The capacity of the stadium.'
-        required: false
-        example: '24'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the stadium.'
-        required: false
-        example: 'Premium soccer field with professional lighting'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      status:
-        name: status
-        description: 'The status of the stadium (open or closed).'
-        required: false
-        example: open
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'Sunset Soccer Field Elite'
-      location: 'Downtown Sports Center'
-      latitude: '25.276990'
-      longitude: '55.296260'
-      price_per_hour: '175.00'
-      capacity: '24'
-      description: 'Premium soccer field with professional lighting'
-      status: open
-    fileParameters:
-      image: null
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "data": {
-              "id": 1,
-              "name": "Sunset Soccer Field Elite",
-              "location": "Downtown Sports Center",
-              "latitude": 25.276990,
-              "longitude": 55.296260,
-              "price_per_hour": 175.00,
-              "capacity": 24,
-              "image": null,
-              "description": "Premium soccer field with professional lighting",
-              "rating": 4.5,
-              "status": "open",
-              "created_at": "2025-05-09T10:00:00.000000Z",
-              "updated_at": "2025-05-09T11:30:00.000000Z",
-              "user": {
-                "id": 1,
-                "name": "John Doe"
-                "phone_number": "218912345678",
-
-              }
-            }
+           "id": 1,
+           "name": "John Doe",
+           "phone_number": "218925113276",
+           "type": "user",
+           "roles": ["user"],
+           "avatar": "https://example.com/avatar.jpg",
+           "cover": "https://example.com/cover.jpg",
+           "status": "active",
+           "created_at": "2023-01-01T00:00:00.000000Z",
+           "updated_at": "2023-01-01T00:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -594,46 +55,24 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/stadiums/{stadium_id}'
+    uri: api/v1/me
     metadata:
-      groupName: User/Stadiums
+      groupName: User/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Delete Stadium
+        Delete Authenticated User
 
-        Deletes a stadium. Only the owner of the stadium can delete it.
+        Deletes the currently authenticated user's account and revokes their access token.
       description: ''
-      authenticated: true
+      authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      stadium_id:
-        name: stadium_id
-        description: 'The ID of the stadium.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      id:
-        name: id
-        description: 'The ID of the stadium.'
-        required: true
-        example: '1'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      stadium_id: 1
-      id: '1'
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -644,7 +83,7 @@ endpoints:
         status: 200
         content: |-
           {
-            "message": "Stadium deleted successfully"
+           "message": "User deleted successfully."
           }
         headers: []
         description: ''
@@ -658,16 +97,16 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/stadiums
+    uri: api/me
     metadata:
-      groupName: User/Stadiums
+      groupName: User/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Stadium Catalog
+        Get Authenticated User
 
-        Retrieves a paginated list of stadiums with filtering options.
+        Retrieves the currently authenticated user's details.
       description: ''
       authenticated: false
       custom: []
@@ -676,129 +115,8 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
-      'filter[name]':
-        name: 'filter[name]'
-        description: 'Optional stadium name filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[location]':
-        name: 'filter[location]'
-        description: 'Optional stadium location filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[min_price_per_hour]':
-        name: 'filter[min_price_per_hour]'
-        description: 'Optional minimum price per hour filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[max_price_per_hour]':
-        name: 'filter[max_price_per_hour]'
-        description: 'Optional maximum price per hour filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[min_capacity]':
-        name: 'filter[min_capacity]'
-        description: 'Optional minimum capacity filter.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[max_capacity]':
-        name: 'filter[max_capacity]'
-        description: 'Optional maximum capacity filter.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[status]':
-        name: 'filter[status]'
-        description: 'Optional status filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[min_rating]':
-        name: 'filter[min_rating]'
-        description: 'Optional minimum rating filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[max_rating]':
-        name: 'filter[max_rating]'
-        description: 'Optional maximum rating filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[user_id]':
-        name: 'filter[user_id]'
-        description: "Optional owner's user ID filter."
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      sort:
-        name: sort
-        description: 'Optional sort parameter. Prefix with "-" for descending order.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanQueryParameters:
-      'filter[name]': architecto
-      'filter[location]': architecto
-      'filter[min_price_per_hour]': 4326.41688
-      'filter[max_price_per_hour]': 4326.41688
-      'filter[min_capacity]': 16
-      'filter[max_capacity]': 16
-      'filter[status]': architecto
-      'filter[min_rating]': 4326.41688
-      'filter[max_rating]': 4326.41688
-      'filter[user_id]': 16
-      sort: architecto
+    queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -807,253 +125,19 @@ endpoints:
         status: 200
         content: |-
           {
-            "data": [
-              {
-                "id": 1,
-                "name": "City Stadium",
-                "location": "Downtown",
-                "price_per_hour": 100.00,
-                "capacity": 12,
-                "image": "https://example.com/stadium.jpg",
-                "rating": 4.5,
-                "status": "available",
-                "created_at": "2023-01-01T00:00:00.000000Z",
-                "updated_at": "2023-01-01T00:00:00.000000Z",
-                "user": {
-                  "id": 1,
-                  "name": "John Doe"
-                }
-              }
-            ],
-            "links": { ... },
-            "meta": { ... }
+           "id": 1,
+           "name": "John Doe",
+           "phone_number": "218925113276",
+           "type": "user",
+           "roles": ["user"],
+           "avatar": "https://example.com/avatar.jpg",
+           "cover": "https://example.com/cover.jpg",
+           "status": "active",
+           "created_at": "2023-01-01T00:00:00.000000Z",
+           "updated_at": "2023-01-01T00:00:00.000000Z"
           }
         headers: []
         description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/stadiums
-    metadata:
-      groupName: User/Stadiums
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Create Stadium
-
-        Creates a new stadium with the provided details.
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: multipart/form-data
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the stadium.'
-        required: true
-        example: 'Sunset Soccer Field'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      location:
-        name: location
-        description: 'The location of the stadium.'
-        required: true
-        example: 'Downtown Sports Complex'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      latitude:
-        name: latitude
-        description: 'The latitude coordinates.'
-        required: true
-        example: '25.276987'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      longitude:
-        name: longitude
-        description: 'The longitude coordinates.'
-        required: true
-        example: '55.296249'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      image:
-        name: image
-        description: 'Must be an image. Must not be greater than 2048 kilobytes.'
-        required: false
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      price_per_hour:
-        name: price_per_hour
-        description: 'The hourly rental price.'
-        required: true
-        example: '150.00'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      capacity:
-        name: capacity
-        description: 'The capacity of the stadium.'
-        required: false
-        example: '12'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the stadium.'
-        required: false
-        example: 'Full-size soccer field with floodlights'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      status:
-        name: status
-        description: 'The status of the stadium (open or closed).'
-        required: false
-        example: open
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'Sunset Soccer Field'
-      location: 'Downtown Sports Complex'
-      latitude: '25.276987'
-      longitude: '55.296249'
-      price_per_hour: '150.00'
-      capacity: '12'
-      description: 'Full-size soccer field with floodlights'
-      status: open
-    fileParameters:
-      image: null
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "data": {
-              "id": 1,
-              "name": "ملعب توسي بارك السداسي",
-              "location": "ملعب مدرسة شباب الإنتفاضة - مقابل جزيرة الجعب",
-              "latitude": 25.276987,
-              "longitude": 55.296249,
-              "price_per_hour": 150.00,
-              "capacity": 12,
-              "image": stadium.jpg,
-              "description": "Full-size soccer field with floodlights",
-              "rating": 0,
-              "status": "open",
-              "created_at": "2025-05-09T10:00:00.000000Z",
-              "updated_at": "2025-05-09T10:00:00.000000Z",
-              "user": {
-                "id": 1,
-                "name": "John Doe"
-                "phone_number": "218912345678",
-              }
-            }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/stadiums/{stadium_id}'
-    metadata:
-      groupName: User/Stadiums
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Get Stadium Details
-
-        Retrieves the details of a specific stadium.
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      stadium_id:
-        name: stadium_id
-        description: 'The ID of the stadium.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      id:
-        name: id
-        description: 'The ID of the stadium.'
-        required: true
-        example: '1'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      stadium_id: 1
-      id: '1'
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
         custom: []
     responseFields: []
     auth: []
@@ -1064,46 +148,24 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/stadiums/{stadium_id}'
+    uri: api/me
     metadata:
-      groupName: User/Stadiums
+      groupName: User/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Delete Stadium
+        Delete Authenticated User
 
-        Deletes a stadium. Only the owner of the stadium can delete it.
+        Deletes the currently authenticated user's account and revokes their access token.
       description: ''
-      authenticated: true
+      authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      stadium_id:
-        name: stadium_id
-        description: 'The ID of the stadium.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      id:
-        name: id
-        description: 'The ID of the stadium.'
-        required: true
-        example: '1'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      stadium_id: 1
-      id: '1'
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1114,191 +176,7 @@ endpoints:
         status: 200
         content: |-
           {
-            "message": "Stadium deleted successfully"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - PUT
-    uri: 'api/stadiums/{stadium_id}'
-    metadata:
-      groupName: User/Stadiums
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Update Stadium
-
-        Updates an existing stadium with the provided details.
-        Only the owner of the stadium can update it.
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: multipart/form-data
-      Accept: application/json
-    urlParameters:
-      stadium_id:
-        name: stadium_id
-        description: 'The ID of the stadium.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      id:
-        name: id
-        description: 'The ID of the stadium.'
-        required: true
-        example: '1'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      stadium_id: 1
-      id: '1'
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the stadium.'
-        required: false
-        example: 'Sunset Soccer Field Elite'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      location:
-        name: location
-        description: 'The location of the stadium.'
-        required: false
-        example: 'Downtown Sports Center'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      latitude:
-        name: latitude
-        description: 'The latitude coordinates.'
-        required: false
-        example: '25.276990'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      longitude:
-        name: longitude
-        description: 'The longitude coordinates.'
-        required: false
-        example: '55.296260'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      image:
-        name: image
-        description: 'Must be an image. Must not be greater than 2048 kilobytes.'
-        required: false
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      price_per_hour:
-        name: price_per_hour
-        description: 'The hourly rental price.'
-        required: false
-        example: '175.00'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      capacity:
-        name: capacity
-        description: 'The capacity of the stadium.'
-        required: false
-        example: '24'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the stadium.'
-        required: false
-        example: 'Premium soccer field with professional lighting'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      status:
-        name: status
-        description: 'The status of the stadium (open or closed).'
-        required: false
-        example: open
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'Sunset Soccer Field Elite'
-      location: 'Downtown Sports Center'
-      latitude: '25.276990'
-      longitude: '55.296260'
-      price_per_hour: '175.00'
-      capacity: '24'
-      description: 'Premium soccer field with professional lighting'
-      status: open
-    fileParameters:
-      image: null
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "data": {
-              "id": 1,
-              "name": "Sunset Soccer Field Elite",
-              "location": "Downtown Sports Center",
-              "latitude": 25.276990,
-              "longitude": 55.296260,
-              "price_per_hour": 175.00,
-              "capacity": 24,
-              "image": null,
-              "description": "Premium soccer field with professional lighting",
-              "rating": 4.5,
-              "status": "open",
-              "created_at": "2025-05-09T10:00:00.000000Z",
-              "updated_at": "2025-05-09T11:30:00.000000Z",
-              "user": {
-                "id": 1,
-                "name": "John Doe"
-                "phone_number": "218912345678",
-
-              }
-            }
+           "message": "User deleted successfully."
           }
         headers: []
         description: ''

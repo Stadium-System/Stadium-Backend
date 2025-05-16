@@ -1,19 +1,19 @@
-name: Admin/Stadiums
+name: Admin/Users
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/stadiums
+    uri: api/v1/admin/users
     metadata:
-      groupName: Admin/Stadiums
+      groupName: Admin/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Stadium Management
+        Get all users
 
-        Retrieves a paginated list of all stadiums with filtering options.
+        Retrieves a paginated list of all users.
       description: ''
       authenticated: true
       custom: []
@@ -25,126 +25,366 @@ endpoints:
     queryParameters:
       'filter[name]':
         name: 'filter[name]'
-        description: 'Optional stadium name filter.'
+        description: 'Filter by user name.'
         required: false
-        example: architecto
+        example: John
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
-      'filter[location]':
-        name: 'filter[location]'
-        description: 'Optional stadium location filter.'
+      'filter[phone_number]':
+        name: 'filter[phone_number]'
+        description: 'Filter by user phone number.'
         required: false
-        example: architecto
+        example: '218925113276'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
-      'filter[min_price_per_hour]':
-        name: 'filter[min_price_per_hour]'
-        description: 'Optional minimum price per hour filter.'
+      'filter[type]':
+        name: 'filter[type]'
+        description: 'Filter by user type.'
         required: false
-        example: 4326.41688
-        type: number
+        example: admin
+        type: string
         enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[max_price_per_hour]':
-        name: 'filter[max_price_per_hour]'
-        description: 'Optional maximum price per hour filter.'
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[min_capacity]':
-        name: 'filter[min_capacity]'
-        description: 'Optional minimum capacity filter.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[max_capacity]':
-        name: 'filter[max_capacity]'
-        description: 'Optional maximum capacity filter.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       'filter[status]':
         name: 'filter[status]'
-        description: 'Optional status filter.'
+        description: 'Filter by user status.'
         required: false
-        example: architecto
+        example: active
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      sort:
+        name: sort
+        description: 'Sort by fields. Prefix with "-" for descending order.'
+        required: false
+        example: 'name,-created_at'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      'filter[name]': John
+      'filter[phone_number]': '218925113276'
+      'filter[type]': admin
+      'filter[status]': active
+      sort: 'name,-created_at'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/admin/users/{id}'
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get user by ID
+
+        Retrieves the details of a specific user by its ID.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/admin/users/{id}'
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Update user by ID
+
+        Updates the details of a specific user by its ID.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The updated name of the user.'
+        required: true
+        example: 'Jane Doe'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      phone_number:
+        name: phone_number
+        description: 'The updated phone number of the user. Must start with 2189 and be exactly 12 characters.'
+        required: false
+        example: '218912345678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      0:
+        name: '0'
+        description: ''
+        required: false
+        example: null
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      'filter[min_rating]':
-        name: 'filter[min_rating]'
-        description: 'Optional minimum rating filter.'
+      password:
+        name: password
+        description: 'The updated password for the user. Must be at least 8 characters.'
         required: false
-        example: 4326.41688
-        type: number
+        example: newsecurepassword
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      type:
+        name: type
+        description: 'The updated type of user.'
+        required: true
+        example: user
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      status:
+        name: status
+        description: 'The updated status of the user. Must be either active, inactive, or banned.'
+        required: false
+        example: active
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      media_ids:
+        name: media_ids
+        description: 'The <code>id</code> of an existing record in the media table.'
+        required: false
+        example:
+          - 16
+        type: 'integer[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      'filter[max_rating]':
-        name: 'filter[max_rating]'
-        description: 'Optional maximum rating filter.'
+      avatar_media_id:
+        name: avatar_media_id
+        description: 'The media ID of the updated avatar image (obtained from /api/v1/general/temp-uploads/images endpoint).'
         required: false
-        example: 4326.41688
-        type: number
+        example: 9
+        type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
-      'filter[user_id]':
-        name: 'filter[user_id]'
-        description: "Optional owner's user ID filter."
+      cover_media_id:
+        name: cover_media_id
+        description: 'The media ID of the updated cover image (obtained from /api/v1/general/temp-uploads/images endpoint).'
         required: false
-        example: 16
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: 'Jane Doe'
+      phone_number: '218912345678'
+      password: newsecurepassword
+      type: user
+      status: active
+      media_ids:
+        - 16
+      avatar_media_id: 9
+      cover_media_id: 10
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/admin/users/{id}'
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Delete user by ID
+
+        Deletes a specific user by its ID.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PATCH
+    uri: 'api/v1/admin/users/{user_id}/ban'
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Ban User
+
+        Bans a user so they cannot log in.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      sort:
-        name: sort
-        description: 'Optional sort parameter. Prefix with "-" for descending order.'
-        required: false
-        example: architecto
-        type: string
+      user:
+        name: user
+        description: 'The ID of the user to ban.'
+        required: true
+        example: 3
+        type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
-    cleanQueryParameters:
-      'filter[name]': architecto
-      'filter[location]': architecto
-      'filter[min_price_per_hour]': 4326.41688
-      'filter[max_price_per_hour]': 4326.41688
-      'filter[min_capacity]': 16
-      'filter[max_capacity]': 16
-      'filter[status]': architecto
-      'filter[min_rating]': 4326.41688
-      'filter[max_rating]': 4326.41688
-      'filter[user_id]': 16
-      sort: architecto
+    cleanUrlParameters:
+      user_id: 1
+      user: 3
+    queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -153,29 +393,16 @@ endpoints:
         status: 200
         content: |-
           {
-            "data": [
-              {
-                "id": 1,
-                "name": "City Stadium",
-                "location": "Downtown",
-                "latitude": 25.276987,
-                "longitude": 55.296249,
-                "price_per_hour": 100.00,
-                "capacity": 12,
-                "image": "https://example.com/stadium.jpg",
-                "description": "Professional stadium with amenities",
-                "rating": 4.5,
-                "status": "open",
-                "created_at": "2023-01-01T00:00:00.000000Z",
-                "updated_at": "2023-01-01T00:00:00.000000Z",
-                "user": {
-                  "id": 1,
-                  "name": "John Doe"
-                }
-              }
-            ],
-            "links": { ... },
-            "meta": { ... }
+            "message": "User banned successfully."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 403
+        content: |-
+          {
+            "message": "Unauthorized."
           }
         headers: []
         description: ''
@@ -188,153 +415,67 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: api/v1/admin/stadiums
+      - PATCH
+    uri: 'api/v1/admin/users/{user_id}/unban'
     metadata:
-      groupName: Admin/Stadiums
+      groupName: Admin/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Create Stadium
+        Unban User
 
-        Creates a new stadium with the provided details.
+        Unbans a user, allowing them to log in.
       description: ''
       authenticated: true
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the stadium.'
-        required: true
-        example: 'Olympic Stadium'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      location:
-        name: location
-        description: 'The location of the stadium.'
-        required: true
-        example: 'Sports City'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      latitude:
-        name: latitude
-        description: 'The latitude coordinates.'
-        required: true
-        example: '25.276987'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      longitude:
-        name: longitude
-        description: 'The longitude coordinates.'
-        required: true
-        example: '55.296249'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      price_per_hour:
-        name: price_per_hour
-        description: 'The hourly rental price.'
-        required: true
-        example: '200.00'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      capacity:
-        name: capacity
-        description: 'The capacity of the stadium.'
-        required: false
-        example: '30'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the stadium.'
-        required: false
-        example: 'Professional stadium with amenities'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      status:
-        name: status
-        description: 'The status of the stadium (open or closed).'
-        required: false
-        example: open
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
+    urlParameters:
       user_id:
         name: user_id
-        description: 'The ID of the owner.'
+        description: 'The ID of the user.'
         required: true
-        example: 5
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      user:
+        name: user
+        description: 'The ID of the user to unban.'
+        required: true
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: true
-        nullable: true
+        nullable: false
         custom: []
-    cleanBodyParameters:
-      name: 'Olympic Stadium'
-      location: 'Sports City'
-      latitude: '25.276987'
-      longitude: '55.296249'
-      price_per_hour: '200.00'
-      capacity: '30'
-      description: 'Professional stadium with amenities'
-      status: open
-      user_id: 5
+    cleanUrlParameters:
+      user_id: 1
+      user: 3
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-            "data": {
-              "id": 1,
-              "name": "Olympic Stadium",
-              "location": "Sports City",
-              "latitude": 25.276987,
-              "longitude": 55.296249,
-              "price_per_hour": 200.00,
-              "capacity": 30,
-              "image": null,
-              "description": "Professional stadium with amenities",
-              "rating": 0,
-              "status": "open",
-              "created_at": "2025-05-09T10:00:00.000000Z",
-              "updated_at": "2025-05-09T10:00:00.000000Z",
-              "user": {
-                "id": 5,
-                "name": "Stadium Owner"
-              }
-            }
+            "message": "User unbanned successfully."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 403
+        content: |-
+          {
+            "message": "Unauthorized."
           }
         headers: []
         description: ''
@@ -348,16 +489,113 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/v1/admin/stadiums/{id}'
+    uri: api/users
     metadata:
-      groupName: Admin/Stadiums
+      groupName: Admin/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Get Stadium Details
+        Get all users
 
-        Retrieves the details of a specific stadium.
+        Retrieves a paginated list of all users.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      'filter[name]':
+        name: 'filter[name]'
+        description: 'Filter by user name.'
+        required: false
+        example: John
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[phone_number]':
+        name: 'filter[phone_number]'
+        description: 'Filter by user phone number.'
+        required: false
+        example: '218925113276'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[type]':
+        name: 'filter[type]'
+        description: 'Filter by user type.'
+        required: false
+        example: admin
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[status]':
+        name: 'filter[status]'
+        description: 'Filter by user status.'
+        required: false
+        example: active
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      sort:
+        name: sort
+        description: 'Sort by fields. Prefix with "-" for descending order.'
+        required: false
+        example: 'name,-created_at'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      'filter[name]': John
+      'filter[phone_number]': '218925113276'
+      'filter[type]': admin
+      'filter[status]': active
+      sort: 'name,-created_at'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/users/{id}'
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get user by ID
+
+        Retrieves the details of a specific user by its ID.
       description: ''
       authenticated: true
       custom: []
@@ -367,16 +605,16 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the stadium.'
+        description: 'The ID of the user.'
         required: true
-        example: '1'
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: '1'
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -384,31 +622,13 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: |-
-          {
-            "data": {
-              "id": 1,
-              "name": "Olympic Stadium",
-              "location": "Sports City",
-              "latitude": 25.276987,
-              "longitude": 55.296249,
-              "price_per_hour": 200.00,
-              "capacity": 30,
-              "image": null,
-              "description": "Professional stadium with amenities",
-              "rating": 4.2,
-              "status": "open",
-              "created_at": "2025-05-09T10:00:00.000000Z",
-              "updated_at": "2025-05-09T10:00:00.000000Z",
-              "user": {
-                "id": 5,
-                "name": "Stadium Owner"
-              }
-            }
-          }
-        headers: []
-        description: ''
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
         custom: []
     responseFields: []
     auth: []
@@ -420,16 +640,16 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/v1/admin/stadiums/{id}'
+    uri: 'api/users/{id}'
     metadata:
-      groupName: Admin/Stadiums
+      groupName: Admin/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Update Stadium
+        Update user by ID
 
-        Updates an existing stadium with the provided details.
+        Updates the details of a specific user by its ID.
       description: ''
       authenticated: true
       custom: []
@@ -439,84 +659,64 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the stadium.'
+        description: 'The ID of the user.'
         required: true
-        example: '1'
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: '1'
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       name:
         name: name
-        description: 'The name of the stadium.'
-        required: false
-        example: 'Olympic Stadium Premium'
+        description: 'The updated name of the user.'
+        required: true
+        example: 'Jane Doe'
         type: string
         enumValues: []
         exampleWasSpecified: true
-        nullable: false
+        nullable: true
         custom: []
-      location:
-        name: location
-        description: 'The location of the stadium.'
+      phone_number:
+        name: phone_number
+        description: 'The updated phone number of the user. Must start with 2189 and be exactly 12 characters.'
         required: false
-        example: 'Sports City Center'
+        example: '218912345678'
         type: string
         enumValues: []
         exampleWasSpecified: true
+        nullable: true
+        custom: []
+      0:
+        name: '0'
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
         nullable: false
         custom: []
-      latitude:
-        name: latitude
-        description: 'The latitude coordinates.'
+      password:
+        name: password
+        description: 'The updated password for the user. Must be at least 8 characters.'
         required: false
-        example: '25.276990'
-        type: numeric
+        example: newsecurepassword
+        type: string
         enumValues: []
         exampleWasSpecified: true
-        nullable: false
+        nullable: true
         custom: []
-      longitude:
-        name: longitude
-        description: 'The longitude coordinates.'
-        required: false
-        example: '55.296260'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      price_per_hour:
-        name: price_per_hour
-        description: 'The hourly rental price.'
-        required: false
-        example: '225.00'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      capacity:
-        name: capacity
-        description: 'The capacity of the stadium.'
-        required: false
-        example: '35'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the stadium.'
-        required: false
-        example: 'Premium stadium with VIP facilities'
+      type:
+        name: type
+        description: 'The updated type of user.'
+        required: true
+        example: user
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -524,74 +724,57 @@ endpoints:
         custom: []
       status:
         name: status
-        description: 'The status of the stadium (open or closed).'
+        description: 'The updated status of the user. Must be either active, inactive, or banned.'
         required: false
-        example: open
+        example: active
         type: string
         enumValues: []
         exampleWasSpecified: true
+        nullable: true
+        custom: []
+      media_ids:
+        name: media_ids
+        description: 'The <code>id</code> of an existing record in the media table.'
+        required: false
+        example:
+          - 16
+        type: 'integer[]'
+        enumValues: []
+        exampleWasSpecified: false
         nullable: false
         custom: []
-      user_id:
-        name: user_id
-        description: 'The ID of the owner.'
+      avatar_media_id:
+        name: avatar_media_id
+        description: 'The media ID of the updated avatar image (obtained from /api/v1/general/temp-uploads/images endpoint).'
         required: false
-        example: 7
+        example: 9
         type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
-      rating:
-        name: rating
-        description: 'The rating of the stadium (0-5).'
+      cover_media_id:
+        name: cover_media_id
+        description: 'The media ID of the updated cover image (obtained from /api/v1/general/temp-uploads/images endpoint).'
         required: false
-        example: '4.8'
-        type: numeric
+        example: 10
+        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: 'Olympic Stadium Premium'
-      location: 'Sports City Center'
-      latitude: '25.276990'
-      longitude: '55.296260'
-      price_per_hour: '225.00'
-      capacity: '35'
-      description: 'Premium stadium with VIP facilities'
-      status: open
-      user_id: 7
-      rating: '4.8'
+      name: 'Jane Doe'
+      phone_number: '218912345678'
+      password: newsecurepassword
+      type: user
+      status: active
+      media_ids:
+        - 16
+      avatar_media_id: 9
+      cover_media_id: 10
     fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "data": {
-              "id": 1,
-              "name": "Olympic Stadium Premium",
-              "location": "Sports City Center",
-              "latitude": 25.276990,
-              "longitude": 55.296260,
-              "price_per_hour": 225.00,
-              "capacity": 35,
-              "image": null,
-              "description": "Premium stadium with VIP facilities",
-              "rating": 4.8,
-              "status": "open",
-              "created_at": "2025-05-09T10:00:00.000000Z",
-              "updated_at": "2025-05-09T11:30:00.000000Z",
-              "user": {
-                "id": 7,
-                "name": "New Stadium Owner"
-              }
-            }
-          }
-        headers: []
-        description: ''
-        custom: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -601,16 +784,16 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/admin/stadiums/{id}'
+    uri: 'api/users/{id}'
     metadata:
-      groupName: Admin/Stadiums
+      groupName: Admin/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Delete Stadium
+        Delete user by ID
 
-        Deletes a stadium.
+        Deletes a specific user by its ID.
       description: ''
       authenticated: true
       custom: []
@@ -620,16 +803,71 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the stadium.'
+        description: 'The ID of the user.'
         required: true
-        example: '1'
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: '1'
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PATCH
+    uri: 'api/users/{user_id}/ban'
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Ban User
+
+        Bans a user so they cannot log in.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      user:
+        name: user
+        description: 'The ID of the user to ban.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      user_id: 1
+      user: 3
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -640,7 +878,16 @@ endpoints:
         status: 200
         content: |-
           {
-            "message": "Stadium deleted successfully"
+            "message": "User banned successfully."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 403
+        content: |-
+          {
+            "message": "Unauthorized."
           }
         headers: []
         description: ''
@@ -653,18 +900,17 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - PUT
       - PATCH
-    uri: 'api/stadiums/{id}'
+    uri: 'api/users/{user_id}/unban'
     metadata:
-      groupName: Admin/Stadiums
+      groupName: Admin/Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Update Stadium
+        Unban User
 
-        Updates an existing stadium with the provided details.
+        Unbans a user, allowing them to log in.
       description: ''
       authenticated: true
       custom: []
@@ -672,157 +918,49 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      id:
-        name: id
-        description: 'The ID of the stadium.'
-        required: true
-        example: '1'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: '1'
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the stadium.'
-        required: false
-        example: 'Olympic Stadium Premium'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      location:
-        name: location
-        description: 'The location of the stadium.'
-        required: false
-        example: 'Sports City Center'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      latitude:
-        name: latitude
-        description: 'The latitude coordinates.'
-        required: false
-        example: '25.276990'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      longitude:
-        name: longitude
-        description: 'The longitude coordinates.'
-        required: false
-        example: '55.296260'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      price_per_hour:
-        name: price_per_hour
-        description: 'The hourly rental price.'
-        required: false
-        example: '225.00'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      capacity:
-        name: capacity
-        description: 'The capacity of the stadium.'
-        required: false
-        example: '35'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: 'The description of the stadium.'
-        required: false
-        example: 'Premium stadium with VIP facilities'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      status:
-        name: status
-        description: 'The status of the stadium (open or closed).'
-        required: false
-        example: open
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
       user_id:
         name: user_id
-        description: 'The ID of the owner.'
-        required: false
-        example: 7
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      user:
+        name: user
+        description: 'The ID of the user to unban.'
+        required: true
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
-      rating:
-        name: rating
-        description: 'The rating of the stadium (0-5).'
-        required: false
-        example: '4.8'
-        type: numeric
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'Olympic Stadium Premium'
-      location: 'Sports City Center'
-      latitude: '25.276990'
-      longitude: '55.296260'
-      price_per_hour: '225.00'
-      capacity: '35'
-      description: 'Premium stadium with VIP facilities'
-      status: open
-      user_id: 7
-      rating: '4.8'
+    cleanUrlParameters:
+      user_id: 1
+      user: 3
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-            "data": {
-              "id": 1,
-              "name": "Olympic Stadium Premium",
-              "location": "Sports City Center",
-              "latitude": 25.276990,
-              "longitude": 55.296260,
-              "price_per_hour": 225.00,
-              "capacity": 35,
-              "image": null,
-              "description": "Premium stadium with VIP facilities",
-              "rating": 4.8,
-              "status": "open",
-              "created_at": "2025-05-09T10:00:00.000000Z",
-              "updated_at": "2025-05-09T11:30:00.000000Z",
-              "user": {
-                "id": 7,
-                "name": "New Stadium Owner"
-              }
-            }
+            "message": "User unbanned successfully."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 403
+        content: |-
+          {
+            "message": "Unauthorized."
           }
         headers: []
         description: ''

@@ -1,61 +1,54 @@
-name: 'Admin Authentication'
+name: 'File Upload'
 description: ''
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/admin/login
+    uri: api/v1/general/temp-uploads/images
     metadata:
-      groupName: 'Admin Authentication'
+      groupName: 'File Upload'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Login
+        Upload Image
 
-        Authenticates an admin using phone number and password.
+        Uploads a temporary image file to S3 and returns a media ID that can be used in other endpoints.
+        This endpoint must be called first before creating/updating resources with images.
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
-      Content-Type: application/json
+      Content-Type: multipart/form-data
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      phone_number:
-        name: phone_number
-        description: "The admin's phone number. Must start with 2189 and be exactly 12 characters."
+      file:
+        name: file
+        description: 'The image file to upload. Must be jpeg, png, jpg, or gif and less than 2MB.'
         required: true
-        example: '218912345678'
-        type: string
+        example: null
+        type: file
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         custom: []
-      password:
-        name: password
-        description: "The admin's password."
-        required: true
-        example: password123
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      phone_number: '218912345678'
-      password: password123
-    fileParameters: []
+    cleanBodyParameters: []
+    fileParameters:
+      file: null
     responses:
       -
-        status: 200
+        status: 201
         content: |-
           {
-            "access_token": "token_string",
-            "token_type": "Bearer"
+           "message": "Uploaded Successfully",
+           "data": {
+               "id": 8,
+               "url": "https://stadium-app-bucket-gaafarbbk.s3.us-east-2.amazonaws.com/8/146.jpg"
+           }
           }
         headers: []
         description: ''
@@ -68,19 +61,20 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: api/v1/admin/logout
+      - GET
+    uri: api/v1/general/temp-uploads
     metadata:
-      groupName: 'Admin Authentication'
+      groupName: 'File Upload'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Logout
+        List Temporary Uploads
 
-        Revokes the current admin token.
+        Retrieves all temporary media uploads for the authenticated user.
+        Use this endpoint to see all previously uploaded temporary files that haven't been attached to models yet.
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -94,8 +88,146 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 204
-        content: '{}'
+        status: 200
+        content: |-
+          {
+           "count": 3,
+           "data": [
+             {
+               "id": 1,
+               "url": "https://your-s3-bucket-url.com/temp-uploads/images/first_image.jpg",
+               "created_at": "2025-05-09T10:00:00.000000Z"
+             },
+             {
+               "id": 2,
+               "url": "https://your-s3-bucket-url.com/temp-uploads/images/second_image.jpg",
+               "created_at": "2025-05-09T10:15:00.000000Z"
+             },
+             {
+               "id": 3,
+               "url": "https://your-s3-bucket-url.com/temp-uploads/images/third_image.jpg",
+               "created_at": "2025-05-09T10:30:00.000000Z"
+             }
+           ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/temp-uploads/images
+    metadata:
+      groupName: 'File Upload'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Upload Image
+
+        Uploads a temporary image file to S3 and returns a media ID that can be used in other endpoints.
+        This endpoint must be called first before creating/updating resources with images.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      file:
+        name: file
+        description: 'The image file to upload. Must be jpeg, png, jpg, or gif and less than 2MB.'
+        required: true
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters: []
+    fileParameters:
+      file: null
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+           "message": "Uploaded Successfully",
+           "data": {
+               "id": 8,
+               "url": "https://stadium-app-bucket-gaafarbbk.s3.us-east-2.amazonaws.com/8/146.jpg"
+           }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/temp-uploads
+    metadata:
+      groupName: 'File Upload'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        List Temporary Uploads
+
+        Retrieves all temporary media uploads for the authenticated user.
+        Use this endpoint to see all previously uploaded temporary files that haven't been attached to models yet.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "count": 3,
+           "data": [
+             {
+               "id": 1,
+               "url": "https://your-s3-bucket-url.com/temp-uploads/images/first_image.jpg",
+               "created_at": "2025-05-09T10:00:00.000000Z"
+             },
+             {
+               "id": 2,
+               "url": "https://your-s3-bucket-url.com/temp-uploads/images/second_image.jpg",
+               "created_at": "2025-05-09T10:15:00.000000Z"
+             },
+             {
+               "id": 3,
+               "url": "https://your-s3-bucket-url.com/temp-uploads/images/third_image.jpg",
+               "created_at": "2025-05-09T10:30:00.000000Z"
+             }
+           ]
+          }
         headers: []
         description: ''
         custom: []

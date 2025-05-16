@@ -11,6 +11,8 @@ use Spatie\QueryBuilder\AllowedFilter;
 use App\Http\Requests\Admin\Stadium\StoreStadiumRequest;
 use App\Http\Requests\Admin\Stadium\UpdateStadiumRequest;
 use App\Models\User;
+use App\Helpers\MediaHelper;
+
 
 class StadiumController extends Controller
 {
@@ -119,6 +121,8 @@ class StadiumController extends Controller
      * @bodyParam description string The description of the stadium. Example: Professional stadium with amenities
      * @bodyParam status string The status of the stadium (open or closed). Example: open
      * @bodyParam user_id integer required The ID of the owner. Example: 5
+     * @bodyParam media_ids array An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint). Example: [5, 6]
+     * @bodyParam media_ids.* integer The media ID for each new image. Example: 5
      *
      * @response {
      *   "data": {
@@ -149,9 +153,9 @@ class StadiumController extends Controller
 
         $stadium = Stadium::create($validatedData);
 
-         // Handle temp upload IDs if provided
-        if ($request->filled('temp_upload_ids')) {
-            $stadium->imagesFromTempUploads($request->temp_upload_ids, 'stadiums');
+        // Handle image uploads if media_ids are provided
+        if ($request->has('media_ids')) {
+            MediaHelper::attachMedia($stadium, $request->input('media_ids'), 'images');
         }
         
         return new StadiumResource($stadium->load('user', 'images'));
@@ -214,6 +218,8 @@ class StadiumController extends Controller
      * @bodyParam status string The status of the stadium (open or closed). Example: open
      * @bodyParam rating numeric The rating of the stadium (0-5). Example: 4.8
      * @bodyParam user_id integer The ID of the owner. Example: 7
+     * @bodyParam media_ids array An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint). Example: [5, 6]
+     * @bodyParam media_ids.* integer The media ID for each new image. Example: 5
      *
      * @response {
      *   "data": {
@@ -241,9 +247,9 @@ class StadiumController extends Controller
     {
         $stadium->update($request->validated());
 
-         // Handle temp upload IDs if provided
-        if ($request->filled('temp_upload_ids')) {
-            $stadium->imagesFromTempUploads($request->temp_upload_ids, 'stadiums');
+         // Handle image uploads if media_ids are provided
+        if ($request->has('media_ids')) {
+            MediaHelper::attachMedia($stadium, $request->input('media_ids'), 'images');
         }
 
         return new StadiumResource($stadium->fresh()->load('user', 'images'));
@@ -270,35 +276,4 @@ class StadiumController extends Controller
         return response()->json(['message' => 'Stadium deleted successfully']);
     }
 
-    /**
-     * @group Admin/Stadiums
-     *
-     * Remove Stadium Image
-     *
-     * Removes an image from a stadium.
-     *
-     * @authenticated
-     * @urlParam stadium integer required The ID of the stadium. Example: 1
-     * @urlParam image integer required The ID of the image to remove. Example: 2
-     *
-     * @response {
-     *   "message": "Image removed successfully"
-     * }
-     */
-    public function removeImage(Stadium $stadium, $imageId)
-    {
-        $image = $stadium->images()->find($imageId);
-        
-        if (!$image) {
-            return response()->json(['message' => 'Image not found'], 404);
-        }
-        
-        // Delete the image from S3
-        Storage::disk('s3')->delete($image->url);
-        
-        // Delete the image record
-        $image->delete();
-        
-        return response()->json(['message' => 'Image removed successfully']);
-    }
 }

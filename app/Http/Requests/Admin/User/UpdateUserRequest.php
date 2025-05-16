@@ -28,8 +28,8 @@ class UpdateUserRequest extends FormRequest
             'password' => 'sometimes|nullable|string|min:8',
             'type' => 'nullable|string|in:admin,user,owner',
             'status' => 'nullable|string|in:active,inactive,banned',
-            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'], 
+            'media_ids' => 'required|array',
+            'media_ids.*' => 'integer|exists:media,id'
         ];
     }
 }

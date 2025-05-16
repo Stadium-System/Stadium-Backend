@@ -118,6 +118,11 @@ Retrieves a paginated list of all users.</a>
 
 Retrieves the details of a specific user by its ID.</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="adminusers-PUTapi-v1-admin-users--id-">
+                                <a href="#adminusers-PUTapi-v1-admin-users--id-">Update user by ID
+
+Updates the details of a specific user by its ID.</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="adminusers-DELETEapi-v1-admin-users--id-">
                                 <a href="#adminusers-DELETEapi-v1-admin-users--id-">Delete user by ID
 
@@ -142,6 +147,11 @@ Retrieves a paginated list of all users.</a>
                                 <a href="#adminusers-GETapi-users--id-">Get user by ID
 
 Retrieves the details of a specific user by its ID.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="adminusers-PUTapi-users--id-">
+                                <a href="#adminusers-PUTapi-users--id-">Update user by ID
+
+Updates the details of a specific user by its ID.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="adminusers-DELETEapi-users--id-">
                                 <a href="#adminusers-DELETEapi-users--id-">Delete user by ID
@@ -170,6 +180,11 @@ Unbans a user, allowing them to log in.</a>
 
 Authenticates an admin using phone number and password.</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="admin-authentication-POSTapi-v1-admin-register">
+                                <a href="#admin-authentication-POSTapi-v1-admin-register">Register a new user
+
+Creates a new user with the provided details. Only admins can create other admins.</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="admin-authentication-POSTapi-v1-admin-logout">
                                 <a href="#admin-authentication-POSTapi-v1-admin-logout">Logout
 
@@ -187,6 +202,37 @@ Revokes the current admin token.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-run-command">
                                 <a href="#endpoints-POSTapi-run-command">POST api/run-command</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-file-upload" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="file-upload">
+                    <a href="#file-upload">File Upload</a>
+                </li>
+                                    <ul id="tocify-subheader-file-upload" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="file-upload-POSTapi-v1-general-temp-uploads-images">
+                                <a href="#file-upload-POSTapi-v1-general-temp-uploads-images">Upload Image
+
+Uploads a temporary image file to S3 and returns a media ID that can be used in other endpoints.
+This endpoint must be called first before creating/updating resources with images.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="file-upload-GETapi-v1-general-temp-uploads">
+                                <a href="#file-upload-GETapi-v1-general-temp-uploads">List Temporary Uploads
+
+Retrieves all temporary media uploads for the authenticated user.
+Use this endpoint to see all previously uploaded temporary files that haven't been attached to models yet.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="file-upload-POSTapi-temp-uploads-images">
+                                <a href="#file-upload-POSTapi-temp-uploads-images">Upload Image
+
+Uploads a temporary image file to S3 and returns a media ID that can be used in other endpoints.
+This endpoint must be called first before creating/updating resources with images.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="file-upload-GETapi-temp-uploads">
+                                <a href="#file-upload-GETapi-temp-uploads">List Temporary Uploads
+
+Retrieves all temporary media uploads for the authenticated user.
+Use this endpoint to see all previously uploaded temporary files that haven't been attached to models yet.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -248,6 +294,11 @@ Only the owner of the stadium can update it.</a>
 
 Deletes a stadium. Only the owner of the stadium can delete it.</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="userstadiums-DELETEapi-v1-stadiums--stadium_id--images--image-">
+                                <a href="#userstadiums-DELETEapi-v1-stadiums--stadium_id--images--image-">Remove Stadium Image
+
+Removes an image from a stadium. Only the owner of the stadium can remove images.</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="userstadiums-GETapi-stadiums">
                                 <a href="#userstadiums-GETapi-stadiums">Stadium Catalog
 
@@ -267,6 +318,11 @@ Retrieves the details of a specific stadium.</a>
                                 <a href="#userstadiums-DELETEapi-stadiums--stadium_id-">Delete Stadium
 
 Deletes a stadium. Only the owner of the stadium can delete it.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="userstadiums-DELETEapi-stadiums--stadium_id--images--image-">
+                                <a href="#userstadiums-DELETEapi-stadiums--stadium_id--images--image-">Remove Stadium Image
+
+Removes an image from a stadium. Only the owner of the stadium can remove images.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="userstadiums-PUTapi-stadiums--stadium_id-">
                                 <a href="#userstadiums-PUTapi-stadiums--stadium_id-">Update Stadium
@@ -303,12 +359,35 @@ Deletes the currently authenticated user's account and revokes their access toke
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-userusers" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="userusers">
+                    <a href="#userusers">User/Users </a>
+                </li>
+                                    <ul id="tocify-subheader-userusers" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="userusers-PUTapi-v1-me">
+                                <a href="#userusers-PUTapi-v1-me">Update Authenticated User
+
+Updates the currently authenticated user's details.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="userusers-PUTapi-me">
+                                <a href="#userusers-PUTapi-me">Update Authenticated User
+
+Updates the currently authenticated user's details.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-user-authentication" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="user-authentication">
                     <a href="#user-authentication">User Authentication</a>
                 </li>
                                     <ul id="tocify-subheader-user-authentication" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="user-authentication-POSTapi-v1-login">
+                                                    <li class="tocify-item level-2" data-unique="user-authentication-POSTapi-v1-register">
+                                <a href="#user-authentication-POSTapi-v1-register">Register a New User
+
+Completes the registration for a new user with the provided details,
+assigns the default 'user' role, and returns an access token.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="user-authentication-POSTapi-v1-login">
                                 <a href="#user-authentication-POSTapi-v1-login">Login (by Phone Number)
 
 Authenticates a user using phone number and password.</a>
@@ -322,6 +401,12 @@ Revokes the current user token.</a>
                                 <a href="#user-authentication-POSTapi-login">Login (by Phone Number)
 
 Authenticates a user using phone number and password.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="user-authentication-POSTapi-register">
+                                <a href="#user-authentication-POSTapi-register">Register a New User
+
+Completes the registration for a new user with the provided details,
+assigns the default 'user' role, and returns an access token.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="user-authentication-POSTapi-logout">
                                 <a href="#user-authentication-POSTapi-logout">Logout
@@ -339,7 +424,7 @@ Revokes the current user token.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: May 10, 2025</li>
+        <li>Last updated: May 16, 2025</li>
     </ul>
 </div>
 
@@ -441,7 +526,17 @@ fetch(url, {
       &quot;user&quot;: {
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;John Doe&quot;
-      }
+      },
+      &quot;images&quot;: [
+        {
+          &quot;id&quot;: 1,
+          &quot;url&quot;: &quot;https://example.com/image1.jpg&quot;
+        },
+        {
+          &quot;id&quot;: 2,
+          &quot;url&quot;: &quot;https://example.com/image2.jpg&quot;
+        }
+      ]
     }
   ],
   &quot;links&quot;: { ... },
@@ -670,7 +765,10 @@ Creates a new stadium with the provided details.</h2>
     \"capacity\": \"30\",
     \"description\": \"Professional stadium with amenities\",
     \"status\": \"open\",
-    \"user_id\": 5
+    \"user_id\": 5,
+    \"media_ids\": [
+        16
+    ]
 }"
 </code></pre></div>
 
@@ -694,7 +792,10 @@ let body = {
     "capacity": "30",
     "description": "Professional stadium with amenities",
     "status": "open",
-    "user_id": 5
+    "user_id": 5,
+    "media_ids": [
+        16
+    ]
 };
 
 fetch(url, {
@@ -903,6 +1004,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the owner. Example: <code>5</code></p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids[0]"                data-endpoint="POSTapi-v1-admin-stadiums"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="media_ids[1]"                data-endpoint="POSTapi-v1-admin-stadiums"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the media table.</p>
+        </div>
         </form>
 
                     <h2 id="adminstadiums-GETapi-v1-admin-stadiums--id-">Get Stadium Details
@@ -1084,7 +1198,11 @@ Updates an existing stadium with the provided details.</h2>
     \"description\": \"Premium stadium with VIP facilities\",
     \"status\": \"open\",
     \"user_id\": 7,
-    \"rating\": \"4.8\"
+    \"rating\": \"4.8\",
+    \"media_ids\": [
+        5,
+        6
+    ]
 }"
 </code></pre></div>
 
@@ -1109,7 +1227,11 @@ let body = {
     "description": "Premium stadium with VIP facilities",
     "status": "open",
     "user_id": 7,
-    "rating": "4.8"
+    "rating": "4.8",
+    "media_ids": [
+        5,
+        6
+    ]
 };
 
 fetch(url, {
@@ -1345,6 +1467,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The rating of the stadium (0-5). Example: <code>4.8</code></p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>*</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids.*"                data-endpoint="PUTapi-v1-admin-stadiums--id-"
+               value="5"
+               data-component="body">
+    <br>
+<p>The media ID for each new image. Example: <code>5</code></p>
+                    </div>
+                                    </details>
+        </div>
         </form>
 
                     <h2 id="adminstadiums-DELETEapi-v1-admin-stadiums--id-">Delete Stadium
@@ -1508,7 +1652,11 @@ Updates an existing stadium with the provided details.</h2>
     \"description\": \"Premium stadium with VIP facilities\",
     \"status\": \"open\",
     \"user_id\": 7,
-    \"rating\": \"4.8\"
+    \"rating\": \"4.8\",
+    \"media_ids\": [
+        5,
+        6
+    ]
 }"
 </code></pre></div>
 
@@ -1533,7 +1681,11 @@ let body = {
     "description": "Premium stadium with VIP facilities",
     "status": "open",
     "user_id": 7,
-    "rating": "4.8"
+    "rating": "4.8",
+    "media_ids": [
+        5,
+        6
+    ]
 };
 
 fetch(url, {
@@ -1768,6 +1920,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>The rating of the stadium (0-5). Example: <code>4.8</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>*</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids.*"                data-endpoint="PUTapi-stadiums--id-"
+               value="5"
+               data-component="body">
+    <br>
+<p>The media ID for each new image. Example: <code>5</code></p>
+                    </div>
+                                    </details>
         </div>
         </form>
 
@@ -2106,6 +2280,262 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>The ID of the user. Example: <code>1</code></p>
             </div>
                     </form>
+
+                    <h2 id="adminusers-PUTapi-v1-admin-users--id-">Update user by ID
+
+Updates the details of a specific user by its ID.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-users--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/v1/admin/users/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Jane Doe\",
+    \"phone_number\": \"218912345678\",
+    \"password\": \"newsecurepassword\",
+    \"type\": \"user\",
+    \"status\": \"active\",
+    \"media_ids\": [
+        16
+    ],
+    \"avatar_media_id\": 9,
+    \"cover_media_id\": 10
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/admin/users/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Jane Doe",
+    "phone_number": "218912345678",
+    "password": "newsecurepassword",
+    "type": "user",
+    "status": "active",
+    "media_ids": [
+        16
+    ],
+    "avatar_media_id": 9,
+    "cover_media_id": 10
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-users--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-users--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-users--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-users--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-users--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-users--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-users--id-" data-method="PUT"
+      data-path="api/v1/admin/users/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-users--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-users--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-users--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-users--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-users--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-users--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/users/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/users/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the user. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="Jane Doe"
+               data-component="body">
+    <br>
+<p>The updated name of the user. Example: <code>Jane Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone_number"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="218912345678"
+               data-component="body">
+    <br>
+<p>The updated phone number of the user. Must start with 2189 and be exactly 12 characters. Example: <code>218912345678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>0</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="0"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="newsecurepassword"
+               data-component="body">
+    <br>
+<p>The updated password for the user. Must be at least 8 characters. Example: <code>newsecurepassword</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="user"
+               data-component="body">
+    <br>
+<p>The updated type of user. Example: <code>user</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="active"
+               data-component="body">
+    <br>
+<p>The updated status of the user. Must be either active, inactive, or banned. Example: <code>active</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids[0]"                data-endpoint="PUTapi-v1-admin-users--id-"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="media_ids[1]"                data-endpoint="PUTapi-v1-admin-users--id-"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the media table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>avatar_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="avatar_media_id"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="9"
+               data-component="body">
+    <br>
+<p>The media ID of the updated avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>9</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cover_media_id"                data-endpoint="PUTapi-v1-admin-users--id-"
+               value="10"
+               data-component="body">
+    <br>
+<p>The media ID of the updated cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>10</code></p>
+        </div>
+        </form>
 
                     <h2 id="adminusers-DELETEapi-v1-admin-users--id-">Delete user by ID
 
@@ -2866,6 +3296,262 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="adminusers-PUTapi-users--id-">Update user by ID
+
+Updates the details of a specific user by its ID.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-users--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/users/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Jane Doe\",
+    \"phone_number\": \"218912345678\",
+    \"password\": \"newsecurepassword\",
+    \"type\": \"user\",
+    \"status\": \"active\",
+    \"media_ids\": [
+        16
+    ],
+    \"avatar_media_id\": 9,
+    \"cover_media_id\": 10
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/users/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Jane Doe",
+    "phone_number": "218912345678",
+    "password": "newsecurepassword",
+    "type": "user",
+    "status": "active",
+    "media_ids": [
+        16
+    ],
+    "avatar_media_id": 9,
+    "cover_media_id": 10
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-users--id-">
+</span>
+<span id="execution-results-PUTapi-users--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-users--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-users--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-users--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-users--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-users--id-" data-method="PUT"
+      data-path="api/users/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-users--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-users--id-"
+                    onclick="tryItOut('PUTapi-users--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-users--id-"
+                    onclick="cancelTryOut('PUTapi-users--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-users--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/users/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/users/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-users--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-users--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-users--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the user. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-users--id-"
+               value="Jane Doe"
+               data-component="body">
+    <br>
+<p>The updated name of the user. Example: <code>Jane Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone_number"                data-endpoint="PUTapi-users--id-"
+               value="218912345678"
+               data-component="body">
+    <br>
+<p>The updated phone number of the user. Must start with 2189 and be exactly 12 characters. Example: <code>218912345678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>0</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="0"                data-endpoint="PUTapi-users--id-"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="PUTapi-users--id-"
+               value="newsecurepassword"
+               data-component="body">
+    <br>
+<p>The updated password for the user. Must be at least 8 characters. Example: <code>newsecurepassword</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="PUTapi-users--id-"
+               value="user"
+               data-component="body">
+    <br>
+<p>The updated type of user. Example: <code>user</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="PUTapi-users--id-"
+               value="active"
+               data-component="body">
+    <br>
+<p>The updated status of the user. Must be either active, inactive, or banned. Example: <code>active</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids[0]"                data-endpoint="PUTapi-users--id-"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="media_ids[1]"                data-endpoint="PUTapi-users--id-"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the media table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>avatar_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="avatar_media_id"                data-endpoint="PUTapi-users--id-"
+               value="9"
+               data-component="body">
+    <br>
+<p>The media ID of the updated avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>9</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cover_media_id"                data-endpoint="PUTapi-users--id-"
+               value="10"
+               data-component="body">
+    <br>
+<p>The media ID of the updated cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>10</code></p>
+        </div>
+        </form>
+
                     <h2 id="adminusers-DELETEapi-users--id-">Delete user by ID
 
 Deletes a specific user by its ID.</h2>
@@ -3451,6 +4137,233 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
+                    <h2 id="admin-authentication-POSTapi-v1-admin-register">Register a new user
+
+Creates a new user with the provided details. Only admins can create other admins.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/v1/admin/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"phone_number\": \"218912345678\",
+    \"password\": \"securepassword\",
+    \"type\": \"admin\",
+    \"media_ids\": [
+        16
+    ],
+    \"avatar_media_id\": 7,
+    \"cover_media_id\": 8
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/admin/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "phone_number": "218912345678",
+    "password": "securepassword",
+    "type": "admin",
+    "media_ids": [
+        16
+    ],
+    "avatar_media_id": 7,
+    "cover_media_id": 8
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-register">
+</span>
+<span id="execution-results-POSTapi-v1-admin-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-register"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-register">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-register" data-method="POST"
+      data-path="api/v1/admin/register"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-register"
+                    onclick="tryItOut('POSTapi-v1-admin-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-register"
+                    onclick="cancelTryOut('POSTapi-v1-admin-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-register"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/register</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-register"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The name of the user. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone_number"                data-endpoint="POSTapi-v1-admin-register"
+               value="218912345678"
+               data-component="body">
+    <br>
+<p>The user's phone number. Must start with 2189 and be exactly 12 characters. Example: <code>218912345678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>0</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="0"                data-endpoint="POSTapi-v1-admin-register"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-admin-register"
+               value="securepassword"
+               data-component="body">
+    <br>
+<p>The password for the user. Must be at least 8 characters. Example: <code>securepassword</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="POSTapi-v1-admin-register"
+               value="admin"
+               data-component="body">
+    <br>
+<p>The type of user. Must be either admin or user or owner. Example: <code>admin</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids[0]"                data-endpoint="POSTapi-v1-admin-register"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="media_ids[1]"                data-endpoint="POSTapi-v1-admin-register"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the media table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>avatar_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="avatar_media_id"                data-endpoint="POSTapi-v1-admin-register"
+               value="7"
+               data-component="body">
+    <br>
+<p>The media ID of the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>7</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cover_media_id"                data-endpoint="POSTapi-v1-admin-register"
+               value="8"
+               data-component="body">
+    <br>
+<p>The media ID of the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>8</code></p>
+        </div>
+        </form>
+
                     <h2 id="admin-authentication-POSTapi-v1-admin-logout">Logout
 
 Revokes the current admin token.</h2>
@@ -3780,6 +4693,570 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="Accept"                data-endpoint="POSTapi-run-command"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                <h1 id="file-upload">File Upload</h1>
+
+    
+
+                                <h2 id="file-upload-POSTapi-v1-general-temp-uploads-images">Upload Image
+
+Uploads a temporary image file to S3 and returns a media ID that can be used in other endpoints.
+This endpoint must be called first before creating/updating resources with images.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-general-temp-uploads-images">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/v1/general/temp-uploads/images" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "file=@C:\Users\Gaafar\AppData\Local\Temp\php15FB.tmp" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/general/temp-uploads/images"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('file', document.querySelector('input[name="file"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-general-temp-uploads-images">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Uploaded Successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 8,
+        &quot;url&quot;: &quot;https://stadium-app-bucket-gaafarbbk.s3.us-east-2.amazonaws.com/8/146.jpg&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-general-temp-uploads-images" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-general-temp-uploads-images"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-general-temp-uploads-images"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-general-temp-uploads-images" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-general-temp-uploads-images">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-general-temp-uploads-images" data-method="POST"
+      data-path="api/v1/general/temp-uploads/images"
+      data-authed="1"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-general-temp-uploads-images', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-general-temp-uploads-images"
+                    onclick="tryItOut('POSTapi-v1-general-temp-uploads-images');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-general-temp-uploads-images"
+                    onclick="cancelTryOut('POSTapi-v1-general-temp-uploads-images');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-general-temp-uploads-images"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/general/temp-uploads/images</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-general-temp-uploads-images"
+               value="multipart/form-data"
+               data-component="header">
+    <br>
+<p>Example: <code>multipart/form-data</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-general-temp-uploads-images"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>file</code></b>&nbsp;&nbsp;
+<small>file</small>&nbsp;
+ &nbsp;
+                <input type="file" style="display: none"
+                              name="file"                data-endpoint="POSTapi-v1-general-temp-uploads-images"
+               value=""
+               data-component="body">
+    <br>
+<p>The image file to upload. Must be jpeg, png, jpg, or gif and less than 2MB. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php15FB.tmp</code></p>
+        </div>
+        </form>
+
+                    <h2 id="file-upload-GETapi-v1-general-temp-uploads">List Temporary Uploads
+
+Retrieves all temporary media uploads for the authenticated user.
+Use this endpoint to see all previously uploaded temporary files that haven&#039;t been attached to models yet.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-general-temp-uploads">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/v1/general/temp-uploads" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/general/temp-uploads"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-general-temp-uploads">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;count&quot;: 3,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;url&quot;: &quot;https://your-s3-bucket-url.com/temp-uploads/images/first_image.jpg&quot;,
+            &quot;created_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;url&quot;: &quot;https://your-s3-bucket-url.com/temp-uploads/images/second_image.jpg&quot;,
+            &quot;created_at&quot;: &quot;2025-05-09T10:15:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;url&quot;: &quot;https://your-s3-bucket-url.com/temp-uploads/images/third_image.jpg&quot;,
+            &quot;created_at&quot;: &quot;2025-05-09T10:30:00.000000Z&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-general-temp-uploads" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-general-temp-uploads"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-general-temp-uploads"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-general-temp-uploads" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-general-temp-uploads">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-general-temp-uploads" data-method="GET"
+      data-path="api/v1/general/temp-uploads"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-general-temp-uploads', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-general-temp-uploads"
+                    onclick="tryItOut('GETapi-v1-general-temp-uploads');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-general-temp-uploads"
+                    onclick="cancelTryOut('GETapi-v1-general-temp-uploads');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-general-temp-uploads"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/general/temp-uploads</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-general-temp-uploads"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-general-temp-uploads"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="file-upload-POSTapi-temp-uploads-images">Upload Image
+
+Uploads a temporary image file to S3 and returns a media ID that can be used in other endpoints.
+This endpoint must be called first before creating/updating resources with images.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-temp-uploads-images">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/temp-uploads/images" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "file=@C:\Users\Gaafar\AppData\Local\Temp\php19A8.tmp" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/temp-uploads/images"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('file', document.querySelector('input[name="file"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-temp-uploads-images">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Uploaded Successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 8,
+        &quot;url&quot;: &quot;https://stadium-app-bucket-gaafarbbk.s3.us-east-2.amazonaws.com/8/146.jpg&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-temp-uploads-images" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-temp-uploads-images"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-temp-uploads-images"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-temp-uploads-images" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-temp-uploads-images">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-temp-uploads-images" data-method="POST"
+      data-path="api/temp-uploads/images"
+      data-authed="1"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-temp-uploads-images', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-temp-uploads-images"
+                    onclick="tryItOut('POSTapi-temp-uploads-images');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-temp-uploads-images"
+                    onclick="cancelTryOut('POSTapi-temp-uploads-images');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-temp-uploads-images"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/temp-uploads/images</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-temp-uploads-images"
+               value="multipart/form-data"
+               data-component="header">
+    <br>
+<p>Example: <code>multipart/form-data</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-temp-uploads-images"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>file</code></b>&nbsp;&nbsp;
+<small>file</small>&nbsp;
+ &nbsp;
+                <input type="file" style="display: none"
+                              name="file"                data-endpoint="POSTapi-temp-uploads-images"
+               value=""
+               data-component="body">
+    <br>
+<p>The image file to upload. Must be jpeg, png, jpg, or gif and less than 2MB. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php19A8.tmp</code></p>
+        </div>
+        </form>
+
+                    <h2 id="file-upload-GETapi-temp-uploads">List Temporary Uploads
+
+Retrieves all temporary media uploads for the authenticated user.
+Use this endpoint to see all previously uploaded temporary files that haven&#039;t been attached to models yet.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-temp-uploads">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/temp-uploads" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/temp-uploads"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-temp-uploads">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;count&quot;: 3,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;url&quot;: &quot;https://your-s3-bucket-url.com/temp-uploads/images/first_image.jpg&quot;,
+            &quot;created_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;url&quot;: &quot;https://your-s3-bucket-url.com/temp-uploads/images/second_image.jpg&quot;,
+            &quot;created_at&quot;: &quot;2025-05-09T10:15:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;url&quot;: &quot;https://your-s3-bucket-url.com/temp-uploads/images/third_image.jpg&quot;,
+            &quot;created_at&quot;: &quot;2025-05-09T10:30:00.000000Z&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-temp-uploads" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-temp-uploads"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-temp-uploads"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-temp-uploads" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-temp-uploads">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-temp-uploads" data-method="GET"
+      data-path="api/temp-uploads"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-temp-uploads', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-temp-uploads"
+                    onclick="tryItOut('GETapi-temp-uploads');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-temp-uploads"
+                    onclick="cancelTryOut('GETapi-temp-uploads');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-temp-uploads"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/temp-uploads</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-temp-uploads"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-temp-uploads"
                value="application/json"
                data-component="header">
     <br>
@@ -4977,7 +6454,8 @@ Creates a new stadium with the provided details.</h2>
     --form "capacity=12"\
     --form "description=Full-size soccer field with floodlights"\
     --form "status=open"\
-    --form "image=@C:\Users\Gaafar\AppData\Local\Temp\php3C27.tmp" </code></pre></div>
+    --form "media_ids[]=1"\
+    --form "image=@C:\Users\Gaafar\AppData\Local\Temp\php1995.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -4999,6 +6477,7 @@ body.append('price_per_hour', '150.00');
 body.append('capacity', '12');
 body.append('description', 'Full-size soccer field with floodlights');
 body.append('status', 'open');
+body.append('media_ids[]', '1');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -5016,26 +6495,35 @@ fetch(url, {
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-  &quot;data&quot;: {
-    &quot;id&quot;: 1,
-    &quot;name&quot;: &quot;ملعب توسي بارك السداسي&quot;,
-    &quot;location&quot;: &quot;ملعب مدرسة شباب الإنتفاضة - مقابل جزيرة الجعب&quot;,
-    &quot;latitude&quot;: 25.276987,
-    &quot;longitude&quot;: 55.296249,
-    &quot;price_per_hour&quot;: 150.00,
-    &quot;capacity&quot;: 12,
-    &quot;image&quot;: stadium.jpg,
-    &quot;description&quot;: &quot;Full-size soccer field with floodlights&quot;,
-    &quot;rating&quot;: 0,
-    &quot;status&quot;: &quot;open&quot;,
-    &quot;created_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;,
-    &quot;updated_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;,
-    &quot;user&quot;: {
-      &quot;id&quot;: 1,
-      &quot;name&quot;: &quot;John Doe&quot;
-      &quot;phone_number&quot;: &quot;218912345678&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;ملعب توسي بارك السداسي&quot;,
+        &quot;location&quot;: &quot;ملعب مدرسة شباب الإنتفاضة - مقابل جزيرة الجعب&quot;,
+        &quot;latitude&quot;: 25.276987,
+        &quot;longitude&quot;: 55.296249,
+        &quot;price_per_hour&quot;: 150,
+        &quot;capacity&quot;: 12,
+        &quot;images&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;url&quot;: &quot;https://your-s3-bucket-url.com/stadiums/1/image1.jpg&quot;
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;url&quot;: &quot;https://your-s3-bucket-url.com/stadiums/1/image2.jpg&quot;
+            }
+        ],
+        &quot;description&quot;: &quot;Full-size soccer field with floodlights&quot;,
+        &quot;rating&quot;: 0,
+        &quot;status&quot;: &quot;open&quot;,
+        &quot;created_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;,
+        &quot;user&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;John Doe&quot;,
+            &quot;phone_number&quot;: &quot;218912345678&quot;
+        }
     }
-  }
 }</code>
  </pre>
     </span>
@@ -5162,7 +6650,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php3C27.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php1995.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>price_per_hour</code></b>&nbsp;&nbsp;
@@ -5208,6 +6696,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The status of the stadium (open or closed). Example: <code>open</code></p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+<br>
+<p>An array of media IDs for stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>*</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids.*"                data-endpoint="POSTapi-v1-stadiums"
+               value="1"
+               data-component="body">
+    <br>
+<p>The media ID for each image. Example: <code>1</code></p>
+                    </div>
+                                    </details>
+        </div>
         </form>
 
                     <h2 id="userstadiums-PUTapi-v1-stadiums--stadium_id-">Update Stadium
@@ -5238,7 +6748,8 @@ Only the owner of the stadium can update it.</h2>
     --form "capacity=24"\
     --form "description=Premium soccer field with professional lighting"\
     --form "status=open"\
-    --form "image=@C:\Users\Gaafar\AppData\Local\Temp\php3C28.tmp" </code></pre></div>
+    --form "media_ids[]=5"\
+    --form "image=@C:\Users\Gaafar\AppData\Local\Temp\php19A6.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -5260,6 +6771,7 @@ body.append('price_per_hour', '175.00');
 body.append('capacity', '24');
 body.append('description', 'Premium soccer field with professional lighting');
 body.append('status', 'open');
+body.append('media_ids[]', '5');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -5447,7 +6959,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php3C28.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php19A6.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>price_per_hour</code></b>&nbsp;&nbsp;
@@ -5492,6 +7004,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>The status of the stadium (open or closed). Example: <code>open</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>*</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids.*"                data-endpoint="PUTapi-v1-stadiums--stadium_id-"
+               value="5"
+               data-component="body">
+    <br>
+<p>The media ID for each new image. Example: <code>5</code></p>
+                    </div>
+                                    </details>
         </div>
         </form>
 
@@ -5631,6 +7165,160 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-stadiums--stadium_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the stadium. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="userstadiums-DELETEapi-v1-stadiums--stadium_id--images--image-">Remove Stadium Image
+
+Removes an image from a stadium. Only the owner of the stadium can remove images.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-stadiums--stadium_id--images--image-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://127.0.0.1:8000/api/v1/stadiums/1/images/2" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/stadiums/1/images/2"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-stadiums--stadium_id--images--image-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Image removed successfully&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-v1-stadiums--stadium_id--images--image-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-stadiums--stadium_id--images--image-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-stadiums--stadium_id--images--image-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-stadiums--stadium_id--images--image-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-stadiums--stadium_id--images--image-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-stadiums--stadium_id--images--image-" data-method="DELETE"
+      data-path="api/v1/stadiums/{stadium_id}/images/{image}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-stadiums--stadium_id--images--image-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-stadiums--stadium_id--images--image-"
+                    onclick="tryItOut('DELETEapi-v1-stadiums--stadium_id--images--image-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-stadiums--stadium_id--images--image-"
+                    onclick="cancelTryOut('DELETEapi-v1-stadiums--stadium_id--images--image-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-stadiums--stadium_id--images--image-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/stadiums/{stadium_id}/images/{image}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-stadiums--stadium_id--images--image-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-stadiums--stadium_id--images--image-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>stadium_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="stadium_id"                data-endpoint="DELETEapi-v1-stadiums--stadium_id--images--image-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the stadium. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="image"                data-endpoint="DELETEapi-v1-stadiums--stadium_id--images--image-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the image to remove. Example: <code>2</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>stadium</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="stadium"                data-endpoint="DELETEapi-v1-stadiums--stadium_id--images--image-"
                value="1"
                data-component="url">
     <br>
@@ -5941,7 +7629,8 @@ Creates a new stadium with the provided details.</h2>
     --form "capacity=12"\
     --form "description=Full-size soccer field with floodlights"\
     --form "status=open"\
-    --form "image=@C:\Users\Gaafar\AppData\Local\Temp\php3C4A.tmp" </code></pre></div>
+    --form "media_ids[]=1"\
+    --form "image=@C:\Users\Gaafar\AppData\Local\Temp\php19C8.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -5963,6 +7652,7 @@ body.append('price_per_hour', '150.00');
 body.append('capacity', '12');
 body.append('description', 'Full-size soccer field with floodlights');
 body.append('status', 'open');
+body.append('media_ids[]', '1');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -5980,26 +7670,35 @@ fetch(url, {
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-  &quot;data&quot;: {
-    &quot;id&quot;: 1,
-    &quot;name&quot;: &quot;ملعب توسي بارك السداسي&quot;,
-    &quot;location&quot;: &quot;ملعب مدرسة شباب الإنتفاضة - مقابل جزيرة الجعب&quot;,
-    &quot;latitude&quot;: 25.276987,
-    &quot;longitude&quot;: 55.296249,
-    &quot;price_per_hour&quot;: 150.00,
-    &quot;capacity&quot;: 12,
-    &quot;image&quot;: stadium.jpg,
-    &quot;description&quot;: &quot;Full-size soccer field with floodlights&quot;,
-    &quot;rating&quot;: 0,
-    &quot;status&quot;: &quot;open&quot;,
-    &quot;created_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;,
-    &quot;updated_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;,
-    &quot;user&quot;: {
-      &quot;id&quot;: 1,
-      &quot;name&quot;: &quot;John Doe&quot;
-      &quot;phone_number&quot;: &quot;218912345678&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;ملعب توسي بارك السداسي&quot;,
+        &quot;location&quot;: &quot;ملعب مدرسة شباب الإنتفاضة - مقابل جزيرة الجعب&quot;,
+        &quot;latitude&quot;: 25.276987,
+        &quot;longitude&quot;: 55.296249,
+        &quot;price_per_hour&quot;: 150,
+        &quot;capacity&quot;: 12,
+        &quot;images&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;url&quot;: &quot;https://your-s3-bucket-url.com/stadiums/1/image1.jpg&quot;
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;url&quot;: &quot;https://your-s3-bucket-url.com/stadiums/1/image2.jpg&quot;
+            }
+        ],
+        &quot;description&quot;: &quot;Full-size soccer field with floodlights&quot;,
+        &quot;rating&quot;: 0,
+        &quot;status&quot;: &quot;open&quot;,
+        &quot;created_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-05-09T10:00:00.000000Z&quot;,
+        &quot;user&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;John Doe&quot;,
+            &quot;phone_number&quot;: &quot;218912345678&quot;
+        }
     }
-  }
 }</code>
  </pre>
     </span>
@@ -6126,7 +7825,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php3C4A.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php19C8.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>price_per_hour</code></b>&nbsp;&nbsp;
@@ -6171,6 +7870,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>The status of the stadium (open or closed). Example: <code>open</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+<br>
+<p>An array of media IDs for stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>*</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids.*"                data-endpoint="POSTapi-stadiums"
+               value="1"
+               data-component="body">
+    <br>
+<p>The media ID for each image. Example: <code>1</code></p>
+                    </div>
+                                    </details>
         </div>
         </form>
 
@@ -6466,6 +8187,160 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="userstadiums-DELETEapi-stadiums--stadium_id--images--image-">Remove Stadium Image
+
+Removes an image from a stadium. Only the owner of the stadium can remove images.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-stadiums--stadium_id--images--image-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://127.0.0.1:8000/api/stadiums/1/images/2" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/stadiums/1/images/2"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-stadiums--stadium_id--images--image-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Image removed successfully&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-stadiums--stadium_id--images--image-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-stadiums--stadium_id--images--image-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-stadiums--stadium_id--images--image-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-stadiums--stadium_id--images--image-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-stadiums--stadium_id--images--image-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-stadiums--stadium_id--images--image-" data-method="DELETE"
+      data-path="api/stadiums/{stadium_id}/images/{image}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-stadiums--stadium_id--images--image-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-stadiums--stadium_id--images--image-"
+                    onclick="tryItOut('DELETEapi-stadiums--stadium_id--images--image-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-stadiums--stadium_id--images--image-"
+                    onclick="cancelTryOut('DELETEapi-stadiums--stadium_id--images--image-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-stadiums--stadium_id--images--image-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/stadiums/{stadium_id}/images/{image}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-stadiums--stadium_id--images--image-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-stadiums--stadium_id--images--image-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>stadium_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="stadium_id"                data-endpoint="DELETEapi-stadiums--stadium_id--images--image-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the stadium. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="image"                data-endpoint="DELETEapi-stadiums--stadium_id--images--image-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the image to remove. Example: <code>2</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>stadium</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="stadium"                data-endpoint="DELETEapi-stadiums--stadium_id--images--image-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the stadium. Example: <code>1</code></p>
+            </div>
+                    </form>
+
                     <h2 id="userstadiums-PUTapi-stadiums--stadium_id-">Update Stadium
 
 Updates an existing stadium with the provided details.
@@ -6494,7 +8369,8 @@ Only the owner of the stadium can update it.</h2>
     --form "capacity=24"\
     --form "description=Premium soccer field with professional lighting"\
     --form "status=open"\
-    --form "image=@C:\Users\Gaafar\AppData\Local\Temp\php3C5D.tmp" </code></pre></div>
+    --form "media_ids[]=5"\
+    --form "image=@C:\Users\Gaafar\AppData\Local\Temp\php19E9.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -6516,6 +8392,7 @@ body.append('price_per_hour', '175.00');
 body.append('capacity', '24');
 body.append('description', 'Premium soccer field with professional lighting');
 body.append('status', 'open');
+body.append('media_ids[]', '5');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -6703,7 +8580,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php3C5D.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\Gaafar\AppData\Local\Temp\php19E9.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>price_per_hour</code></b>&nbsp;&nbsp;
@@ -6748,6 +8625,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>The status of the stadium (open or closed). Example: <code>open</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>media_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>*</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="media_ids.*"                data-endpoint="PUTapi-stadiums--stadium_id-"
+               value="5"
+               data-component="body">
+    <br>
+<p>The media ID for each new image. Example: <code>5</code></p>
+                    </div>
+                                    </details>
         </div>
         </form>
 
@@ -7253,11 +9152,568 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                <h1 id="userusers">User/Users </h1>
+
+    
+
+                                <h2 id="userusers-PUTapi-v1-me">Update Authenticated User
+
+Updates the currently authenticated user&#039;s details.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-me">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/v1/me" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"avatar_media_id\": 3,
+    \"cover_media_id\": 4
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/me"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "avatar_media_id": 3,
+    "cover_media_id": 4
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-me">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;phone_number&quot;: &quot;218925113276&quot;,
+    &quot;type&quot;: &quot;user&quot;,
+    &quot;roles&quot;: [
+        &quot;user&quot;
+    ],
+    &quot;avatar&quot;: &quot;https://example.com/avatar.jpg&quot;,
+    &quot;cover&quot;: &quot;https://example.com/cover.jpg&quot;,
+    &quot;status&quot;: &quot;active&quot;,
+    &quot;created_at&quot;: &quot;2023-01-01T00:00:00.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2023-01-01T00:00:00.000000Z&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-v1-me" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-me"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-me"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-me" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-me">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-me" data-method="PUT"
+      data-path="api/v1/me"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-me', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-me"
+                    onclick="tryItOut('PUTapi-v1-me');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-me"
+                    onclick="cancelTryOut('PUTapi-v1-me');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-me"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/me</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-v1-me"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>optional The name of the user. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>avatar_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="avatar_media_id"                data-endpoint="PUTapi-v1-me"
+               value="3"
+               data-component="body">
+    <br>
+<p>optional The media ID for the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>3</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cover_media_id"                data-endpoint="PUTapi-v1-me"
+               value="4"
+               data-component="body">
+    <br>
+<p>optional The media ID for the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>4</code></p>
+        </div>
+        </form>
+
+                    <h2 id="userusers-PUTapi-me">Update Authenticated User
+
+Updates the currently authenticated user&#039;s details.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-me">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/me" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"avatar_media_id\": 3,
+    \"cover_media_id\": 4
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/me"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "avatar_media_id": 3,
+    "cover_media_id": 4
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-me">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;phone_number&quot;: &quot;218925113276&quot;,
+    &quot;type&quot;: &quot;user&quot;,
+    &quot;roles&quot;: [
+        &quot;user&quot;
+    ],
+    &quot;avatar&quot;: &quot;https://example.com/avatar.jpg&quot;,
+    &quot;cover&quot;: &quot;https://example.com/cover.jpg&quot;,
+    &quot;status&quot;: &quot;active&quot;,
+    &quot;created_at&quot;: &quot;2023-01-01T00:00:00.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2023-01-01T00:00:00.000000Z&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-me" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-me"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-me"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-me" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-me">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-me" data-method="PUT"
+      data-path="api/me"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-me', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-me"
+                    onclick="tryItOut('PUTapi-me');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-me"
+                    onclick="cancelTryOut('PUTapi-me');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-me"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/me</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-me"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>optional The name of the user. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>avatar_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="avatar_media_id"                data-endpoint="PUTapi-me"
+               value="3"
+               data-component="body">
+    <br>
+<p>optional The media ID for the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>3</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cover_media_id"                data-endpoint="PUTapi-me"
+               value="4"
+               data-component="body">
+    <br>
+<p>optional The media ID for the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>4</code></p>
+        </div>
+        </form>
+
                 <h1 id="user-authentication">User Authentication</h1>
 
     
 
-                                <h2 id="user-authentication-POSTapi-v1-login">Login (by Phone Number)
+                                <h2 id="user-authentication-POSTapi-v1-register">Register a New User
+
+Completes the registration for a new user with the provided details,
+assigns the default &#039;user&#039; role, and returns an access token.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/v1/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"phone_number\": \"218912345678\",
+    \"type\": \"owner\",
+    \"avatar_media_id\": 1,
+    \"cover_media_id\": 2,
+    \"password\": \"securepassword\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/v1/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "phone_number": "218912345678",
+    "type": "owner",
+    "avatar_media_id": 1,
+    "cover_media_id": 2,
+    "password": "securepassword"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-register">
+</span>
+<span id="execution-results-POSTapi-v1-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-register"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-register">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-register" data-method="POST"
+      data-path="api/v1/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-register"
+                    onclick="tryItOut('POSTapi-v1-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-register"
+                    onclick="cancelTryOut('POSTapi-v1-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-register"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/register</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-register"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The  name of the user. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone_number"                data-endpoint="POSTapi-v1-register"
+               value="218912345678"
+               data-component="body">
+    <br>
+<p>The user's phone number. Must start with 2189 and be exactly 12 characters. Example: <code>218912345678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="POSTapi-v1-register"
+               value="owner"
+               data-component="body">
+    <br>
+<p>Example: <code>owner</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>user</code></li> <li><code>owner</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>avatar_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="avatar_media_id"                data-endpoint="POSTapi-v1-register"
+               value="1"
+               data-component="body">
+    <br>
+<p>The media ID of the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cover_media_id"                data-endpoint="POSTapi-v1-register"
+               value="2"
+               data-component="body">
+    <br>
+<p>The media ID of the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>2</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-register"
+               value="securepassword"
+               data-component="body">
+    <br>
+<p>The password for the user. Must be at least 8 characters. Example: <code>securepassword</code></p>
+        </div>
+        </form>
+
+                    <h2 id="user-authentication-POSTapi-v1-login">Login (by Phone Number)
 
 Authenticates a user using phone number and password.</h2>
 
@@ -7674,6 +10130,205 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-login"
+               value="securepassword"
+               data-component="body">
+    <br>
+<p>The password for the user. Must be at least 8 characters. Example: <code>securepassword</code></p>
+        </div>
+        </form>
+
+                    <h2 id="user-authentication-POSTapi-register">Register a New User
+
+Completes the registration for a new user with the provided details,
+assigns the default &#039;user&#039; role, and returns an access token.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/register" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"phone_number\": \"218912345678\",
+    \"type\": \"user\",
+    \"avatar_media_id\": 1,
+    \"cover_media_id\": 2,
+    \"password\": \"securepassword\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/register"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "phone_number": "218912345678",
+    "type": "user",
+    "avatar_media_id": 1,
+    "cover_media_id": 2,
+    "password": "securepassword"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-register">
+</span>
+<span id="execution-results-POSTapi-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-register"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-register">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-register" data-method="POST"
+      data-path="api/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-register"
+                    onclick="tryItOut('POSTapi-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-register"
+                    onclick="cancelTryOut('POSTapi-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-register"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/register</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-register"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-register"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The  name of the user. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone_number"                data-endpoint="POSTapi-register"
+               value="218912345678"
+               data-component="body">
+    <br>
+<p>The user's phone number. Must start with 2189 and be exactly 12 characters. Example: <code>218912345678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="POSTapi-register"
+               value="user"
+               data-component="body">
+    <br>
+<p>Example: <code>user</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>user</code></li> <li><code>owner</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>avatar_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="avatar_media_id"                data-endpoint="POSTapi-register"
+               value="1"
+               data-component="body">
+    <br>
+<p>The media ID of the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cover_media_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cover_media_id"                data-endpoint="POSTapi-register"
+               value="2"
+               data-component="body">
+    <br>
+<p>The media ID of the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: <code>2</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-register"
                value="securepassword"
                data-component="body">
     <br>

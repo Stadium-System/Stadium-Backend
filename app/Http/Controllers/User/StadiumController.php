@@ -11,6 +11,7 @@ use Spatie\QueryBuilder\AllowedFilter;
 use App\Http\Requests\User\Stadium\StoreStadiumRequest;
 use App\Http\Requests\User\Stadium\UpdateStadiumRequest;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Helpers\MediaHelper;
 
 
 class StadiumController extends Controller
@@ -114,8 +115,8 @@ class StadiumController extends Controller
      * @bodyParam capacity numeric The capacity of the stadium. Example: 12
      * @bodyParam description string The description of the stadium. Example: Full-size soccer field with floodlights
      * @bodyParam status string The status of the stadium (open or closed). Example: open
-    * @bodyParam temp_upload_ids array The TempUpload IDs for the stadium images. Example: [1, 2]
-    * @bodyParam temp_upload_ids.* integer The TempUpload ID for each image. Example: 1
+     * @bodyParam media_ids array required An array of media IDs for stadium images (obtained from /api/v1/general/temp-uploads/images endpoint). Example: [1, 2]
+     * @bodyParam media_ids.* integer required The media ID for each image. Example: 1
     *
     * @response {
     *   "data": {
@@ -159,12 +160,9 @@ class StadiumController extends Controller
 
         $stadium = Stadium::create($validatedData);
 
-        // Handle image uploads if media_ids are provided
-        if ($request->has('media_ids') && is_array($request->input('media_ids'))) {
-            foreach ($request->input('media_ids') as $mediaId) {
-                $media = Media::findOrFail($mediaId);
-                $media->move($stadium, 'images');
-            }
+       // Handle image uploads if media_ids are provided
+        if ($request->has('media_ids')) {
+            MediaHelper::attachMedia($stadium, $request->input('media_ids'), 'images');
         }
         
         return new StadiumResource($stadium->load('user'));
@@ -204,6 +202,8 @@ class StadiumController extends Controller
      * @bodyParam capacity numeric The capacity of the stadium. Example: 24
      * @bodyParam description string The description of the stadium. Example: Premium soccer field with professional lighting
      * @bodyParam status string The status of the stadium (open or closed). Example: open
+     * @bodyParam media_ids array An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint). Example: [5, 6]
+     * @bodyParam media_ids.* integer The media ID for each new image. Example: 5
      *
      * @response {
      *   "data": {
@@ -235,10 +235,7 @@ class StadiumController extends Controller
 
         // Handle image uploads if media_ids are provided
         if ($request->has('media_ids')) {
-            foreach ($request->input('media_ids') as $mediaId) {
-                $media = Media::findOrFail($mediaId);
-                $media->move($stadium, 'images');
-            }
+            MediaHelper::attachMedia($stadium, $request->input('media_ids'), 'images');
         }
         
         return new StadiumResource($stadium->fresh()->load('user', 'images'));

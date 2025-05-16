@@ -12,6 +12,7 @@ use App\Http\Requests\User\Auth\StoreUserRequest;
 use App\Models\User;
 use App\Models\Otp;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Helpers\MediaHelper;
 
 
 class AuthController extends Controller
@@ -28,8 +29,8 @@ class AuthController extends Controller
      * @bodyParam name string required The  name of the user. Example: John Doe
      * @bodyParam phone_number string required The user's phone number. Must start with 2189 and be exactly 12 characters. Example: 218912345678
      * @bodyParam password string required The password for the user. Must be at least 8 characters. Example: securepassword
-     * @bodyParam avatar file The avatar image for the user. Must be a valid image file. Example: avatar.jpg
-     * @bodyParam cover file The cover image for the user. Must be a valid image file. Example: cover.jpg
+     * @bodyParam avatar_media_id integer The media ID of the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 1
+     * @bodyParam cover_media_id integer The media ID of the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 2
      */
     public function register(StoreUserRequest $request)
     {
@@ -66,18 +67,14 @@ class AuthController extends Controller
             'status' => 'active'
         ]);
 
-        // Handle avatar upload from temp media
+        // For avatar
         if ($request->has('avatar_media_id')) {
-            $mediaId = $request->input('avatar_media_id');
-            $media = Media::findOrFail($mediaId);
-            $media->move($user, 'avatar');
+            MediaHelper::attachMedia($user, [$request->input('avatar_media_id')], 'avatar', true);
         }
-        
-        // Handle cover upload from temp media
+
+        // For cover
         if ($request->has('cover_media_id')) {
-            $mediaId = $request->input('cover_media_id');
-            $media = Media::findOrFail($mediaId);
-            $media->move($user, 'cover');
+            MediaHelper::attachMedia($user, [$request->input('cover_media_id')], 'cover', true);
         }
 
         $user->assignRole('user');

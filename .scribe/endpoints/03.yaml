@@ -1,30 +1,195 @@
-name: Endpoints
+name: Admin/Stadiums
 description: ''
 endpoints:
   -
     httpMethods:
-      - POST
-    uri: api/v1/admin/run-command
+      - GET
+    uri: api/v1/admin/stadiums
     metadata:
-      groupName: Endpoints
+      groupName: Admin/Stadiums
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: |-
+        Stadium Management
+
+        Retrieves a paginated list of all stadiums with filtering options.
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
+    queryParameters:
+      'filter[name]':
+        name: 'filter[name]'
+        description: 'Optional stadium name filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[location]':
+        name: 'filter[location]'
+        description: 'Optional stadium location filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[min_price_per_hour]':
+        name: 'filter[min_price_per_hour]'
+        description: 'Optional minimum price per hour filter.'
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[max_price_per_hour]':
+        name: 'filter[max_price_per_hour]'
+        description: 'Optional maximum price per hour filter.'
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[min_capacity]':
+        name: 'filter[min_capacity]'
+        description: 'Optional minimum capacity filter.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[max_capacity]':
+        name: 'filter[max_capacity]'
+        description: 'Optional maximum capacity filter.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[status]':
+        name: 'filter[status]'
+        description: 'Optional status filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[min_rating]':
+        name: 'filter[min_rating]'
+        description: 'Optional minimum rating filter.'
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[max_rating]':
+        name: 'filter[max_rating]'
+        description: 'Optional maximum rating filter.'
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[user_id]':
+        name: 'filter[user_id]'
+        description: "Optional owner's user ID filter."
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      sort:
+        name: sort
+        description: 'Optional sort parameter. Prefix with "-" for descending order.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      'filter[name]': architecto
+      'filter[location]': architecto
+      'filter[min_price_per_hour]': 4326.41688
+      'filter[max_price_per_hour]': 4326.41688
+      'filter[min_capacity]': 16
+      'filter[max_capacity]': 16
+      'filter[status]': architecto
+      'filter[min_rating]': 4326.41688
+      'filter[max_rating]': 4326.41688
+      'filter[user_id]': 16
+      sort: architecto
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "name": "City Stadium",
+                "location": "Downtown",
+                "latitude": 25.276987,
+                "longitude": 55.296249,
+                "price_per_hour": 100.00,
+                "capacity": 12,
+                "image": "https://example.com/stadium.jpg",
+                "description": "Professional stadium with amenities",
+                "rating": 4.5,
+                "status": "open",
+                "created_at": "2023-01-01T00:00:00.000000Z",
+                "updated_at": "2023-01-01T00:00:00.000000Z",
+                "user": {
+                  "id": 1,
+                  "name": "John Doe"
+                },
+                "images": [
+                  {
+                    "id": 1,
+                    "url": "https://example.com/image1.jpg"
+                  },
+                  {
+                    "id": 2,
+                    "url": "https://example.com/image2.jpg"
+                  }
+                ]
+              }
+            ],
+            "links": { ... },
+            "meta": { ... }
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth: []
     controller: null
@@ -34,15 +199,18 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/run-command
+    uri: api/v1/admin/stadiums
     metadata:
-      groupName: Endpoints
+      groupName: Admin/Stadiums
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: |-
+        Create Stadium
+
+        Creates a new stadium with the provided details.
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -51,10 +219,687 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the stadium.'
+        required: true
+        example: 'Olympic Stadium'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      location:
+        name: location
+        description: 'The location of the stadium.'
+        required: true
+        example: 'Sports City'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      latitude:
+        name: latitude
+        description: 'The latitude coordinates.'
+        required: true
+        example: '25.276987'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      longitude:
+        name: longitude
+        description: 'The longitude coordinates.'
+        required: true
+        example: '55.296249'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      price_per_hour:
+        name: price_per_hour
+        description: 'The hourly rental price.'
+        required: true
+        example: '200.00'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      capacity:
+        name: capacity
+        description: 'The capacity of the stadium.'
+        required: false
+        example: '30'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'The description of the stadium.'
+        required: false
+        example: 'Professional stadium with amenities'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      status:
+        name: status
+        description: 'The status of the stadium (open or closed).'
+        required: false
+        example: open
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      user_id:
+        name: user_id
+        description: 'The ID of the owner.'
+        required: true
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      media_ids:
+        name: media_ids
+        description: 'The <code>id</code> of an existing record in the media table.'
+        required: false
+        example:
+          - 16
+        type: 'integer[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: 'Olympic Stadium'
+      location: 'Sports City'
+      latitude: '25.276987'
+      longitude: '55.296249'
+      price_per_hour: '200.00'
+      capacity: '30'
+      description: 'Professional stadium with amenities'
+      status: open
+      user_id: 5
+      media_ids:
+        - 16
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Olympic Stadium",
+              "location": "Sports City",
+              "latitude": 25.276987,
+              "longitude": 55.296249,
+              "price_per_hour": 200.00,
+              "capacity": 30,
+              "image": null,
+              "description": "Professional stadium with amenities",
+              "rating": 0,
+              "status": "open",
+              "created_at": "2025-05-09T10:00:00.000000Z",
+              "updated_at": "2025-05-09T10:00:00.000000Z",
+              "user": {
+                "id": 5,
+                "name": "Stadium Owner"
+              }
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/admin/stadiums/{id}'
+    metadata:
+      groupName: Admin/Stadiums
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get Stadium Details
+
+        Retrieves the details of a specific stadium.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the stadium.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: '1'
+    queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Olympic Stadium",
+              "location": "Sports City",
+              "latitude": 25.276987,
+              "longitude": 55.296249,
+              "price_per_hour": 200.00,
+              "capacity": 30,
+              "image": null,
+              "description": "Professional stadium with amenities",
+              "rating": 4.2,
+              "status": "open",
+              "created_at": "2025-05-09T10:00:00.000000Z",
+              "updated_at": "2025-05-09T10:00:00.000000Z",
+              "user": {
+                "id": 5,
+                "name": "Stadium Owner"
+              }
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/admin/stadiums/{id}'
+    metadata:
+      groupName: Admin/Stadiums
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Update Stadium
+
+        Updates an existing stadium with the provided details.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the stadium.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the stadium.'
+        required: false
+        example: 'Olympic Stadium Premium'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      location:
+        name: location
+        description: 'The location of the stadium.'
+        required: false
+        example: 'Sports City Center'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      latitude:
+        name: latitude
+        description: 'The latitude coordinates.'
+        required: false
+        example: '25.276990'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      longitude:
+        name: longitude
+        description: 'The longitude coordinates.'
+        required: false
+        example: '55.296260'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      price_per_hour:
+        name: price_per_hour
+        description: 'The hourly rental price.'
+        required: false
+        example: '225.00'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      capacity:
+        name: capacity
+        description: 'The capacity of the stadium.'
+        required: false
+        example: '35'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'The description of the stadium.'
+        required: false
+        example: 'Premium stadium with VIP facilities'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      status:
+        name: status
+        description: 'The status of the stadium (open or closed).'
+        required: false
+        example: open
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      user_id:
+        name: user_id
+        description: 'The ID of the owner.'
+        required: false
+        example: 7
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      rating:
+        name: rating
+        description: 'The rating of the stadium (0-5).'
+        required: false
+        example: '4.8'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      media_ids:
+        name: media_ids
+        description: 'An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).'
+        required: false
+        example:
+          - 5
+          - 6
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'media_ids.*':
+        name: 'media_ids.*'
+        description: 'The media ID for each new image.'
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: 'Olympic Stadium Premium'
+      location: 'Sports City Center'
+      latitude: '25.276990'
+      longitude: '55.296260'
+      price_per_hour: '225.00'
+      capacity: '35'
+      description: 'Premium stadium with VIP facilities'
+      status: open
+      user_id: 7
+      rating: '4.8'
+      media_ids:
+        - 5
+        - 6
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Olympic Stadium Premium",
+              "location": "Sports City Center",
+              "latitude": 25.276990,
+              "longitude": 55.296260,
+              "price_per_hour": 225.00,
+              "capacity": 35,
+              "image": null,
+              "description": "Premium stadium with VIP facilities",
+              "rating": 4.8,
+              "status": "open",
+              "created_at": "2025-05-09T10:00:00.000000Z",
+              "updated_at": "2025-05-09T11:30:00.000000Z",
+              "user": {
+                "id": 7,
+                "name": "New Stadium Owner"
+              }
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/admin/stadiums/{id}'
+    metadata:
+      groupName: Admin/Stadiums
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Delete Stadium
+
+        Deletes a stadium.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the stadium.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Stadium deleted successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/stadiums/{id}'
+    metadata:
+      groupName: Admin/Stadiums
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Update Stadium
+
+        Updates an existing stadium with the provided details.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the stadium.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the stadium.'
+        required: false
+        example: 'Olympic Stadium Premium'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      location:
+        name: location
+        description: 'The location of the stadium.'
+        required: false
+        example: 'Sports City Center'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      latitude:
+        name: latitude
+        description: 'The latitude coordinates.'
+        required: false
+        example: '25.276990'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      longitude:
+        name: longitude
+        description: 'The longitude coordinates.'
+        required: false
+        example: '55.296260'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      price_per_hour:
+        name: price_per_hour
+        description: 'The hourly rental price.'
+        required: false
+        example: '225.00'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      capacity:
+        name: capacity
+        description: 'The capacity of the stadium.'
+        required: false
+        example: '35'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'The description of the stadium.'
+        required: false
+        example: 'Premium stadium with VIP facilities'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      status:
+        name: status
+        description: 'The status of the stadium (open or closed).'
+        required: false
+        example: open
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      user_id:
+        name: user_id
+        description: 'The ID of the owner.'
+        required: false
+        example: 7
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      rating:
+        name: rating
+        description: 'The rating of the stadium (0-5).'
+        required: false
+        example: '4.8'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      media_ids:
+        name: media_ids
+        description: 'An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).'
+        required: false
+        example:
+          - 5
+          - 6
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'media_ids.*':
+        name: 'media_ids.*'
+        description: 'The media ID for each new image.'
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: 'Olympic Stadium Premium'
+      location: 'Sports City Center'
+      latitude: '25.276990'
+      longitude: '55.296260'
+      price_per_hour: '225.00'
+      capacity: '35'
+      description: 'Premium stadium with VIP facilities'
+      status: open
+      user_id: 7
+      rating: '4.8'
+      media_ids:
+        - 5
+        - 6
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Olympic Stadium Premium",
+              "location": "Sports City Center",
+              "latitude": 25.276990,
+              "longitude": 55.296260,
+              "price_per_hour": 225.00,
+              "capacity": 35,
+              "image": null,
+              "description": "Premium stadium with VIP facilities",
+              "rating": 4.8,
+              "status": "open",
+              "created_at": "2025-05-09T10:00:00.000000Z",
+              "updated_at": "2025-05-09T11:30:00.000000Z",
+              "user": {
+                "id": 7,
+                "name": "New Stadium Owner"
+              }
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth: []
     controller: null

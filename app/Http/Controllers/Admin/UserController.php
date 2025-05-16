@@ -12,6 +12,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Helpers\MediaHelper;
 
 
 class UserController extends Controller
@@ -72,8 +73,8 @@ class UserController extends Controller
      * @bodyParam phone_number string required The user's phone number. Must start with 2189 and be exactly 12 characters. Example: 218912345678
      * @bodyParam password string required The password for the user. Must be at least 8 characters. Example: securepassword
      * @bodyParam type string required The type of user. Must be either admin or user or owner. Example: admin
-     * @bodyParam avatar file The avatar image for the user. Must be a valid image file. Example: avatar.jpg
-     * @bodyParam cover file The cover image for the user. Must be a valid image file. Example: cover.jpg
+     * @bodyParam avatar_media_id integer The media ID of the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 7
+     * @bodyParam cover_media_id integer The media ID of the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 8
      */
     public function register(StoreUserRequest $request)
     {
@@ -83,11 +84,19 @@ class UserController extends Controller
             'name' => $data['name'],
             'phone_number' => $data['phone_number'],
             'password' => bcrypt($data['password']),
-            'avatar' => $data['avatar'] ?? null,
-            'cover' => $data['cover'] ?? null,
             'type' => $data['type'],
             'status' => 'active',
         ]);
+
+        // For avatar
+        if ($request->has('avatar_media_id')) {
+            MediaHelper::attachMedia($user, [$request->input('avatar_media_id')], 'avatar', true);
+        }
+
+        // For cover
+        if ($request->has('cover_media_id')) {
+            MediaHelper::attachMedia($user, [$request->input('cover_media_id')], 'cover', true);
+        }
 
         // Assign role based on 'type'
         $user->assignRole($data['type']);
@@ -125,8 +134,8 @@ class UserController extends Controller
      * @bodyParam password string The updated password for the user. Must be at least 8 characters. Example: newsecurepassword
      * @bodyParam phone_number string The updated phone number of the user. Must start with 2189 and be exactly 12 characters. Example: 218912345678
      * @bodyParam status string The updated status of the user. Must be either active, inactive, or banned. Example: active
-     * @bodyParam avatar file The avatar image for the user. Must be a valid image file. Example: avatar.jpg
-     * @bodyParam cover file The cover image for the user. Must be a valid image file. Example: cover.jpg
+     * @bodyParam avatar_media_id integer The media ID of the updated avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 9
+     * @bodyParam cover_media_id integer The media ID of the updated cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 10
      * @bodyParam type string required The updated type of user. Example: user
      */
     public function update(UpdateUserRequest $request, User $user)
@@ -140,6 +149,16 @@ class UserController extends Controller
         }
         
         $user->update($data);
+
+        // For avatar
+        if ($request->has('avatar_media_id')) {
+            MediaHelper::attachMedia($user, [$request->input('avatar_media_id')], 'avatar', true);
+        }
+
+        // For cover
+        if ($request->has('cover_media_id')) {
+            MediaHelper::attachMedia($user, [$request->input('cover_media_id')], 'cover', true);
+        }
 
         $user->syncRoles($request->type);
 
