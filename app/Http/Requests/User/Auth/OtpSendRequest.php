@@ -23,8 +23,8 @@ class OtpSendRequest extends FormRequest
                 'regex:/^2189/',
                 Rule::when(
                     $this->purpose === 'registration',
-                    Rule::unique('users'), // Must NOT exist for registration
-                    Rule::exists('users')  // Must exist for password reset
+                    [Rule::unique('users', 'phone_number')], // Must NOT exist for registration
+                    [Rule::exists('users', 'phone_number')->where('status', 'active')] // Must exist and be active for password reset
                 )
             ],
             'purpose' => 'required|in:registration,password_reset'

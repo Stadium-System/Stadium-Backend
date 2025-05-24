@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2109ca475daf5145eec62c6925212c5",
+    "content-hash": "8daf4988896bfe3378ced5d0820cb46c",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1469,6 +1469,78 @@
                 }
             ],
             "time": "2025-02-03T10:55:03+00:00"
+        },
+        {
+            "name": "isend/laravel",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sulimanbenhalim/isend-laravel.git",
+                "reference": "1bb09d2bc68d99ac004cb98dc59050a04458bb40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sulimanbenhalim/isend-laravel/zipball/1bb09d2bc68d99ac004cb98dc59050a04458bb40",
+                "reference": "1bb09d2bc68d99ac004cb98dc59050a04458bb40",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "illuminate/support": "^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.14",
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^9.0|^10.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.0|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "ISend": "ISend\\SMS\\Facades\\ISend"
+                    },
+                    "providers": [
+                        "ISend\\SMS\\ISendServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ISend\\SMS\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Suliman Benhalim",
+                    "email": "soliman.benhalim@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel SDK for iSend SMS API v3",
+            "homepage": "https://isend.ly",
+            "keywords": [
+                "api",
+                "communication",
+                "isend",
+                "laravel",
+                "messaging",
+                "notification",
+                "sms"
+            ],
+            "support": {
+                "docs": "https://github.com/sulimanbenhalim/isend-laravel/blob/master/README.md",
+                "email": "info@isend.ly",
+                "issues": "https://github.com/sulimanbenhalim/isend-laravel/issues",
+                "source": "https://github.com/sulimanbenhalim/isend-laravel"
+            },
+            "time": "2025-05-03T16:35:55+00:00"
         },
         {
             "name": "knuckleswtf/scribe",

@@ -16,6 +16,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('throttle:otp')->group(function () {
     Route::post('/otp/send', [OtpController::class, 'sendOtp']);
     Route::post('/otp/verify', [OtpController::class, 'verifyOtp']);
+    Route::post('/password/reset', [OtpController::class, 'resetPassword']);
 });
 
 // Protected user routes

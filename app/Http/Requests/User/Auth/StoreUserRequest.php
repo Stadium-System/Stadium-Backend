@@ -16,7 +16,8 @@ class StoreUserRequest extends FormRequest
     {
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'string', 'regex:/^2189\d{8}$/'],
+            'phone_number' => ['required', 'string', 'regex:/^2189\d{8}$/', Rule::unique('users', 'phone_number')],
+            'password' => ['required', 'string', 'min:8'],
             'type' => ['required', 'string', Rule::in(['user', 'owner'])],
             'avatar_media_id' => ['nullable', 'integer', 'exists:media,id'],
             'cover_media_id' => ['nullable', 'integer', 'exists:media,id'],
@@ -43,17 +44,27 @@ class StoreUserRequest extends FormRequest
                 'example' => '218912345678',
                 'type' => 'string',
             ],
+            'password' => [
+                'description' => 'The user\'s password. Must be at least 8 characters.',
+                'example' => 'securepassword123',
+                'type' => 'string',
+            ],
+            'type' => [
+                'description' => 'The type of user account.',
+                'example' => 'user',
+                'type' => 'string',
+                'enum' => ['user', 'owner'],
+            ],
             'avatar_media_id' => [
-                'description' => 'The media ID of the user\'s avatar image (obtained from uploading to /api/v1/general/upload/image).',
+                'description' => 'The media ID of the user\'s avatar image.',
                 'example' => 1,
                 'type' => 'integer',
             ],
             'cover_media_id' => [
-                'description' => 'The media ID of the user\'s cover image (obtained from uploading to /api/v1/general/upload/image).',
+                'description' => 'The media ID of the user\'s cover image.',
                 'example' => 2,
                 'type' => 'integer',
             ],
-            
         ];
     }
 }

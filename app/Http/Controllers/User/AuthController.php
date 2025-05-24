@@ -3,82 +3,100 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\User\Auth\LoginUserRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\User\Auth\StoreUserRequest;
-use App\Models\User;
 use App\Models\Otp;
+use App\Models\User;
+use App\Services\OtpService;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use App\Helpers\MediaHelper;
-
 
 class AuthController extends Controller
 {
+    protected $otpService;
+
+    public function __construct(OtpService $otpService)
+    {
+        $this->otpService = $otpService;
+    }
 
     /**
      * @group User Authentication
      *
      * Register a New User
      *
-     * Completes the registration for a new user with the provided details,
-     * assigns the default 'user' role, and returns an access token.
+     * Creates a new user account with the provided details.
+     * The phone number must have a valid OTP verification for 'registration' purpose within the last 30 minutes.
      *
-     * @bodyParam name string required The  name of the user. Example: John Doe
+     * @bodyParam name string required The name of the user. Example: John Doe
      * @bodyParam phone_number string required The user's phone number. Must start with 2189 and be exactly 12 characters. Example: 218912345678
      * @bodyParam password string required The password for the user. Must be at least 8 characters. Example: securepassword
-     * @bodyParam avatar_media_id integer The media ID of the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 1
-     * @bodyParam cover_media_id integer The media ID of the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint). Example: 2
+     * @bodyParam type string required The type of user account (user or owner). Example: user
+     * @bodyParam avatar_media_id integer optional The media ID of the user's avatar image. Example: 1
+     * @bodyParam cover_media_id integer optional The media ID of the user's cover image. Example: 2
+     *
+     * @response 201 {
+     *   "message": "User registered successfully.",
+     *   "user": {
+     *     "id": 1,
+     *     "name": "John Doe",
+     *     "phone_number": "218912345678",
+     *     "type": "user",
+     *     "roles": ["user"],
+     *     "avatar": "https://example.com/avatar.jpg",
+     *     "cover": "https://example.com/cover.jpg",
+     *     "status": "active",
+     *     "created_at": "2023-01-01T00:00:00.000000Z",
+     *     "updated_at": "2023-01-01T00:00:00.000000Z"
+     *   },
+     *   "token": "token_string",
+     *   "token_type": "Bearer"
+     * }
+     * @response 422 {
+     *   "error": "Phone number not verified or verification expired."
+     * }
      */
     public function register(StoreUserRequest $request)
     {
         $data = $request->validated();
 
-        // Find the user by phone number
-        $user = User::where('phone_number', $data['phone_number'])->first();
-
-        if (!$user) {
-            throw ValidationException::withMessages([
-                'phone_number' => ['This phone number is not associated with an OTP request.'],
-            ]);
+        // Check if phone has valid OTP verification for registration
+        if (!Otp::hasValidVerification($data['phone_number'], 'registration')) {
+            return response()->json(['error' => 'Phone number not verified or verification expired.'], 422);
         }
 
-        // Ensure the phone number has been verified via OTP
-        if (!Otp::where('phone_number', $data['phone_number'])->where('is_verified', true)->exists()) {
-            throw ValidationException::withMessages([
-                'phone_number' => ['Phone number is not verified.'],
-            ]);
-        }
-
-        // Ensure the user is still inactive before updating
-        if ($user->status !== 'inactive') {
-            throw ValidationException::withMessages([
-                'phone_number' => ['This phone number is already registered and active. Please log in.'],
-            ]);
-        }
-
-        $user->update([
+        // Create the user
+        $user = User::create([
             'name' => $data['name'],
-            'avatar' => $data['avatar'] ?? null,
-            'cover' => $data['cover'] ?? null,
-            'type' => 'user',
+            'phone_number' => $data['phone_number'],
+            'password' => bcrypt($data['password']),
+            'type' => $data['type'],
             'status' => 'active'
         ]);
 
-        // For avatar
+        // Handle avatar upload from temp media
         if ($request->has('avatar_media_id')) {
-            MediaHelper::attachMedia($user, [$request->input('avatar_media_id')], 'avatar', true);
+            $mediaId = $request->input('avatar_media_id');
+            $media = Media::findOrFail($mediaId);
+            $media->move($user, 'avatar');
         }
-
-        // For cover
+        
+        // Handle cover upload from temp media
         if ($request->has('cover_media_id')) {
-            MediaHelper::attachMedia($user, [$request->input('cover_media_id')], 'cover', true);
+            $mediaId = $request->input('cover_media_id');
+            $media = Media::findOrFail($mediaId);
+            $media->move($user, 'cover');
         }
 
-        $user->assignRole('user');
+        // Assign role based on type
+        $user->assignRole($data['type']);
 
+        // Generate token
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
@@ -89,7 +107,6 @@ class AuthController extends Controller
         ], 201); 
     }
 
-
     /**
      * @group User Authentication
      *
@@ -98,11 +115,26 @@ class AuthController extends Controller
      * Authenticates a user using phone number and password.
      *
      * @bodyParam phone_number string required The user's phone number. Must start with 2189 and be exactly 12 characters. Example: 218912345678
-     * @bodyParam password string required The password for the user. Must be at least 8 characters. Example: securepassword
+     * @bodyParam password string required The password for the user. Example: securepassword
      *
-     * @response {
+     * @response 200 {
      *   "access_token": "token_string",
-     *   "token_type": "Bearer"
+     *   "token_type": "Bearer",
+     *   "user": {
+     *     "id": 1,
+     *     "name": "John Doe",
+     *     "phone_number": "218912345678",
+     *     "type": "user",
+     *     "roles": ["user"],
+     *     "avatar": "https://example.com/avatar.jpg",
+     *     "cover": "https://example.com/cover.jpg",
+     *     "status": "active",
+     *     "created_at": "2023-01-01T00:00:00.000000Z",
+     *     "updated_at": "2023-01-01T00:00:00.000000Z"
+     *   }
+     * }
+     * @response 422 {
+     *   "message": "The provided credentials are incorrect."
      * }
      */
     public function login(LoginUserRequest $request)
@@ -117,13 +149,15 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        if ($user->role == 'admin') {
+        // Check if user is admin (should use admin login)
+        if ($user->hasRole('admin')) {
             Auth::logout();
             throw ValidationException::withMessages([
-                'message' => ['Unauthorized access for this user type.'],
+                'message' => ['Please use admin login for administrative access.'],
             ]);
         }
 
+        // Check user status
         if ($user->status === 'inactive') {
             Auth::logout();
             throw ValidationException::withMessages([
@@ -153,6 +187,8 @@ class AuthController extends Controller
      * Logout
      *
      * Revokes the current user token.
+     *
+     * @authenticated
      *
      * @response 204
      */
