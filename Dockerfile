@@ -4,12 +4,12 @@
 FROM php:8.2-fpm AS build
 
 # Install system dependencies
-RUN rm -rf /var/lib/apt/lists/* \\\
-    && apt-get update \\\
-    && apt-get install -y --no-install-recommends DEBIAN_FRONTEND=noninteractive \\
-    zip unzip git curl libpq-dev libxml2-dev libzip-dev zlib1g-dev \\\
-    && docker-php-ext-install pdo pdo_pgsql mbstring xml zip bcmath ctype \\\
-    && rm -rf /var/lib/apt/lists/*
+RUN rm -rf /var/lib/apt/lists/* && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends DEBIAN_FRONTEND=noninteractive \
+    zip unzip git curl libpq-dev libxml2-dev libzip-dev zlib1g-dev && \
+    docker-php-ext-install pdo pdo_pgsql mbstring xml zip bcmath ctype && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
