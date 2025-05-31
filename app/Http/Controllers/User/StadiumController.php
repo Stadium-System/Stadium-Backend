@@ -115,7 +115,7 @@ class StadiumController extends Controller
      * @bodyParam capacity numeric The capacity of the stadium. Example: 12
      * @bodyParam description string The description of the stadium. Example: Full-size soccer field with floodlights
      * @bodyParam status string The status of the stadium (open or closed). Example: open
-     * @bodyParam media_ids array required An array of media IDs for stadium images (obtained from /api/v1/general/temp-uploads/images endpoint). Example: [1, 2]
+     * @bodyParam media_ids array nullable An array of media IDs for stadium images (obtained from /api/v1/general/temp-uploads/images endpoint). Example: [1, 2]
      * @bodyParam media_ids.* integer required The media ID for each image. Example: 1
     *
     * @response {
@@ -165,7 +165,10 @@ class StadiumController extends Controller
             MediaHelper::attachMedia($stadium, $request->input('media_ids'), 'images');
         }
         
-        return new StadiumResource($stadium->load('user'));
+        $stadium->load('user');
+        $stadium->loadMedia('images'); 
+
+        return new StadiumResource($stadium);
     }
 
     /**
@@ -180,7 +183,10 @@ class StadiumController extends Controller
      */
     public function show(Stadium $stadium)
     {   
-        return new StadiumResource($stadium->load('user'));
+        $stadium->load('user');
+        $stadium->loadMedia('images'); 
+
+        return new StadiumResource($stadium);
     }
 
     /**
@@ -238,7 +244,10 @@ class StadiumController extends Controller
             MediaHelper::attachMedia($stadium, $request->input('media_ids'), 'images');
         }
         
-        return new StadiumResource($stadium->fresh()->load('user', 'images'));
+        $stadium->load('user');
+        $stadium->loadMedia('images'); 
+
+        return new StadiumResource($stadium);
     }
 
     /**

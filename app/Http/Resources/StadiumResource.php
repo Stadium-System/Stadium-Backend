@@ -24,7 +24,7 @@ class StadiumResource extends JsonResource
                     'id' => $media->id,
                     'url' => $media->getFullUrl()
                 ];
-            })->values(),
+            }),
 
             'location' => $this->location,
             'latitude' => $this->latitude,

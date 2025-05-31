@@ -32,7 +32,7 @@ class UpdateStadiumRequest extends FormRequest
             'capacity' => 'sometimes|numeric|min:1',
             'description' => 'nullable|string',
             'status' => 'sometimes|in:open,closed',
-            'media_ids' => 'required|array',
+            'media_ids' => 'nullable|array',
             'media_ids.*' => 'integer|exists:media,id'
         ];
     }
