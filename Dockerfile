@@ -21,7 +21,7 @@ COPY composer.json composer.lock ./
 COPY . .
 
 # Install PHP dependencies (no-dev for production)
-RUN composer install --optimize-autoloader --no-dev --no-interaction --no-plugins
+RUN composer install --optimize-autoloader --no-dev --no-interaction --no-plugins  --verbose
 
 
 # ---------------------------------------
