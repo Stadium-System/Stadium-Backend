@@ -3,11 +3,11 @@
 # ---------------------------------------
 FROM php:8.2-fpm AS build
 
-# Install system dependencies
+# Install system dependencies including libonig-dev for mbstring
 RUN rm -rf /var/lib/apt/lists/* && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    zip unzip git curl libpq-dev libxml2-dev libzip-dev zlib1g-dev && \
+    zip unzip git curl libpq-dev libxml2-dev libzip-dev zlib1g-dev libonig-dev && \
     docker-php-ext-install pdo pdo_pgsql mbstring xml zip bcmath ctype && \
     rm -rf /var/lib/apt/lists/*
 
@@ -32,11 +32,11 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction --no-plugin
 # ---------------------------------------
 FROM php:8.2-fpm
 
-# Install system dependencies, NGINX, and Supervisor
+# Install system dependencies including libonig-dev for mbstring
 RUN apt-get update && apt-get install -y \
-    nginx supervisor libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql \
-    && rm -rf /var/lib/apt/lists/*
+    nginx supervisor libpq-dev libonig-dev \
+    && docker-php-ext-install pdo pdo_pgsql mbstring bcmath ctype \
+    && rm -rf /var/lib/apt/lists/* 
 
 # Copy application from build stage
 COPY --from=build /var/www/html /var/www/html
