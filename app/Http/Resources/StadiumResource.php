@@ -19,12 +19,12 @@ class StadiumResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             
-            'images' => $this->getMedia('images')->map(function ($media) {
+            'images' => $this->media->where('collection_name', 'images')->map(function ($media) {
                 return [
                     'id' => $media->id,
                     'url' => $media->getFullUrl()
                 ];
-            }),
+            })->values(),
 
             'location' => $this->location,
             'latitude' => $this->latitude,
@@ -39,6 +39,6 @@ class StadiumResource extends JsonResource
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-          ];
+        ];
     }
 }

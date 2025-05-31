@@ -33,7 +33,7 @@ class UpdateStadiumRequest extends FormRequest
             'status' => 'sometimes|in:open,closed',
             'user_id' => 'sometimes|exists:users,id',
             'rating' => 'sometimes|numeric|between:0,5',
-            'media_ids' => 'required|array',
+            'media_ids' => 'nullable|array',
             'media_ids.*' => 'integer|exists:media,id'
         ];
     }

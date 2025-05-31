@@ -158,7 +158,10 @@ class StadiumController extends Controller
             MediaHelper::attachMedia($stadium, $request->input('media_ids'), 'images');
         }
         
-        return new StadiumResource($stadium->load('user', 'images'));
+        $stadium->load('user');
+        $stadium->loadMedia('images'); 
+
+        return new StadiumResource($stadium);
     }
 
     /**
@@ -195,7 +198,10 @@ class StadiumController extends Controller
      */
     public function show(Stadium $stadium)
     {
-        return new StadiumResource($stadium->load('user', 'images'));
+        $stadium->load('user');
+        $stadium->loadMedia('images'); 
+
+        return new StadiumResource($stadium);
     }
 
     /**
@@ -252,7 +258,10 @@ class StadiumController extends Controller
             MediaHelper::attachMedia($stadium, $request->input('media_ids'), 'images');
         }
 
-        return new StadiumResource($stadium->fresh()->load('user', 'images'));
+        $stadium->load('user');
+        $stadium->loadMedia('images'); 
+
+        return new StadiumResource($stadium);
     }
 
     /**
