@@ -20,8 +20,15 @@ class UserResource extends JsonResource
             'phone_number' => $this->phone_number,
             'type' => $this->type,
             'roles' => $this->getRoleNames(), 
-            'avatar' => $this->getFirstMediaUrl('avatar'),
-            'cover' => $this->getFirstMediaUrl('cover'),
+
+            // Images
+            'avatar' => $this->getMedia('avatar')->map(function ($media) {
+                return new ImageResource($media);
+            })->first(),
+            'cover' => $this->getMedia('cover')->map(function ($media) {
+                return new ImageResource($media);
+            })->first(),
+
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

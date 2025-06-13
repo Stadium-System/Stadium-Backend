@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StadiumResource extends JsonResource
+class EventResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,20 +18,15 @@ class StadiumResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'date' => $this->date,
             
             'images' => ImageResource::collection($this->getMedia('images')),
-
-            'location' => $this->location,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
             
-            'price_per_hour' => $this->price_per_hour,
-            'capacity' => $this->capacity,
-            'rating' => $this->rating,
             'status' => $this->status,
-
+            
+            'stadium' => new StadiumResource($this->whenLoaded('stadium')),
             'user' => new UserResource($this->whenLoaded('user')),
-
+            
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

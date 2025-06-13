@@ -69,6 +69,11 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Stadium::class);
     }
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
 
     // ========= Functions ==========
     public function registerMediaCollections(): void

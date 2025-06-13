@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\StadiumController;
 use App\Http\Controllers\TempUploadController;
+use App\Http\Controllers\Admin\EventController;
 
 // Public admin routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -24,6 +25,10 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // Stadium management
     Route::apiResource('stadiums', StadiumController::class);
     Route::delete('/stadiums/{stadium}/images/{image}', [StadiumController::class, 'removeImage']);
+
+    // Event management
+    Route::apiResource('events', EventController::class);
+    Route::delete('/events/{event}/images/{image}', [EventController::class, 'removeImage']);
 
 });
 
