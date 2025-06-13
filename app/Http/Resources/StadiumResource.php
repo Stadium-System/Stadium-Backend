@@ -32,6 +32,17 @@ class StadiumResource extends JsonResource
 
             'user' => new UserResource($this->whenLoaded('user')),
 
+            'is_favorited' => $this->when(auth()->check(), function () {
+                return $this->isFavoritedBy(auth()->user());
+            }),
+            
+            'favorites_count' => $this->when(
+                auth()->check() && auth()->user()->hasRole('owner') && auth()->id() === $this->user_id,
+                function () {
+                    return $this->favorites_count;
+                }
+            ),
+
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

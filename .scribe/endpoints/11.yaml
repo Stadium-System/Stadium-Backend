@@ -1,164 +1,19 @@
-name: Admin/Events
+name: User/Events
 description: ''
 endpoints:
   -
     httpMethods:
-      - GET
-    uri: api/v1/admin/events
-    metadata:
-      groupName: Admin/Events
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Event Management
-
-        Retrieves a paginated list of all events with filtering options.
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters:
-      'filter[name]':
-        name: 'filter[name]'
-        description: 'Optional event name filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[stadium_id]':
-        name: 'filter[stadium_id]'
-        description: 'Optional stadium ID filter.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[user_id]':
-        name: 'filter[user_id]'
-        description: "Optional owner's user ID filter."
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[status]':
-        name: 'filter[status]'
-        description: 'Optional status filter (active, inactive).'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[date_from]':
-        name: 'filter[date_from]'
-        description: 'date Optional minimum date filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[date_to]':
-        name: 'filter[date_to]'
-        description: 'date Optional maximum date filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      sort:
-        name: sort
-        description: 'Optional sort parameter. Prefix with "-" for descending order.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanQueryParameters:
-      'filter[name]': architecto
-      'filter[stadium_id]': 16
-      'filter[user_id]': 16
-      'filter[status]': architecto
-      'filter[date_from]': architecto
-      'filter[date_to]': architecto
-      sort: architecto
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "data": [
-              {
-                "id": 1,
-                "name": "Weekend Tournament",
-                "description": "5v5 football tournament",
-                "date": "2025-06-15T18:00:00.000000Z",
-                "images": [
-                  {
-                    "id": 1,
-                    "url": "https://example.com/event-image.jpg"
-                  }
-                ],
-                "status": "active",
-                "stadium": {
-                  "id": 1,
-                  "name": "City Stadium"
-                },
-                "user": {
-                  "id": 1,
-                  "name": "John Doe"
-                },
-                "created_at": "2025-05-01T00:00:00.000000Z",
-                "updated_at": "2025-05-01T00:00:00.000000Z"
-              }
-            ],
-            "links": { ... },
-            "meta": { ... }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
       - POST
-    uri: api/v1/admin/events
+    uri: api/v1/events
     metadata:
-      groupName: Admin/Events
+      groupName: User/Events
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
         Create Event
 
-        Creates a new event with the provided details.
+        Creates a new event for a stadium owned by the authenticated user.
       description: ''
       authenticated: true
       custom: []
@@ -174,7 +29,7 @@ endpoints:
         name: name
         description: 'The name of the event.'
         required: true
-        example: 'Admin Created Tournament'
+        example: 'Weekend Tournament'
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -184,7 +39,7 @@ endpoints:
         name: description
         description: 'The description of the event.'
         required: true
-        example: 'Tournament created by admin'
+        example: '5v5 football tournament with prizes'
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -194,7 +49,7 @@ endpoints:
         name: date
         description: 'The date and time of the event. Must be in the future.'
         required: true
-        example: '2025-07-01 20:00:00'
+        example: '2025-06-15 18:00:00'
         type: datetime
         enumValues: []
         exampleWasSpecified: true
@@ -202,19 +57,9 @@ endpoints:
         custom: []
       stadium_id:
         name: stadium_id
-        description: 'The ID of the stadium.'
+        description: 'The ID of the stadium where the event will be held. Must be owned by the user.'
         required: true
-        example: 2
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      user_id:
-        name: user_id
-        description: 'The ID of the owner/organizer.'
-        required: true
-        example: 3
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: true
@@ -253,11 +98,10 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: 'Admin Created Tournament'
-      description: 'Tournament created by admin'
-      date: '2025-07-01 20:00:00'
-      stadium_id: 2
-      user_id: 3
+      name: 'Weekend Tournament'
+      description: '5v5 football tournament with prizes'
+      date: '2025-06-15 18:00:00'
+      stadium_id: 1
       status: active
       media_ids:
         - 1
@@ -269,84 +113,14 @@ endpoints:
         content: |-
           {
             "data": {
-              "id": 2,
-              "name": "Admin Created Tournament",
-              "description": "Tournament created by admin",
-              "date": "2025-07-01T20:00:00.000000Z",
-              "images": [],
-              "status": "active",
-              "stadium": {
-                "id": 2,
-                "name": "Sports Complex"
-              },
-              "user": {
-                "id": 3,
-                "name": "Stadium Owner"
-              },
-              "created_at": "2025-05-10T10:00:00.000000Z",
-              "updated_at": "2025-05-10T10:00:00.000000Z"
-            }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/v1/admin/events/{id}'
-    metadata:
-      groupName: Admin/Events
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Get Event Details
-
-        Retrieves the details of a specific event.
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the event.'
-        required: true
-        example: '1'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: '1'
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "data": {
               "id": 1,
               "name": "Weekend Tournament",
-              "description": "5v5 football tournament",
+              "description": "5v5 football tournament with prizes",
               "date": "2025-06-15T18:00:00.000000Z",
               "images": [
                 {
                   "id": 1,
-                  "url": "https://example.com/event-image.jpg"
+                  "url": "https://your-s3-bucket-url.com/events/1/image1.jpg"
                 }
               ],
               "status": "active",
@@ -358,8 +132,8 @@ endpoints:
                 "id": 1,
                 "name": "John Doe"
               },
-              "created_at": "2025-05-01T00:00:00.000000Z",
-              "updated_at": "2025-05-01T00:00:00.000000Z"
+              "created_at": "2025-05-01T10:00:00.000000Z",
+              "updated_at": "2025-05-01T10:00:00.000000Z"
             }
           }
         headers: []
@@ -374,17 +148,16 @@ endpoints:
   -
     httpMethods:
       - PUT
-      - PATCH
-    uri: 'api/v1/admin/events/{id}'
+    uri: 'api/v1/events/{event_id}'
     metadata:
-      groupName: Admin/Events
+      groupName: User/Events
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
         Update Event
 
-        Updates an existing event with the provided details.
+        Updates an existing event. Only the owner of the event can update it.
       description: ''
       authenticated: true
       custom: []
@@ -392,6 +165,16 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       id:
         name: id
         description: 'The ID of the event.'
@@ -403,6 +186,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
+      event_id: 16
       id: '1'
     queryParameters: []
     cleanQueryParameters: []
@@ -411,7 +195,7 @@ endpoints:
         name: name
         description: 'The name of the event.'
         required: false
-        example: 'Updated Tournament'
+        example: 'Updated Tournament Name'
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -421,7 +205,7 @@ endpoints:
         name: description
         description: 'The description of the event.'
         required: false
-        example: 'Updated by admin'
+        example: 'Updated tournament description'
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -431,28 +215,8 @@ endpoints:
         name: date
         description: 'The date and time of the event. Must be in the future.'
         required: false
-        example: '2025-07-15 21:00:00'
+        example: '2025-06-20 19:00:00'
         type: datetime
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      stadium_id:
-        name: stadium_id
-        description: 'The ID of the stadium.'
-        required: false
-        example: 3
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      user_id:
-        name: user_id
-        description: 'The ID of the owner/organizer.'
-        required: false
-        example: 4
-        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
@@ -461,7 +225,7 @@ endpoints:
         name: status
         description: 'The status of the event (active or inactive).'
         required: false
-        example: inactive
+        example: active
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -473,6 +237,7 @@ endpoints:
         required: false
         example:
           - 3
+          - 4
         type: 'string[]'
         enumValues: []
         exampleWasSpecified: true
@@ -489,14 +254,13 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: 'Updated Tournament'
-      description: 'Updated by admin'
-      date: '2025-07-15 21:00:00'
-      stadium_id: 3
-      user_id: 4
-      status: inactive
+      name: 'Updated Tournament Name'
+      description: 'Updated tournament description'
+      date: '2025-06-20 19:00:00'
+      status: active
       media_ids:
         - 3
+        - 4
     fileParameters: []
     responses:
       -
@@ -505,26 +269,26 @@ endpoints:
           {
             "data": {
               "id": 1,
-              "name": "Updated Tournament",
-              "description": "Updated by admin",
-              "date": "2025-07-15T21:00:00.000000Z",
+              "name": "Updated Tournament Name",
+              "description": "Updated tournament description",
+              "date": "2025-06-20T19:00:00.000000Z",
               "images": [
                 {
                   "id": 3,
-                  "url": "https://example.com/new-event-image.jpg"
+                  "url": "https://your-s3-bucket-url.com/events/1/image3.jpg"
                 }
               ],
-              "status": "inactive",
+              "status": "active",
               "stadium": {
-                "id": 3,
-                "name": "New Stadium"
+                "id": 1,
+                "name": "City Stadium"
               },
               "user": {
-                "id": 4,
-                "name": "New Owner"
+                "id": 1,
+                "name": "John Doe"
               },
-              "created_at": "2025-05-01T00:00:00.000000Z",
-              "updated_at": "2025-05-10T11:30:00.000000Z"
+              "created_at": "2025-05-01T10:00:00.000000Z",
+              "updated_at": "2025-05-01T11:30:00.000000Z"
             }
           }
         headers: []
@@ -539,16 +303,16 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/admin/events/{id}'
+    uri: 'api/v1/events/{event_id}'
     metadata:
-      groupName: Admin/Events
+      groupName: User/Events
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
         Delete Event
 
-        Deletes an event.
+        Deletes an event. Only the owner of the event can delete it.
       description: ''
       authenticated: true
       custom: []
@@ -556,6 +320,16 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       id:
         name: id
         description: 'The ID of the event.'
@@ -567,6 +341,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
+      event_id: 16
       id: '1'
     queryParameters: []
     cleanQueryParameters: []
@@ -592,16 +367,16 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/admin/events/{event_id}/images/{image}'
+    uri: 'api/v1/events/{event_id}/images/{image}'
     metadata:
-      groupName: Admin/Events
+      groupName: User/Events
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
         Remove Event Image
 
-        Removes an image from an event.
+        Removes an image from an event. Only the owner of the event can remove images.
       description: ''
       authenticated: true
       custom: []
@@ -666,17 +441,17 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - GET
+      - POST
     uri: api/events
     metadata:
-      groupName: Admin/Events
+      groupName: User/Events
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Event Management
+        Create Event
 
-        Retrieves a paginated list of all events with filtering options.
+        Creates a new event for a stadium owned by the authenticated user.
       description: ''
       authenticated: true
       custom: []
@@ -685,166 +460,90 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
-      'filter[name]':
-        name: 'filter[name]'
-        description: 'Optional event name filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[stadium_id]':
-        name: 'filter[stadium_id]'
-        description: 'Optional stadium ID filter.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[user_id]':
-        name: 'filter[user_id]'
-        description: "Optional owner's user ID filter."
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[status]':
-        name: 'filter[status]'
-        description: 'Optional status filter (active, inactive).'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[date_from]':
-        name: 'filter[date_from]'
-        description: 'date Optional minimum date filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      'filter[date_to]':
-        name: 'filter[date_to]'
-        description: 'date Optional maximum date filter.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      sort:
-        name: sort
-        description: 'Optional sort parameter. Prefix with "-" for descending order.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanQueryParameters:
-      'filter[name]': architecto
-      'filter[stadium_id]': 16
-      'filter[user_id]': 16
-      'filter[status]': architecto
-      'filter[date_from]': architecto
-      'filter[date_to]': architecto
-      sort: architecto
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "data": [
-              {
-                "id": 1,
-                "name": "Weekend Tournament",
-                "description": "5v5 football tournament",
-                "date": "2025-06-15T18:00:00.000000Z",
-                "images": [
-                  {
-                    "id": 1,
-                    "url": "https://example.com/event-image.jpg"
-                  }
-                ],
-                "status": "active",
-                "stadium": {
-                  "id": 1,
-                  "name": "City Stadium"
-                },
-                "user": {
-                  "id": 1,
-                  "name": "John Doe"
-                },
-                "created_at": "2025-05-01T00:00:00.000000Z",
-                "updated_at": "2025-05-01T00:00:00.000000Z"
-              }
-            ],
-            "links": { ... },
-            "meta": { ... }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/events/{id}'
-    metadata:
-      groupName: Admin/Events
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Get Event Details
-
-        Retrieves the details of a specific event.
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the event.'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the event.'
         required: true
-        example: '1'
+        example: 'Weekend Tournament'
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
-    cleanUrlParameters:
-      id: '1'
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+      description:
+        name: description
+        description: 'The description of the event.'
+        required: true
+        example: '5v5 football tournament with prizes'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      date:
+        name: date
+        description: 'The date and time of the event. Must be in the future.'
+        required: true
+        example: '2025-06-15 18:00:00'
+        type: datetime
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      stadium_id:
+        name: stadium_id
+        description: 'The ID of the stadium where the event will be held. Must be owned by the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      status:
+        name: status
+        description: 'The status of the event (active or inactive).'
+        required: false
+        example: active
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      media_ids:
+        name: media_ids
+        description: 'Optional array of media IDs for event images.'
+        required: false
+        example:
+          - 1
+          - 2
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'media_ids.*':
+        name: 'media_ids.*'
+        description: 'The media ID for each image.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: 'Weekend Tournament'
+      description: '5v5 football tournament with prizes'
+      date: '2025-06-15 18:00:00'
+      stadium_id: 1
+      status: active
+      media_ids:
+        - 1
+        - 2
     fileParameters: []
     responses:
       -
@@ -854,12 +553,12 @@ endpoints:
             "data": {
               "id": 1,
               "name": "Weekend Tournament",
-              "description": "5v5 football tournament",
+              "description": "5v5 football tournament with prizes",
               "date": "2025-06-15T18:00:00.000000Z",
               "images": [
                 {
                   "id": 1,
-                  "url": "https://example.com/event-image.jpg"
+                  "url": "https://your-s3-bucket-url.com/events/1/image1.jpg"
                 }
               ],
               "status": "active",
@@ -871,8 +570,8 @@ endpoints:
                 "id": 1,
                 "name": "John Doe"
               },
-              "created_at": "2025-05-01T00:00:00.000000Z",
-              "updated_at": "2025-05-01T00:00:00.000000Z"
+              "created_at": "2025-05-01T10:00:00.000000Z",
+              "updated_at": "2025-05-01T10:00:00.000000Z"
             }
           }
         headers: []
@@ -886,18 +585,17 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - PUT
-      - PATCH
-    uri: 'api/events/{id}'
+      - DELETE
+    uri: 'api/events/{event_id}'
     metadata:
-      groupName: Admin/Events
+      groupName: User/Events
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Update Event
+        Delete Event
 
-        Updates an existing event with the provided details.
+        Deletes an event. Only the owner of the event can delete it.
       description: ''
       authenticated: true
       custom: []
@@ -905,6 +603,16 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       id:
         name: id
         description: 'The ID of the event.'
@@ -916,6 +624,146 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
+      event_id: 16
+      id: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Event deleted successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/events/{event_id}/images/{image}'
+    metadata:
+      groupName: User/Events
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Remove Event Image
+
+        Removes an image from an event. Only the owner of the event can remove images.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      image:
+        name: image
+        description: 'The ID of the image to remove.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      event:
+        name: event
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      event_id: 16
+      image: 2
+      event: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Image removed successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/events/{event_id}'
+    metadata:
+      groupName: User/Events
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Update Event
+
+        Updates an existing event. Only the owner of the event can update it.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      id:
+        name: id
+        description: 'The ID of the event.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      event_id: 16
       id: '1'
     queryParameters: []
     cleanQueryParameters: []
@@ -924,7 +772,7 @@ endpoints:
         name: name
         description: 'The name of the event.'
         required: false
-        example: 'Updated Tournament'
+        example: 'Updated Tournament Name'
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -934,7 +782,7 @@ endpoints:
         name: description
         description: 'The description of the event.'
         required: false
-        example: 'Updated by admin'
+        example: 'Updated tournament description'
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -944,28 +792,8 @@ endpoints:
         name: date
         description: 'The date and time of the event. Must be in the future.'
         required: false
-        example: '2025-07-15 21:00:00'
+        example: '2025-06-20 19:00:00'
         type: datetime
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      stadium_id:
-        name: stadium_id
-        description: 'The ID of the stadium.'
-        required: false
-        example: 3
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      user_id:
-        name: user_id
-        description: 'The ID of the owner/organizer.'
-        required: false
-        example: 4
-        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
@@ -974,7 +802,7 @@ endpoints:
         name: status
         description: 'The status of the event (active or inactive).'
         required: false
-        example: inactive
+        example: active
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -986,6 +814,7 @@ endpoints:
         required: false
         example:
           - 3
+          - 4
         type: 'string[]'
         enumValues: []
         exampleWasSpecified: true
@@ -1002,14 +831,13 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: 'Updated Tournament'
-      description: 'Updated by admin'
-      date: '2025-07-15 21:00:00'
-      stadium_id: 3
-      user_id: 4
-      status: inactive
+      name: 'Updated Tournament Name'
+      description: 'Updated tournament description'
+      date: '2025-06-20 19:00:00'
+      status: active
       media_ids:
         - 3
+        - 4
     fileParameters: []
     responses:
       -
@@ -1018,26 +846,26 @@ endpoints:
           {
             "data": {
               "id": 1,
-              "name": "Updated Tournament",
-              "description": "Updated by admin",
-              "date": "2025-07-15T21:00:00.000000Z",
+              "name": "Updated Tournament Name",
+              "description": "Updated tournament description",
+              "date": "2025-06-20T19:00:00.000000Z",
               "images": [
                 {
                   "id": 3,
-                  "url": "https://example.com/new-event-image.jpg"
+                  "url": "https://your-s3-bucket-url.com/events/1/image3.jpg"
                 }
               ],
-              "status": "inactive",
+              "status": "active",
               "stadium": {
-                "id": 3,
-                "name": "New Stadium"
+                "id": 1,
+                "name": "City Stadium"
               },
               "user": {
-                "id": 4,
-                "name": "New Owner"
+                "id": 1,
+                "name": "John Doe"
               },
-              "created_at": "2025-05-01T00:00:00.000000Z",
-              "updated_at": "2025-05-10T11:30:00.000000Z"
+              "created_at": "2025-05-01T10:00:00.000000Z",
+              "updated_at": "2025-05-01T11:30:00.000000Z"
             }
           }
         headers: []

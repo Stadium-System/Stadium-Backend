@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             StadiumSeeder::class,
             EventSeeder::class,
+            FavoriteSeeder::class,
         ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\StadiumController;
 use App\Http\Controllers\TempUploadController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\FavoriteController;
 
 // Public admin routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -29,6 +30,14 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // Event management
     Route::apiResource('events', EventController::class);
     Route::delete('/events/{event}/images/{image}', [EventController::class, 'removeImage']);
+
+    // Favorites management
+    Route::prefix('favorites')->group(function () {
+        Route::get('/users/{user}', [FavoriteController::class, 'userFavorites']);
+        Route::get('/stats', [FavoriteController::class, 'overallStats']);
+        Route::get('/stats/stadiums', [FavoriteController::class, 'stadiumStats']);
+        Route::get('/stats/events', [FavoriteController::class, 'eventStats']);
+    });
 
 });
 

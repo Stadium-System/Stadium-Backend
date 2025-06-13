@@ -1,186 +1,16 @@
-name: 'User Authentication'
+name: Endpoints
 description: ''
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/register
+    uri: api/v1/admin/run-command
     metadata:
-      groupName: 'User Authentication'
+      groupName: Endpoints
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: |-
-        Register a New User
-
-        Completes the registration for a new user with the provided details,
-        assigns the default 'user' role, and returns an access token.
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The  name of the user.'
-        required: true
-        example: 'John Doe'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      phone_number:
-        name: phone_number
-        description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
-        required: true
-        example: '218912345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      type:
-        name: type
-        description: ''
-        required: true
-        example: owner
-        type: string
-        enumValues:
-          - user
-          - owner
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      avatar_media_id:
-        name: avatar_media_id
-        description: "The media ID of the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint)."
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      cover_media_id:
-        name: cover_media_id
-        description: "The media ID of the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint)."
-        required: false
-        example: 2
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      password:
-        name: password
-        description: 'The password for the user. Must be at least 8 characters.'
-        required: true
-        example: securepassword
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'John Doe'
-      phone_number: '218912345678'
-      type: owner
-      avatar_media_id: 1
-      cover_media_id: 2
-      password: securepassword
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/login
-    metadata:
-      groupName: 'User Authentication'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Login (by Phone Number)
-
-        Authenticates a user using phone number and password.
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      phone_number:
-        name: phone_number
-        description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
-        required: true
-        example: '218912345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      password:
-        name: password
-        description: 'The password for the user. Must be at least 8 characters.'
-        required: true
-        example: securepassword
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      phone_number: '218912345678'
-      password: securepassword
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "access_token": "token_string",
-            "token_type": "Bearer"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/logout
-    metadata:
-      groupName: 'User Authentication'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Logout
-
-        Revokes the current user token.
+      title: ''
       description: ''
       authenticated: false
       custom: []
@@ -194,179 +24,6 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 204
-        content: '{}'
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/login
-    metadata:
-      groupName: 'User Authentication'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Login (by Phone Number)
-
-        Authenticates a user using phone number and password.
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      phone_number:
-        name: phone_number
-        description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
-        required: true
-        example: '218912345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      password:
-        name: password
-        description: 'The password for the user. Must be at least 8 characters.'
-        required: true
-        example: securepassword
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      phone_number: '218912345678'
-      password: securepassword
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "access_token": "token_string",
-            "token_type": "Bearer"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/register
-    metadata:
-      groupName: 'User Authentication'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Register a New User
-
-        Completes the registration for a new user with the provided details,
-        assigns the default 'user' role, and returns an access token.
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The  name of the user.'
-        required: true
-        example: 'John Doe'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      phone_number:
-        name: phone_number
-        description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
-        required: true
-        example: '218912345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      type:
-        name: type
-        description: ''
-        required: true
-        example: user
-        type: string
-        enumValues:
-          - user
-          - owner
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      avatar_media_id:
-        name: avatar_media_id
-        description: "The media ID of the user's avatar image (obtained from /api/v1/general/temp-uploads/images endpoint)."
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      cover_media_id:
-        name: cover_media_id
-        description: "The media ID of the user's cover image (obtained from /api/v1/general/temp-uploads/images endpoint)."
-        required: false
-        example: 2
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      password:
-        name: password
-        description: 'The password for the user. Must be at least 8 characters.'
-        required: true
-        example: securepassword
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'John Doe'
-      phone_number: '218912345678'
-      type: user
-      avatar_media_id: 1
-      cover_media_id: 2
-      password: securepassword
-    fileParameters: []
     responses: []
     responseFields: []
     auth: []
@@ -377,16 +34,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/logout
+    uri: api/run-command
     metadata:
-      groupName: 'User Authentication'
+      groupName: Endpoints
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: |-
-        Logout
-
-        Revokes the current user token.
+      title: ''
       description: ''
       authenticated: false
       custom: []
@@ -400,13 +54,7 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 204
-        content: '{}'
-        headers: []
-        description: ''
-        custom: []
+    responses: []
     responseFields: []
     auth: []
     controller: null

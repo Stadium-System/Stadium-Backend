@@ -314,13 +314,24 @@ endpoints:
         custom: []
       media_ids:
         name: media_ids
-        description: 'The <code>id</code> of an existing record in the media table.'
+        description: 'An array of new media IDs to add to the stadium images (obtained from /api/v1/general/temp-uploads/images endpoint).'
         required: false
         example:
-          - 16
-        type: 'integer[]'
+          - 5
+          - 6
+        type: 'string[]'
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'media_ids.*':
+        name: 'media_ids.*'
+        description: 'The media ID for each new image.'
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
@@ -334,7 +345,8 @@ endpoints:
       status: open
       user_id: 5
       media_ids:
-        - 16
+        - 5
+        - 6
     fileParameters: []
     responses:
       -

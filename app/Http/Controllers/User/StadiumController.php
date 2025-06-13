@@ -23,7 +23,6 @@ class StadiumController extends Controller
      *
      * Retrieves a paginated list of stadiums with filtering options.
      *
-     *
      * @queryParam filter[name] string Optional stadium name filter.
      * @queryParam filter[location] string Optional stadium location filter.
      * @queryParam filter[min_price_per_hour] float Optional minimum price per hour filter.

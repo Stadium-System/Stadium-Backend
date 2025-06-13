@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Favoritable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Event extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, Favoritable;
     
     protected $fillable = [
         'name',

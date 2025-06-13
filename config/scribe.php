@@ -9,7 +9,7 @@ use function Knuckles\Scribe\Config\{removeStrategies, configureStrategy};
 
 return [
     // The HTML <title> for the generated documentation.
-    'title' => config('app.name').' API Documentation',
+    'title' => ' Stadium API Documentation',
 
     // A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
     'description' => '',
@@ -48,7 +48,7 @@ return [
     'type' => 'laravel',
 
     // See https://scribe.knuckles.wtf/laravel/reference/config#theme for supported options
-    'theme' => 'default',
+    'theme' => 'elements',
 
     'static' => [
         // HTML documentation, assets and Postman collection will be generated to this folder.

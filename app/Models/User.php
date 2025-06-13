@@ -73,6 +73,11 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasMany(Event::class);
     }
+    
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 
 
     // ========= Functions ==========

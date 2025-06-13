@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Traits\Favoritable;
 use App\Traits\HasImages;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Stadium extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, Favoritable;
     protected $fillable = [
         'name',
         'location',

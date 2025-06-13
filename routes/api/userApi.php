@@ -8,6 +8,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\StadiumController;
 use App\Http\Controllers\TempUploadController;
 use App\Http\Controllers\User\EventController;
+use App\Http\Controllers\User\FavoriteController;
 
 // Authentication routes (public)
 Route::post('/register', [AuthController::class, 'register']);
@@ -29,10 +30,26 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/me', [UserController::class, 'getMe']);
     Route::put('/me', [UserController::class, 'update']);
     Route::delete('/me', [UserController::class, 'destroy']);
+
+    // Event catalog 
+    Route::get('/events', [EventController::class, 'index']);
+    Route::get('/events/{event}', [EventController::class, 'show']);
     
-    // Stadium catalog (available to all authenticated users)
+    // Stadium catalog 
     Route::get('/stadiums', [StadiumController::class, 'index']);
     Route::get('/stadiums/{stadium}', [StadiumController::class, 'show']);
+
+    // Favorites management
+    Route::prefix('favorites')->group(function () {
+        Route::get('/', [FavoriteController::class, 'index']);
+        Route::get('/stats', [FavoriteController::class, 'stats']);
+        
+        Route::post('/stadiums/{stadium}', [FavoriteController::class, 'favoriteStadium']);
+        Route::delete('/stadiums/{stadium}', [FavoriteController::class, 'unfavoriteStadium']);
+        
+        Route::post('/events/{event}', [FavoriteController::class, 'favoriteEvent']);
+        Route::delete('/events/{event}', [FavoriteController::class, 'unfavoriteEvent']);
+     });
     
     // Stadium management (only for users with 'owner' role)
     Route::middleware(['role:owner'])->group(function () {
@@ -47,7 +64,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/events/{event}', [EventController::class, 'destroy']);
         Route::delete('/events/{event}/images/{image}', [EventController::class, 'removeImage']);
     });
-
-    
-
 });
