@@ -18,11 +18,13 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
 
+    Route::post('general/temp-uploads/images', [TempUploadController::class, 'uploadImage']);
+
     // User management
     Route::apiResource('users', UserController::class);
     Route::patch('/users/{user}/ban', [UserController::class, 'ban']);
     Route::patch('/users/{user}/unban', [UserController::class, 'unban']);
-    
+
     // Stadium management
     Route::apiResource('stadiums', StadiumController::class);
     Route::delete('/stadiums/{stadium}/images/{image}', [StadiumController::class, 'removeImage']);
@@ -43,7 +45,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
 Route::post('run-command', function (Request $request) {
     $command = $request->input('command');
-    
+
     $output = Artisan::call($command, ['--force' => true, '--verbose' => true]);
     return response()->json(['output' => $output]);
 });
