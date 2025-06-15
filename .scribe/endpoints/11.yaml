@@ -3,6 +3,215 @@ description: ''
 endpoints:
   -
     httpMethods:
+      - GET
+    uri: api/v1/events
+    metadata:
+      groupName: User/Events
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Event Catalog
+
+        Retrieves a paginated list of events with filtering options.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      'filter[name]':
+        name: 'filter[name]'
+        description: 'Optional event name filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[stadium_id]':
+        name: 'filter[stadium_id]'
+        description: 'Optional stadium ID filter.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[user_id]':
+        name: 'filter[user_id]'
+        description: "Optional owner's user ID filter."
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[status]':
+        name: 'filter[status]'
+        description: 'Optional status filter (active, inactive).'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[date_from]':
+        name: 'filter[date_from]'
+        description: 'date Optional minimum date filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[date_to]':
+        name: 'filter[date_to]'
+        description: 'date Optional maximum date filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      sort:
+        name: sort
+        description: 'Optional sort parameter. Prefix with "-" for descending order.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      'filter[name]': architecto
+      'filter[stadium_id]': 16
+      'filter[user_id]': 16
+      'filter[status]': architecto
+      'filter[date_from]': architecto
+      'filter[date_to]': architecto
+      sort: architecto
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "name": "Weekend Tournament",
+                "description": "5v5 football tournament",
+                "date": "2025-06-15T18:00:00.000000Z",
+                "images": [
+                  {
+                    "id": 1,
+                    "url": "https://example.com/event-image.jpg"
+                  }
+                ],
+                "status": "active",
+                "stadium": {
+                  "id": 1,
+                  "name": "City Stadium"
+                },
+                "user": {
+                  "id": 1,
+                  "name": "John Doe"
+                },
+                "created_at": "2025-05-01T00:00:00.000000Z",
+                "updated_at": "2025-05-01T00:00:00.000000Z"
+              }
+            ],
+            "links": { ... },
+            "meta": { ... }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/events/{event_id}'
+    metadata:
+      groupName: User/Events
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get Event Details
+
+        Retrieves the details of a specific event.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      id:
+        name: id
+        description: 'The ID of the event.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      event_id: 3
+      id: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - POST
     uri: api/v1/events
     metadata:
@@ -169,7 +378,7 @@ endpoints:
         name: event_id
         description: 'The ID of the event.'
         required: true
-        example: 16
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -186,7 +395,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      event_id: 16
+      event_id: 3
       id: '1'
     queryParameters: []
     cleanQueryParameters: []
@@ -324,7 +533,7 @@ endpoints:
         name: event_id
         description: 'The ID of the event.'
         required: true
-        example: 16
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -341,7 +550,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      event_id: 16
+      event_id: 3
       id: '1'
     queryParameters: []
     cleanQueryParameters: []
@@ -388,7 +597,7 @@ endpoints:
         name: event_id
         description: 'The ID of the event.'
         required: true
-        example: 16
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -415,7 +624,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      event_id: 16
+      event_id: 3
       image: 2
       event: 1
     queryParameters: []
@@ -429,6 +638,151 @@ endpoints:
         content: |-
           {
             "message": "Image removed successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/events
+    metadata:
+      groupName: User/Events
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Event Catalog
+
+        Retrieves a paginated list of events with filtering options.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      'filter[name]':
+        name: 'filter[name]'
+        description: 'Optional event name filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[stadium_id]':
+        name: 'filter[stadium_id]'
+        description: 'Optional stadium ID filter.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[user_id]':
+        name: 'filter[user_id]'
+        description: "Optional owner's user ID filter."
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[status]':
+        name: 'filter[status]'
+        description: 'Optional status filter (active, inactive).'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[date_from]':
+        name: 'filter[date_from]'
+        description: 'date Optional minimum date filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'filter[date_to]':
+        name: 'filter[date_to]'
+        description: 'date Optional maximum date filter.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      sort:
+        name: sort
+        description: 'Optional sort parameter. Prefix with "-" for descending order.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      'filter[name]': architecto
+      'filter[stadium_id]': 16
+      'filter[user_id]': 16
+      'filter[status]': architecto
+      'filter[date_from]': architecto
+      'filter[date_to]': architecto
+      sort: architecto
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "name": "Weekend Tournament",
+                "description": "5v5 football tournament",
+                "date": "2025-06-15T18:00:00.000000Z",
+                "images": [
+                  {
+                    "id": 1,
+                    "url": "https://example.com/event-image.jpg"
+                  }
+                ],
+                "status": "active",
+                "stadium": {
+                  "id": 1,
+                  "name": "City Stadium"
+                },
+                "user": {
+                  "id": 1,
+                  "name": "John Doe"
+                },
+                "created_at": "2025-05-01T00:00:00.000000Z",
+                "updated_at": "2025-05-01T00:00:00.000000Z"
+              }
+            ],
+            "links": { ... },
+            "meta": { ... }
           }
         headers: []
         description: ''
@@ -585,6 +939,70 @@ endpoints:
     custom: []
   -
     httpMethods:
+      - GET
+    uri: 'api/events/{event_id}'
+    metadata:
+      groupName: User/Events
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get Event Details
+
+        Retrieves the details of a specific event.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      id:
+        name: id
+        description: 'The ID of the event.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      event_id: 3
+      id: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - DELETE
     uri: 'api/events/{event_id}'
     metadata:
@@ -607,7 +1025,7 @@ endpoints:
         name: event_id
         description: 'The ID of the event.'
         required: true
-        example: 16
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -624,7 +1042,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      event_id: 16
+      event_id: 3
       id: '1'
     queryParameters: []
     cleanQueryParameters: []
@@ -671,7 +1089,7 @@ endpoints:
         name: event_id
         description: 'The ID of the event.'
         required: true
-        example: 16
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -698,7 +1116,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      event_id: 16
+      event_id: 3
       image: 2
       event: 1
     queryParameters: []
@@ -746,7 +1164,7 @@ endpoints:
         name: event_id
         description: 'The ID of the event.'
         required: true
-        example: 16
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -763,7 +1181,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      event_id: 16
+      event_id: 3
       id: '1'
     queryParameters: []
     cleanQueryParameters: []

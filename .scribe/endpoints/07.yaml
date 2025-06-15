@@ -1,19 +1,20 @@
-name: OTP
+name: 'User Authentication'
 description: ''
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/otp/send
+    uri: api/v1/register
     metadata:
-      groupName: OTP
+      groupName: 'User Authentication'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Send OTP
+        Register a New User
 
-        Sends an OTP to the provided phone number for registration or password reset.
+        Creates a new user account with the provided details.
+        The phone number must have a valid OTP verification for 'registration' purpose within the last 30 minutes.
       description: ''
       authenticated: false
       custom: []
@@ -25,6 +26,16 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
+      name:
+        name: name
+        description: 'The name of the user.'
+        required: true
+        example: 'John Doe'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
       phone_number:
         name: phone_number
         description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
@@ -35,26 +46,74 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
-      purpose:
-        name: purpose
-        description: 'The purpose of the OTP. Must be either "registration" or "password_reset".'
+      password:
+        name: password
+        description: 'The password for the user. Must be at least 8 characters.'
         required: true
-        example: registration
+        example: securepassword
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
+      type:
+        name: type
+        description: 'The type of user account (user or owner).'
+        required: true
+        example: user
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      avatar_media_id:
+        name: avatar_media_id
+        description: "optional The media ID of the user's avatar image."
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      cover_media_id:
+        name: cover_media_id
+        description: "optional The media ID of the user's cover image."
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
     cleanBodyParameters:
+      name: 'John Doe'
       phone_number: '218912345678'
-      purpose: registration
+      password: securepassword
+      type: user
+      avatar_media_id: 1
+      cover_media_id: 2
     fileParameters: []
     responses:
       -
-        status: 200
+        status: 201
         content: |-
           {
-            "message": "OTP sent successfully."
+            "message": "User registered successfully.",
+            "user": {
+              "id": 1,
+              "name": "John Doe",
+              "phone_number": "218912345678",
+              "type": "user",
+              "roles": ["user"],
+              "avatar": "https://example.com/avatar.jpg",
+              "cover": "https://example.com/cover.jpg",
+              "status": "active",
+              "created_at": "2023-01-01T00:00:00.000000Z",
+              "updated_at": "2023-01-01T00:00:00.000000Z"
+            },
+            "token": "token_string",
+            "token_type": "Bearer"
           }
         headers: []
         description: ''
@@ -63,30 +122,7 @@ endpoints:
         status: 422
         content: |-
           {
-            "message": "The given data was invalid.",
-            "errors": {
-              "phone_number": [
-                "This phone number is already registered."
-              ]
-            }
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 429
-        content: |-
-          {
-            "error": "You can only request an OTP once every 2 minutes."
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 500
-        content: |-
-          {
-            "error": "Failed to send OTP."
+            "error": "Phone number not verified or verification expired."
           }
         headers: []
         description: ''
@@ -100,92 +136,16 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/otp/verify
+    uri: api/v1/login
     metadata:
-      groupName: OTP
+      groupName: 'User Authentication'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Verify OTP
+        Login (by Phone Number)
 
-        Verifies the OTP code. This does not create a user or reset password - it only marks the OTP as verified.
-        After verification, you have 30 minutes to complete registration or password reset.
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      phone_number:
-        name: phone_number
-        description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
-        required: true
-        example: '218912345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      otp_code:
-        name: otp_code
-        description: 'The OTP code received by the user. Must be 6 digits.'
-        required: true
-        example: '123456'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      phone_number: '218912345678'
-      otp_code: '123456'
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "message": "OTP verified successfully. You have 30 minutes to complete the process.",
-            "purpose": "registration"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 422
-        content: |-
-          {
-            "error": "Invalid or expired OTP."
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/password/reset
-    metadata:
-      groupName: OTP
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Reset Password
-
-        Resets the user's password after OTP verification.
-        The phone number must have a valid OTP verification for 'password_reset' purpose within the last 30 minutes.
+        Authenticates a user using phone number and password.
       description: ''
       authenticated: false
       custom: []
@@ -209,9 +169,9 @@ endpoints:
         custom: []
       password:
         name: password
-        description: 'The new password. Must be at least 8 characters.'
+        description: 'The password for the user.'
         required: true
-        example: newpassword123
+        example: securepassword
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -219,128 +179,36 @@ endpoints:
         custom: []
     cleanBodyParameters:
       phone_number: '218912345678'
-      password: newpassword123
+      password: securepassword
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-            "message": "Password reset successfully."
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 404
-        content: |-
-          {
-            "error": "User not found."
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 422
-        content: |-
-          {
-            "error": "Phone number not verified or verification expired."
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/otp/send
-    metadata:
-      groupName: OTP
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Send OTP
-
-        Sends an OTP to the provided phone number for registration or password reset.
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      phone_number:
-        name: phone_number
-        description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
-        required: true
-        example: '218912345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      purpose:
-        name: purpose
-        description: 'The purpose of the OTP. Must be either "registration" or "password_reset".'
-        required: true
-        example: registration
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      phone_number: '218912345678'
-      purpose: registration
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "message": "OTP sent successfully."
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 422
-        content: |-
-          {
-            "message": "The given data was invalid.",
-            "errors": {
-              "phone_number": [
-                "This phone number is already registered."
-              ]
+            "access_token": "token_string",
+            "token_type": "Bearer",
+            "user": {
+              "id": 1,
+              "name": "John Doe",
+              "phone_number": "218912345678",
+              "type": "user",
+              "roles": ["user"],
+              "avatar": "https://example.com/avatar.jpg",
+              "cover": "https://example.com/cover.jpg",
+              "status": "active",
+              "created_at": "2023-01-01T00:00:00.000000Z",
+              "updated_at": "2023-01-01T00:00:00.000000Z"
             }
           }
         headers: []
         description: ''
         custom: []
       -
-        status: 429
+        status: 422
         content: |-
           {
-            "error": "You can only request an OTP once every 2 minutes."
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 500
-        content: |-
-          {
-            "error": "Failed to send OTP."
+            "message": "The provided credentials are incorrect."
           }
         headers: []
         description: ''
@@ -354,19 +222,18 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/otp/verify
+    uri: api/v1/logout
     metadata:
-      groupName: OTP
+      groupName: 'User Authentication'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Verify OTP
+        Logout
 
-        Verifies the OTP code. This does not create a user or reset password - it only marks the OTP as verified.
-        After verification, you have 30 minutes to complete registration or password reset.
+        Revokes the current user token.
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -375,48 +242,13 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      phone_number:
-        name: phone_number
-        description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
-        required: true
-        example: '218912345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      otp_code:
-        name: otp_code
-        description: 'The OTP code received by the user. Must be 6 digits.'
-        required: true
-        example: '123456'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      phone_number: '218912345678'
-      otp_code: '123456'
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
-        status: 200
-        content: |-
-          {
-            "message": "OTP verified successfully. You have 30 minutes to complete the process.",
-            "purpose": "registration"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 422
-        content: |-
-          {
-            "error": "Invalid or expired OTP."
-          }
+        status: 204
+        content: '{}'
         headers: []
         description: ''
         custom: []
@@ -429,17 +261,16 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/password/reset
+    uri: api/login
     metadata:
-      groupName: OTP
+      groupName: 'User Authentication'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        Reset Password
+        Login (by Phone Number)
 
-        Resets the user's password after OTP verification.
-        The phone number must have a valid OTP verification for 'password_reset' purpose within the last 30 minutes.
+        Authenticates a user using phone number and password.
       description: ''
       authenticated: false
       custom: []
@@ -463,9 +294,9 @@ endpoints:
         custom: []
       password:
         name: password
-        description: 'The new password. Must be at least 8 characters.'
+        description: 'The password for the user.'
         required: true
-        example: newpassword123
+        example: securepassword
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -473,23 +304,159 @@ endpoints:
         custom: []
     cleanBodyParameters:
       phone_number: '218912345678'
-      password: newpassword123
+      password: securepassword
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-            "message": "Password reset successfully."
+            "access_token": "token_string",
+            "token_type": "Bearer",
+            "user": {
+              "id": 1,
+              "name": "John Doe",
+              "phone_number": "218912345678",
+              "type": "user",
+              "roles": ["user"],
+              "avatar": "https://example.com/avatar.jpg",
+              "cover": "https://example.com/cover.jpg",
+              "status": "active",
+              "created_at": "2023-01-01T00:00:00.000000Z",
+              "updated_at": "2023-01-01T00:00:00.000000Z"
+            }
           }
         headers: []
         description: ''
         custom: []
       -
-        status: 404
+        status: 422
         content: |-
           {
-            "error": "User not found."
+            "message": "The provided credentials are incorrect."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/register
+    metadata:
+      groupName: 'User Authentication'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Register a New User
+
+        Creates a new user account with the provided details.
+        The phone number must have a valid OTP verification for 'registration' purpose within the last 30 minutes.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the user.'
+        required: true
+        example: 'John Doe'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      phone_number:
+        name: phone_number
+        description: "The user's phone number. Must start with 2189 and be exactly 12 characters."
+        required: true
+        example: '218912345678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'The password for the user. Must be at least 8 characters.'
+        required: true
+        example: securepassword
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      type:
+        name: type
+        description: 'The type of user account (user or owner).'
+        required: true
+        example: user
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      avatar_media_id:
+        name: avatar_media_id
+        description: "optional The media ID of the user's avatar image."
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      cover_media_id:
+        name: cover_media_id
+        description: "optional The media ID of the user's cover image."
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: 'John Doe'
+      phone_number: '218912345678'
+      password: securepassword
+      type: user
+      avatar_media_id: 1
+      cover_media_id: 2
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "message": "User registered successfully.",
+            "user": {
+              "id": 1,
+              "name": "John Doe",
+              "phone_number": "218912345678",
+              "type": "user",
+              "roles": ["user"],
+              "avatar": "https://example.com/avatar.jpg",
+              "cover": "https://example.com/cover.jpg",
+              "status": "active",
+              "created_at": "2023-01-01T00:00:00.000000Z",
+              "updated_at": "2023-01-01T00:00:00.000000Z"
+            },
+            "token": "token_string",
+            "token_type": "Bearer"
           }
         headers: []
         description: ''
@@ -500,6 +467,45 @@ endpoints:
           {
             "error": "Phone number not verified or verification expired."
           }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/logout
+    metadata:
+      groupName: 'User Authentication'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Logout
+
+        Revokes the current user token.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 204
+        content: '{}'
         headers: []
         description: ''
         custom: []

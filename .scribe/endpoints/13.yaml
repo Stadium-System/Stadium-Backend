@@ -1,0 +1,875 @@
+name: User/Favorites
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/favorites
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get My Favorites
+
+        Retrieves all favorites for the authenticated user.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      type:
+        name: type
+        description: 'Filter by type (stadium or event).'
+        required: false
+        example: stadium
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      per_page:
+        name: per_page
+        description: 'Number of items per page.'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      type: stadium
+      per_page: 15
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "favoritable_type": "Stadium",
+                "favoritable": {
+                  "id": 1,
+                  "name": "City Stadium",
+                  "location": "Downtown",
+                  "price_per_hour": 100.00
+                },
+                "created_at": "2025-05-01T10:00:00.000000Z"
+              },
+              {
+                "id": 2,
+                "favoritable_type": "Event",
+                "favoritable": {
+                  "id": 1,
+                  "name": "Weekend Tournament",
+                  "date": "2025-06-15T18:00:00.000000Z"
+                },
+                "created_at": "2025-05-02T10:00:00.000000Z"
+              }
+            ],
+            "links": { ... },
+            "meta": { ... }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/favorites/stats
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get My Favorites Stats
+
+        Get statistics about the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": {
+              "total_favorites": 10,
+              "favorite_stadiums_count": 6,
+              "favorite_events_count": 4
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/favorites/stadiums/{stadium_id}'
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Add Stadium to Favorites
+
+        Adds a stadium to the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      stadium_id:
+        name: stadium_id
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      stadium:
+        name: stadium
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      stadium_id: 1
+      stadium: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Stadium added to favorites successfully",
+            "data": {
+              "id": 1,
+              "name": "City Stadium",
+              "is_favorited": true
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 409
+        content: |-
+          {
+            "message": "Stadium is already in favorites"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/favorites/stadiums/{stadium_id}'
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Remove Stadium from Favorites
+
+        Removes a stadium from the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      stadium_id:
+        name: stadium_id
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      stadium:
+        name: stadium
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      stadium_id: 1
+      stadium: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Stadium removed from favorites successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Stadium is not in favorites"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/favorites/events/{event_id}'
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Add Event to Favorites
+
+        Adds an event to the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      event:
+        name: event
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      event_id: 3
+      event: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Event added to favorites successfully",
+            "data": {
+              "id": 1,
+              "name": "Weekend Tournament",
+              "is_favorited": true
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 409
+        content: |-
+          {
+            "message": "Event is already in favorites"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/favorites/events/{event_id}'
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Remove Event from Favorites
+
+        Removes an event from the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      event:
+        name: event
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      event_id: 3
+      event: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Event removed from favorites successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Event is not in favorites"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/favorites/stats
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get My Favorites Stats
+
+        Get statistics about the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": {
+              "total_favorites": 10,
+              "favorite_stadiums_count": 6,
+              "favorite_events_count": 4
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/favorites
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get My Favorites
+
+        Retrieves all favorites for the authenticated user.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      type:
+        name: type
+        description: 'Filter by type (stadium or event).'
+        required: false
+        example: stadium
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      per_page:
+        name: per_page
+        description: 'Number of items per page.'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      type: stadium
+      per_page: 15
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "favoritable_type": "Stadium",
+                "favoritable": {
+                  "id": 1,
+                  "name": "City Stadium",
+                  "location": "Downtown",
+                  "price_per_hour": 100.00
+                },
+                "created_at": "2025-05-01T10:00:00.000000Z"
+              },
+              {
+                "id": 2,
+                "favoritable_type": "Event",
+                "favoritable": {
+                  "id": 1,
+                  "name": "Weekend Tournament",
+                  "date": "2025-06-15T18:00:00.000000Z"
+                },
+                "created_at": "2025-05-02T10:00:00.000000Z"
+              }
+            ],
+            "links": { ... },
+            "meta": { ... }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/favorites/stadiums/{stadium_id}'
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Add Stadium to Favorites
+
+        Adds a stadium to the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      stadium_id:
+        name: stadium_id
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      stadium:
+        name: stadium
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      stadium_id: 1
+      stadium: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Stadium added to favorites successfully",
+            "data": {
+              "id": 1,
+              "name": "City Stadium",
+              "is_favorited": true
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 409
+        content: |-
+          {
+            "message": "Stadium is already in favorites"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/favorites/stadiums/{stadium_id}'
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Remove Stadium from Favorites
+
+        Removes a stadium from the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      stadium_id:
+        name: stadium_id
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      stadium:
+        name: stadium
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      stadium_id: 1
+      stadium: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Stadium removed from favorites successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Stadium is not in favorites"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/favorites/events/{event_id}'
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Add Event to Favorites
+
+        Adds an event to the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      event:
+        name: event
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      event_id: 3
+      event: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Event added to favorites successfully",
+            "data": {
+              "id": 1,
+              "name": "Weekend Tournament",
+              "is_favorited": true
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 409
+        content: |-
+          {
+            "message": "Event is already in favorites"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/favorites/events/{event_id}'
+    metadata:
+      groupName: User/Favorites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Remove Event from Favorites
+
+        Removes an event from the authenticated user's favorites.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      event_id:
+        name: event_id
+        description: 'The ID of the event.'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      event:
+        name: event
+        description: 'The ID of the event.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      event_id: 3
+      event: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Event removed from favorites successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Event is not in favorites"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

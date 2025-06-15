@@ -3,6 +3,156 @@ description: ''
 endpoints:
   -
     httpMethods:
+      - GET
+    uri: api/v1/admin/users
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get all users
+
+        Retrieves a paginated list of all users.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      'filter[name]':
+        name: 'filter[name]'
+        description: 'Filter by user name.'
+        required: false
+        example: John
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[phone_number]':
+        name: 'filter[phone_number]'
+        description: 'Filter by user phone number.'
+        required: false
+        example: '218925113276'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[type]':
+        name: 'filter[type]'
+        description: 'Filter by user type.'
+        required: false
+        example: admin
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[status]':
+        name: 'filter[status]'
+        description: 'Filter by user status.'
+        required: false
+        example: active
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      sort:
+        name: sort
+        description: 'Sort by fields. Prefix with "-" for descending order.'
+        required: false
+        example: 'name,-created_at'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      'filter[name]': John
+      'filter[phone_number]': '218925113276'
+      'filter[type]': admin
+      'filter[status]': active
+      sort: 'name,-created_at'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/admin/users/{id}'
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get user by ID
+
+        Retrieves the details of a specific user by its ID.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - PUT
       - PATCH
     uri: 'api/v1/admin/users/{id}'
@@ -214,7 +364,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -231,7 +381,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      user_id: 16
+      user_id: 1
       user: 3
     queryParameters: []
     cleanQueryParameters: []
@@ -287,7 +437,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -304,7 +454,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      user_id: 16
+      user_id: 1
       user: 3
     queryParameters: []
     cleanQueryParameters: []
@@ -329,6 +479,156 @@ endpoints:
           }
         headers: []
         description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/users
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get all users
+
+        Retrieves a paginated list of all users.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      'filter[name]':
+        name: 'filter[name]'
+        description: 'Filter by user name.'
+        required: false
+        example: John
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[phone_number]':
+        name: 'filter[phone_number]'
+        description: 'Filter by user phone number.'
+        required: false
+        example: '218925113276'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[type]':
+        name: 'filter[type]'
+        description: 'Filter by user type.'
+        required: false
+        example: admin
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'filter[status]':
+        name: 'filter[status]'
+        description: 'Filter by user status.'
+        required: false
+        example: active
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      sort:
+        name: sort
+        description: 'Sort by fields. Prefix with "-" for descending order.'
+        required: false
+        example: 'name,-created_at'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      'filter[name]': John
+      'filter[phone_number]': '218925113276'
+      'filter[type]': admin
+      'filter[status]': active
+      sort: 'name,-created_at'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/users/{id}'
+    metadata:
+      groupName: Admin/Users
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get user by ID
+
+        Retrieves the details of a specific user by its ID.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
         custom: []
     responseFields: []
     auth: []
@@ -549,7 +849,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -566,7 +866,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      user_id: 16
+      user_id: 1
       user: 3
     queryParameters: []
     cleanQueryParameters: []
@@ -622,7 +922,7 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -639,7 +939,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      user_id: 16
+      user_id: 1
       user: 3
     queryParameters: []
     cleanQueryParameters: []
